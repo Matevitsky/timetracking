@@ -22,6 +22,10 @@ public class User extends BaseUser {
         this.activityList = null;
     }
 
+    public List<Activity> getActivityList() {
+        return activityList;
+    }
+
     @Override
     public String toString() {
         return "User{" +

@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 
-@WebServlet("/")
+@WebServlet("")
 public class LoginServlet extends HttpServlet {
 
 
@@ -40,10 +40,12 @@ public class LoginServlet extends HttpServlet {
 
         if (userByEmail.isPresent()) {
             LOGGER.info("Is present " + userByEmail.get());
-            resp.sendRedirect("UserPage");
+            req.setAttribute("user", userByEmail.get().getActivityList());
+            req.getRequestDispatcher("jsp/userPage.jsp").forward(req, resp);
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/login.jsp");
             requestDispatcher.forward(req, resp);
+
             // resp.sendRedirect("jsp/login.jsp");
         }
 

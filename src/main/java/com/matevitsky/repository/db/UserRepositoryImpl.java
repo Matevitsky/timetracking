@@ -60,7 +60,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         } catch (SQLException e) {
             // LOGGER.warn(e.fillInStackTrace().getMessage());
         }
-        return Optional.of(user);
+        return Optional.ofNullable(user);
     }
 
 
@@ -122,7 +122,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
             System.out.println(e.getMessage());
         }
-        return Optional.of(user);
+        return Optional.ofNullable(user);
 
     }
 }

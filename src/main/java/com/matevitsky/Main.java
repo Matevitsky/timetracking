@@ -16,7 +16,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.SQLException;
-import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, SQLException {
@@ -45,10 +44,7 @@ public class Main {
 
         //     activityService.updateActivity(new Activity(2, "Title3", "Hello World", 1, 0));
         //   System.out.println(activityService.getAll());
-        activityService.deleteActivity(activity1);
 
-        Optional<User> userByEmail = userService.findUserByEmail("serg4@gmail.com");
-        System.out.println(userByEmail);
         //   Activity activity1 = activityService.getActivity(2).get();
 
         //   System.out.println(activity1);

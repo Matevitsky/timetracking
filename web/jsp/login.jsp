@@ -1,13 +1,16 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
-    <link href="сss/Mycss.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="<c:url value="/jsp/css/Myscss.css"/>">
+    <%--    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">--%>
 </head>
 <body>
 <div id="wrapper">
 
-    <form name="login-form" class="login-form" action="/login" method="post">
+    <form name="login-form" class="login-form" action="" method="post">
 
         <div class="header">
             <h1>Login Form</h1>
