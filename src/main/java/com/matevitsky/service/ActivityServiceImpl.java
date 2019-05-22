@@ -18,8 +18,8 @@ public class ActivityServiceImpl implements ActivitiesService {
     }
 
     @Override
-    public Activity deleteActivity(Activity activity) {
-        return activityRepository.deleteEntity(activity);
+    public boolean deleteActivity(Integer activityId) {
+        return activityRepository.deleteEntity(activityId);
     }
 
     @Override

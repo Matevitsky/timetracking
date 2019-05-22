@@ -10,7 +10,7 @@ public interface ActivitiesService {
 
     Activity insertActivity(Activity activity);
 
-    Activity deleteActivity(Activity activity);
+    boolean deleteActivity(Integer activityId);
 
     Activity updateActivity(Activity activity);
 

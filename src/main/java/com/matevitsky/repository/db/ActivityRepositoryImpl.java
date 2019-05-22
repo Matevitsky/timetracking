@@ -27,20 +27,19 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     public Activity insertEntity(Activity activity) {
         LOGGER.debug("Method insertEntity started, for Activity with Title " + activity.getTitle());
 
-        String query = String.format(INSERT_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getActivityId());
+        String query = String.format(INSERT_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getId());
 
         return createEntity(activity, query);
 
     }
 
     @Override
-    public Activity deleteEntity(Activity activity) {
-        LOGGER.debug("Method deleteEntity started, for Activity with Title " + activity.getTitle());
-        String query = String.format(DELETE_ACTIVITY_SQL, activity.getActivityId());
+    public boolean deleteEntity(Integer activityId) {
+        LOGGER.debug("Method deleteEntity started, for Activity with Title " + activityId);
+        String query = String.format(DELETE_ACTIVITY_SQL, activityId);
 
 
-
-        return deleteEntity(activity, query);
+        return deleteEntity(query);
 
 
 
@@ -50,7 +49,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     public Activity updateEntity(Activity activity) {
         LOGGER.debug("Method updateEntity started, for Activity with Title " + activity.getTitle());
 
-        String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getActivityId());
+        String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getId());
         return updateEntity(activity, query);
 
     }

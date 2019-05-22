@@ -7,7 +7,7 @@ public interface GenericRepository<E> {
 
     E insertEntity(E entity);
 
-    E deleteEntity(E entity);
+    boolean deleteEntity(Integer id);
 
     E updateEntity(E entity);
 

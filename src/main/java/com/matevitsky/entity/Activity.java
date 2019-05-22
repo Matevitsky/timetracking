@@ -7,19 +7,19 @@ public class Activity {
     private final String content;
     private final Integer duration;
     private final Integer userId;
-    private Integer activityId;
+    private Integer id;
 
 
-    public Activity(Integer activityId, String title, String content, Integer duration, Integer userId) {
-        this.activityId = activityId;
+    public Activity(Integer id, String title, String content, Integer duration, Integer userId) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.duration = duration;
         this.userId = userId;
     }
 
-    public Integer getActivityId() {
-        return activityId;
+    public Integer getId() {
+        return id;
     }
 
 
@@ -37,6 +37,7 @@ public class Activity {
     public Integer getDuration() {
         return duration;
     }
+
 
 
     @Override
@@ -62,7 +63,7 @@ public class Activity {
     @Override
     public String toString() {
         return "Activity{" +
-                "activityId=" + activityId +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", duration=" + duration +

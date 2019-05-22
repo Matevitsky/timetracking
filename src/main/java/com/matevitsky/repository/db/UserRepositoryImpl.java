@@ -66,12 +66,13 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
 
     @Override
-    public User deleteEntity(User user) {
-        String query = String.format(DELETE_USERS_SQL, user.getId());
-        if (deleteEntity(user, query) != null) {
-            return user;
+    public boolean deleteEntity(Integer userId) {
+        boolean result = false;
+        String query = String.format(DELETE_USERS_SQL, userId);
+        if (deleteEntity(query)) {
+            result = true;
         }
-        return null;
+        return result;
     }
 
     @Override

@@ -10,7 +10,7 @@ public interface UserService {
 
     User insertUser(User user);
 
-    User deleteUser(User user);
+    boolean deleteUser(Integer userId);
 
     User updateUser(User user);
 

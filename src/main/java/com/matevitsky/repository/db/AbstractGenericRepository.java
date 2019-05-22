@@ -53,19 +53,20 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
         return Optional.of(rows);
     }
 
-    protected E deleteEntity(E entity, String query) {
-
+    protected boolean deleteEntity(String query) {
+        boolean result = true;
         //  LOGGER.debug("deleteEntity with id " + entity.toString() + " Query = " + query);
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            if (preparedStatement.executeUpdate(query) == 0) {
+            if (preparedStatement.executeUpdate() == 0) {
                 // LOGGER.warn("DeleteEntity " + entity.toString() + " failed ");
+                result = false;
             }
         } catch (SQLException e) {
             //  LOGGER.error("DeleteEntity failed " + e.getMessage());
         }
 
-        return entity;
+        return result;
     }
 
 

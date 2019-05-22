@@ -37,6 +37,8 @@ VALUES ('Sergey3', 'serg3@gmail.com', '3333', 'REGULAR');
 INSERT INTO Users(Name, Email, Password, Role)
 VALUES ('Sergey4', 'serg4@gmail.com', '4444', 'ADMIN');
 
+INSERT INTO Users(Name, Email, Password, Role)
+VALUES ('user', 'user', 'user', 'REGULAR');
 
 INSERT INTO Activities(Title, Content, Duration, UserId)
 VALUES ('Tittle1', 'Content1', '100', '1');
