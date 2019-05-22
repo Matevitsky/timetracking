@@ -2,8 +2,12 @@ package com.matevitsky.repository.db;
 
 
 import com.matevitsky.entity.Activity;
+import org.apache.log4j.Logger;
 
 import javax.sql.rowset.CachedRowSet;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +20,12 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static final String UPDATE_ACTIVITY_SQL = "UPDATE Activities set Title='%s',Content='%s',Duration=%d WHERE ID=%d";
     private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM Activities WHERE ID=%d";
     private static final String SELECT_ALL_ACTIVITY = "SELECT * FROM Activities";
-    // private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
+    private static final String SELECT_ACTIVITY_BY_USER_ID = "SELECT * FROM Activities WHERE UserId=%d";
+    private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
     public Activity insertEntity(Activity activity) {
-        //  LOGGER.debug("Method insertEntity started, for Activity with Title " + activity.getTitle());
+        LOGGER.debug("Method insertEntity started, for Activity with Title " + activity.getTitle());
 
         String query = String.format(INSERT_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getActivityId());
 
@@ -30,19 +35,20 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
     @Override
     public Activity deleteEntity(Activity activity) {
-        // LOGGER.debug("Method deleteEntity started, for Activity with Title " + activity.getTitle());
+        LOGGER.debug("Method deleteEntity started, for Activity with Title " + activity.getTitle());
         String query = String.format(DELETE_ACTIVITY_SQL, activity.getActivityId());
+
 
 
         return deleteEntity(activity, query);
 
-        //  LOGGER.info("Failed to delete activity with ID " + activity.getActivityId() + " and Tittle " + activity.getTitle());
+
 
     }
 
     @Override
     public Activity updateEntity(Activity activity) {
-        // LOGGER.debug("Method updateEntity started, for Activity with Title " + activity.getTitle());
+        LOGGER.debug("Method updateEntity started, for Activity with Title " + activity.getTitle());
 
         String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getActivityId());
         return updateEntity(activity, query);
@@ -51,7 +57,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
     @Override
     public Optional<Activity> getEntity(Integer id) {
-        //  LOGGER.debug("Method getEntity started, for Activity with ID " + id);
+        LOGGER.debug("Method getEntity started, for Activity with ID " + id);
 
         String query = String.format(SELECT_ACTIVITY_BY_ID, id);
         Activity activity = null;
@@ -69,14 +75,14 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
             }
 
         } catch (SQLException e) {
-            // LOGGER.warn(e.fillInStackTrace().getMessage());
+            LOGGER.warn(e.getMessage());
         }
         return Optional.of(activity);
     }
 
     @Override
     public List<Activity> getAll() {
-        // LOGGER.debug("Method getAllActivities started ");
+        LOGGER.debug("Method getAllActivities started ");
         List<Activity> activityList = new ArrayList<>();
         CachedRowSet allActivities = getAll(SELECT_ALL_ACTIVITY);
         try {
@@ -91,10 +97,32 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 activityList.add(activity);
             }
         } catch (SQLException e) {
-            // LOGGER.warn("GetAll method return empty cachedRowSet");
+            LOGGER.warn("GetAll method return empty cachedRowSet");
         }
         return activityList;
     }
 
-}
+    public List<Activity> getActivityListByUserId(Integer userId) {
+        LOGGER.debug("Method getActivityListByUserId started ");
+        String query = String.format(SELECT_ACTIVITY_BY_USER_ID, userId);
+        List<Activity> activityList = new ArrayList<>();
+        try (Connection connection = connectorDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
 
+            while (resultSet.next()) {
+                Integer activityId = resultSet.getInt(1);
+                String tittle = resultSet.getString(2);
+                String content = resultSet.getString(3);
+                Integer duration = resultSet.getInt(4);
+
+                Activity activity = new Activity(activityId, tittle, content, duration, userId);
+                activityList.add(activity);
+            }
+
+        } catch (SQLException e) {
+            LOGGER.warn("Field to get activity List byUserId " + userId + " " + e.getMessage());
+        }
+        return activityList;
+    }
+}

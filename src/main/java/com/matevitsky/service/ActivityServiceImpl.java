@@ -38,4 +38,9 @@ public class ActivityServiceImpl implements ActivitiesService {
 
         return activityRepository.getAll();
     }
+
+    public List<Activity> getActivityListByUserId(Integer userId) {
+
+        return activityRepository.getActivityListByUserId(userId);
+    }
 }

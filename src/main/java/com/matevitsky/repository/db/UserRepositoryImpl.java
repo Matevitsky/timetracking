@@ -4,6 +4,7 @@ package com.matevitsky.repository.db;
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
+import org.apache.log4j.Logger;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.Connection;
@@ -27,11 +28,11 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
     ConnectorDB connectorDB = new ConnectorDB();
 
-    // private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
+    private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
     public User insertEntity(User user) {
-        // LOGGER.debug("Method insertEntity started, for user with Email " + user.getEmail());
+        LOGGER.debug("Method insertEntity started, for user with Email " + user.getEmail());
 
         String query = String.format(INSERT_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole());
 
@@ -58,7 +59,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
             }
 
         } catch (SQLException e) {
-            // LOGGER.warn(e.fillInStackTrace().getMessage());
+            LOGGER.warn(e.fillInStackTrace().getMessage());
         }
         return Optional.ofNullable(user);
     }
@@ -95,13 +96,13 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
                 allUserList.add(user);
             }
         } catch (SQLException e) {
-            //  LOGGER.warn("GetAll method return empty cachedRowSet");
+            LOGGER.warn("GetAll method return empty cachedRowSet");
         }
         return allUserList;
     }
 
     public Optional<User> findUserByEmail(String email) {
-        // LOGGER.debug("findUserByEmail with email " + email);
+        LOGGER.debug("findUserByEmail with email " + email);
         String query = String.format(SELECT_USER_BY_EMAIL, email);
         User user = null;
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -118,7 +119,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
 
         } catch (SQLException e) {
-            // LOGGER.error("Failed to get entity from database " + e.getMessage());
+            LOGGER.error("Failed to get entity from database " + e.getMessage());
 
             System.out.println(e.getMessage());
         }

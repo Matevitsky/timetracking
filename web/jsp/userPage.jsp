@@ -9,7 +9,8 @@
     <!-- Custom styles for this template -->
     <link href="grid.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="<c:url value="/jsp/css/Myscss.css"/>">
+    <link rel="stylesheet" href="<c:url value="/jsp/css/userPage.css"/>">
+    <link rel="stylesheet" href="<c:url value="/jsp/userPage.jsp"/>">
 
     <%-- <link href="../css/Mycss.css" rel="stylesheet" type="text/css">--%>
 
@@ -31,3 +32,83 @@
 </table>
 </body>
 </html>
+
+
+<table class=" tab_esp table table-striped table-bordered table-condensed">
+    <thead>
+    <tr>
+        <th>
+            <input type="text" class="form-control" id="title" placeholder="Title">
+        </th>
+        <th>
+            <input type="text" class="form-control" id="content" placeholder="Title">
+        </th>
+
+        <th class='center'>
+            <labeL>Duration</label>
+        </th>
+        <th>
+            <select class="form-control" id="esp_para">
+                <option>PARAMETRIZADO</option>
+                <option value='1'>Finish</option>
+                <%-- <option value='2'>NAO</option>--%>
+            </select>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class='esp_nm'>название</td>
+        <td class='esp_nm'>контент</td>
+
+        <td><input type='text' class='form-control'></input></td>
+        <td class='esp_para center'>
+            <button class='btn btn-danger'>NAO</button>
+        </td>
+    </tr>
+    <tr>
+        <td class='esp_nm'>название</td>
+        <td class='esp_nm'>контент</td>
+        <td><input type='text' class='form-control'></input></td>
+        <td class='esp_para center'>
+            <button class='btn btn-success'>SIM</button>
+        </td>
+    </tr>
+    <tr>
+        <td class='esp_nm'>название</td>
+        <td class='esp_nm'>контент</td>
+        <td><input type='text' class='form-control'></input></td>
+
+        <td class='esp_para center'>
+            <button class='btn btn-danger'>NAO</button>
+        </td>
+    </tr>
+    <tr>
+        <td class='esp_nm'>название</td>
+        <td class='esp_nm'>контент</td>
+        <td><input type='text' class='form-control'></input></td>
+
+        <td class='esp_para center'>
+            <button class='btn btn-success'>SIM</button>
+        </td>
+    </tr>
+    <tr>
+        <td class='esp_nm'>название</td>
+        <td class='esp_nm'>контент</td>
+        <td><input type='text' class='form-control'></input></td>
+
+        <td class='esp_para center'>
+            <button class='btn btn-success'>SIM</button>
+        </td>
+    </tr>
+    <tr>
+        <td class='esp_nm'>название</td>
+        <td class='esp_nm'>контент</td>
+
+
+        <td class='esp_para center'>
+            <button class='btn btn-success'>SIM</button>
+        </td>
+    </tr>
+    </tbody>
+</table>

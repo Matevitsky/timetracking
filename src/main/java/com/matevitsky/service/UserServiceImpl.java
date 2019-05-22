@@ -52,4 +52,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUserByEmail(email);
 
     }
+
+    //:TODO boolean is login(String email, String password){
+    //TODO: validate email and password искать только по мэйлу. вытащить юзера и сравнить его пароль с тем что ввел юзер
+
 }

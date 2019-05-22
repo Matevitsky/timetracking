@@ -4,7 +4,7 @@
 <head>
     <title>Title</title>
 
-    <link rel="stylesheet" href="<c:url value="/jsp/css/Myscss.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/MyCss.css"/>">
     <%--    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">--%>
 </head>
 <body>

@@ -1,0 +1,266 @@
+/***********************************************
+BINDTUNING TABLE WEB PART STYLES
+Author: BindTuning // www.bindtuning.com
+Copyright © 2017 Bind. All rights reserved.
+***********************************************/
+
+h2 { /* remove this */
+    text-align: center;
+    margin: 35px;
+}
+
+/* TABLE STYLES */
+.bt-wp-table .table > thead > tr > th {
+    border: none;
+    text-align: center;
+}
+
+.bt-wp-table .table > tbody > tr > td,
+.bt-wp-table .table > tbody > tr > th,
+.bt-wp-table .table > tfoot > tr > td,
+.bt-wp-table .table > tfoot > tr > th,
+.bt-wp-table .table > thead > tr > td,
+.bt-wp-table .table > thead > tr > th {
+    vertical-align: middle;
+}
+
+/* FORMAT TEXT INSIDE OF TABLE */
+.bt-wp-table .table .bt-table-field {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.bt-wp-table .table > thead > tr > th .bt-table-field {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 0;
+    text-transform: uppercase;
+    color: #999;
+}
+
+.bt-wp-table .table-striped > tbody > tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+
+.bt-wp-table .table > tbody > tr > td,
+.bt-wp-table .table > tbody > tr > th,
+.bt-wp-table .table > tfoot > tr > td,
+.bt-wp-table .table > tfoot > tr > th,
+.bt-wp-table .table > thead > tr > td,
+.bt-wp-table .table > thead > tr > th {
+    border: solid 1px #eee !important;
+    border-left: solid 1px #f5f5f5 !important;
+    border-right: solid 1px #f5f5f5 !important;
+}
+
+/* RACI TABLE STYLES
+- RACI TABLE LAYOUT */
+
+.bt-wp-table .table .bt-raci-icon-type {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 10px 0;
+    text-align: center;
+    line-height: 10px;
+    margin: 0 auto;
+    color: #FFF;
+    background-color: #ddd;
+}
+
+.bt-wp-table .table .bt-raci-icon-type:before {
+    content: "";
+    font-size: 14px;
+}
+
+/* raci types */
+.bt-wp-table .table .bt-raci-icon-type.responsible {
+    background-color: #124191;
+}
+
+.bt-wp-table .table .bt-raci-icon-type.responsible:before {
+    content: "R";
+}
+
+.bt-wp-table .table .bt-raci-icon-type.accountable {
+    background-color: #273142;
+}
+
+.bt-wp-table .table .bt-raci-icon-type.accountable:before {
+    content: "A";
+}
+
+.bt-wp-table .table .bt-raci-icon-type.consulted {
+    background-color: #f53154;
+}
+
+.bt-wp-table .table .bt-raci-icon-type.consulted:before {
+    content: "C";
+}
+
+.bt-wp-table .table .bt-raci-icon-type.informed {
+    background-color: #00c9ff;
+}
+
+.bt-wp-table .table .bt-raci-icon-type.informed:before {
+    content: "I";
+}
+
+.bt-wp-table .table .bt-table-footer-description {
+    color: #b5b5b5;
+    font-size: 12px;
+}
+
+.bt-wp-table .table .bt-table-footer-description span {
+    padding: 0 5px;
+}
+
+.bt-wp-table .table > tbody > tr > td:first-child .bt-table-field {
+    text-align: left;
+    padding-left: 15px;
+}
+
+/* RACI TABLE STYLES
+- ISSUES AND RISK TABLE STYLES */
+
+.bt-wp-table .bt-risk-indicator {
+    font-size: 16px;
+    text-align: center;
+    padding: 0 !important;
+}
+
+.bt-wp-table .bt-risk-indicator.urgent,
+.bt-wp-table span.urgent {
+    color: #ff3154;
+}
+
+.bt-wp-table .bt-risk-indicator.proceeding,
+.bt-wp-table span.proceeding {
+    color: #e2df00;
+}
+
+.bt-wp-table .bt-risk-indicator.delivered,
+.bt-wp-table span.delivered {
+    color: #4bdd33;
+}
+
+.bt-wp-table .bt-risk-indicator:before {
+    content: "\f111";
+    font-family: fontawesome;
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* BT Table footer */
+
+.bt-wp-table .table > tfoot {
+    display: none;
+}
+
+/* BT Table head */
+
+.bt-wp-table .table > thead:first-child > tr:first-child > th {
+    border-left: 0 !important;
+    border-right: 0 !important;
+}
+
+.bt-wp-table .table > thead:first-child > tr:first-child > th:first-child {
+    border-left: solid 1px #eee !important;
+}
+
+.bt-wp-table .table > thead:first-child > tr:first-child > th:last-child {
+    border-right: solid 1px #eee !important;
+}
+
+
+.bt-wp-table .bt-table-filters {
+    padding: 15px;
+}
+
+.bt-wp-table .bt-table-filters > .bt-table-title {
+    display: inline-block;
+    margin: 0;
+    color: #124191;
+    font-size: 21px;
+}
+
+.bt-wp-table .bt-table-filters > .btn-group {
+    display: inline-block;
+    float: right;
+    margin-top: -2px;
+}
+
+.bt-wp-table .bt-table-filters > .btn-group > label.btn {
+    border: solid 1px transparent;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+.bt-wp-table .bt-table-filters > .btn-group > label.btn.active,
+.bt-wp-table .bt-table-filters > .btn-group > label.btn.focus {
+    background-color: #124191;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    outline: 0 !important;
+    color: #FFF;
+}
+
+
+.bt-wp-table .table .bt-table-expand,
+.bt-wp-table .table .bt-table-edit {
+    cursor: pointer;
+    color: #124191;
+    display: block;
+    width: 20px;
+    height: 20px;
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.bt-wp-table .table .bt-table-expand i:after {
+    font-family: fontawesome;
+    content: "\f055";
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.bt-wp-table .table .bt-table-expand.open i:after {
+    font-family: fontawesome;
+    content: "\f055";
+    transition: all 0.3s;
+}
+
+.bt-wp-table .table tr.tropen .bt-table-expand i:after {
+    font-family: fontawesome;
+    content: "\f056";
+}
+
+.bt-wp-table .table tr.bt-table-description {
+    background-color: #FFF;
+    display: none;
+}
+
+.bt-table-field.title {
+    color: #124191;
+    padding-bottom: 0 !important;
+}
+
+tr.tropen {
+    background-color: #fafafa !important;
+    transition: all 0.05s;
+}

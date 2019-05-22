@@ -18,4 +18,6 @@ public interface ActivitiesService {
 
     List<Activity> getAll();
 
+    List<Activity> getActivityListByUserId(Integer userId);
+
 }
