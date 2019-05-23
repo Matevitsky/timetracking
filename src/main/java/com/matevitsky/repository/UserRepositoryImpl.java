@@ -1,4 +1,4 @@
-package com.matevitsky.repository.db;
+package com.matevitsky.repository;
 
 
 import com.matevitsky.db.ConnectorDB;
@@ -32,8 +32,8 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
-    public User insertEntity(User user) {
-        LOGGER.debug("Method insertEntity started, for user with Email " + user.getEmail());
+    public User create(User user) {
+        LOGGER.debug("Method create started, for user with Email " + user.getEmail());
 
         String query = String.format(INSERT_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole());
 
@@ -42,8 +42,8 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     }
 
     @Override
-    public Optional<User> getEntity(Integer id) {
-        // LOGGER.debug("Method getEntity started, for id " + id);
+    public Optional<User> getById(Integer id) {
+        // LOGGER.debug("Method getById started, for id " + id);
         User user = null;
         String query = String.format(SELECT_USER_BY_ID, id);
         Optional<CachedRowSet> entity = getEntity(id, query);
@@ -67,7 +67,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
 
     @Override
-    public boolean deleteEntity(Integer userId) {
+    public boolean delete(Integer userId) {
         boolean result = false;
         String query = String.format(DELETE_USERS_SQL, userId);
         if (deleteEntity(query)) {
@@ -77,7 +77,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     }
 
     @Override
-    public User updateEntity(User user) {
+    public User update(User user) {
         String query = String.format(UPDATE_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole(), user.getId());
         return updateEntity(user, query);
     }

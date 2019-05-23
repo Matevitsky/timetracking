@@ -2,8 +2,8 @@ package com.matevitsky.service;
 
 
 import com.matevitsky.entity.User;
-import com.matevitsky.repository.db.UserRepository;
-import com.matevitsky.repository.db.UserRepositoryImpl;
+import com.matevitsky.repository.UserRepository;
+import com.matevitsky.repository.UserRepositoryImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,13 +16,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User insertUser(User user) {
-        userRepository.insertEntity(user);
+        userRepository.create(user);
         return user;
     }
 
     @Override
     public boolean deleteUser(Integer userId) {
-        return userRepository.deleteEntity(userId);
+        return userRepository.delete(userId);
 
     }
 
@@ -30,14 +30,14 @@ public class UserServiceImpl implements UserService {
     public User updateUser(User user) {
         //TODO: проверить кто вызывает и что лучше вернуть user или boolean
 
-        return (User) userRepository.updateEntity(user);
+        return (User) userRepository.update(user);
 
     }
 
     @Override
     public Optional<User> getUser(Integer id) {
 
-        return userRepository.getEntity(id);
+        return userRepository.getById(id);
 
     }
 

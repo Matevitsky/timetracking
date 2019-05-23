@@ -2,7 +2,7 @@ package com.matevitsky;
 
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.db.DbInitScriptRunner;
-import com.matevitsky.repository.db.UserRepositoryImpl;
+import com.matevitsky.repository.UserRepositoryImpl;
 import com.matevitsky.service.ActivitiesService;
 import com.matevitsky.service.ActivityServiceImpl;
 

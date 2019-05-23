@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS activities;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS activityRequests;
 
 
 
@@ -22,6 +23,16 @@ create table users
     Role     int          not null,
     PRIMARY KEY (ID),
     FOREIGN KEY (Role) REFERENCES role (ID)
+);
+
+create table activityRequests
+(
+    UserId int not null,
+
+
+    PRIMARY KEY (UserId),
+    FOREIGN KEY (UserId) REFERENCES users (ID)
+
 );
 
 create table activities

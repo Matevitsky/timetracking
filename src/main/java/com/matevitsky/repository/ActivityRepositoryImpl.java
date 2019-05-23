@@ -1,4 +1,4 @@
-package com.matevitsky.repository.db;
+package com.matevitsky.repository;
 
 
 import com.matevitsky.entity.Activity;
@@ -24,8 +24,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
-    public Activity insertEntity(Activity activity) {
-        LOGGER.debug("Method insertEntity started, for Activity with Title " + activity.getTitle());
+    public Activity create(Activity activity) {
+        LOGGER.debug("Method create started, for Activity with Title " + activity.getTitle());
 
         String query = String.format(INSERT_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getId());
 
@@ -34,8 +34,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     }
 
     @Override
-    public boolean deleteEntity(Integer activityId) {
-        LOGGER.debug("Method deleteEntity started, for Activity with Title " + activityId);
+    public boolean delete(Integer activityId) {
+        LOGGER.debug("Method delete started, for Activity with Title " + activityId);
         String query = String.format(DELETE_ACTIVITY_SQL, activityId);
 
 
@@ -46,8 +46,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     }
 
     @Override
-    public Activity updateEntity(Activity activity) {
-        LOGGER.debug("Method updateEntity started, for Activity with Title " + activity.getTitle());
+    public Activity update(Activity activity) {
+        LOGGER.debug("Method update started, for Activity with Title " + activity.getTitle());
 
         String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getId());
         return updateEntity(activity, query);
@@ -55,8 +55,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     }
 
     @Override
-    public Optional<Activity> getEntity(Integer id) {
-        LOGGER.debug("Method getEntity started, for Activity with ID " + id);
+    public Optional<Activity> getById(Integer id) {
+        LOGGER.debug("Method getById started, for Activity with ID " + id);
 
         String query = String.format(SELECT_ACTIVITY_BY_ID, id);
         Activity activity = null;

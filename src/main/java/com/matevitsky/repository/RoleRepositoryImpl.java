@@ -1,4 +1,4 @@
-package com.matevitsky.repository.db;
+package com.matevitsky.repository;
 
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.Role;

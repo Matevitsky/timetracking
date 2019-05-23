@@ -1,4 +1,4 @@
-package com.matevitsky.repository.db;
+package com.matevitsky.repository;
 
 import com.matevitsky.db.ConnectorDB;
 import com.sun.rowset.CachedRowSetImpl;
@@ -18,7 +18,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     ConnectorDB connectorDB = new ConnectorDB();
 
     protected E createEntity(E entity, String query) {
-        LOGGER.debug("getEntity" + entity.toString() + " Query = " + query);
+        LOGGER.debug("getById" + entity.toString() + " Query = " + query);
         boolean resultOfCreation = false;
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
@@ -38,7 +38,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     }
 
     protected Optional<CachedRowSet> getEntity(Integer id, String query) {
-        LOGGER.debug("getEntity with id " + id + " Query = " + query);
+        LOGGER.debug("getById with id " + id + " Query = " + query);
 
         //TODO: заменить casherowset
 
@@ -57,7 +57,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
 
     protected boolean deleteEntity(String query) {
         boolean result = true;
-        LOGGER.debug("deleteEntity " + " Query = " + query);
+        LOGGER.debug("delete " + " Query = " + query);
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             if (preparedStatement.executeUpdate() == 0) {
@@ -73,7 +73,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
 
 
     protected E updateEntity(E entity, String query) {
-        LOGGER.debug("updateEntity with id " + entity.toString() + " Query = " + query);
+        LOGGER.debug("update with id " + entity.toString() + " Query = " + query);
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             if (preparedStatement.executeUpdate(query) > 0) {
                 return entity;
@@ -82,7 +82,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
             }
 
         } catch (SQLException e) {
-            LOGGER.error("updateEntity" + e.getMessage());
+            LOGGER.error("update" + e.getMessage());
         }
         return entity;
     }
@@ -96,7 +96,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
             allEntity = new CachedRowSetImpl();
             allEntity.populate(resultSet);
         } catch (SQLException e) {
-            LOGGER.error("updateEntity" + e.getMessage());
+            LOGGER.error("update" + e.getMessage());
         }
         return allEntity;
     }

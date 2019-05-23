@@ -2,7 +2,7 @@ package com.matevitsky.service;
 
 
 import com.matevitsky.entity.Activity;
-import com.matevitsky.repository.db.ActivityRepositoryImpl;
+import com.matevitsky.repository.ActivityRepositoryImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,24 +13,24 @@ public class ActivityServiceImpl implements ActivitiesService {
 
     @Override
     public Activity insertActivity(Activity activity) {
-        activityRepository.insertEntity(activity);
+        activityRepository.create(activity);
         return activity;
     }
 
     @Override
     public boolean deleteActivity(Integer activityId) {
-        return activityRepository.deleteEntity(activityId);
+        return activityRepository.delete(activityId);
     }
 
     @Override
     public Activity updateActivity(Activity activity) {
-        return activityRepository.updateEntity(activity);
+        return activityRepository.update(activity);
     }
 
     @Override
     public Optional<Activity> getActivity(Integer id) {
 
-        return activityRepository.getEntity(id);
+        return activityRepository.getById(id);
     }
 
     @Override
