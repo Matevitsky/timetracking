@@ -17,7 +17,7 @@ import java.util.Optional;
 public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Request> implements ActivityRequestRepository {
 
     private static final String SELECT_ALL_REQUESTS = "SELECT * FROM activityRequests";
-    private static final String INSERT_REQUEST_SQL = "INSERT INTO activityRequests" + "  (UserId) VALUES  ('%s')";
+    private static final String INSERT_REQUEST_SQL = "INSERT INTO activityRequests" + "  (UserId) VALUES  ('%d')";
     private static final String DELETE_REQUEST_SQL = "DELETE FROM activityRequests WHERE UserId=%d";
     private static final String SELECT_REQUEST_ID = "SELECT * FROM activityRequests WHERE UserId=%d";
 
@@ -28,8 +28,9 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Req
     @Override
     public Request create(Request request) {
         LOGGER.debug("Method create request with UserId " + request.getUserId());
+        String query = String.format(INSERT_REQUEST_SQL, request.getUserId());
 
-        Request entity = createEntity(request, INSERT_REQUEST_SQL);
+        Request entity = createEntity(request, query);
 
         return entity;
     }

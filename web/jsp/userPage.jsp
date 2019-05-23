@@ -23,12 +23,12 @@
 </head>
 
 <body>
+<form action="/requestServlet" method="get">
 
+    <input type="submit" value="RequestActivity" name="requestActivity">
+</form>
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-    <form action="RequestServlet" method="get">
 
-        <input type="submit" name="submit" value="RequestActivity" class="button"/>
-    </form>
     <thead>
     <tr>
         <th class="th-sm">Title
@@ -52,7 +52,7 @@
             <td>${activity.content}</td>
             <td>${activity.duration}</td>
             <td>
-                <form action="userservlet" method="get">
+                <form action="/userServlet" method="get">
                     <input type="hidden" name="id" value="${activity.id}"/>
                     <input type="submit" value="Remove" name="remove">
                 </form>

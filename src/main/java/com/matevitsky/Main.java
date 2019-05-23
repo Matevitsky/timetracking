@@ -2,6 +2,7 @@ package com.matevitsky;
 
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.db.DbInitScriptRunner;
+import com.matevitsky.entity.Activity;
 import com.matevitsky.repository.UserRepositoryImpl;
 import com.matevitsky.service.ActivitiesService;
 import com.matevitsky.service.ActivityServiceImpl;
@@ -30,10 +31,10 @@ public class Main {
         //System.out.println(userService.getAll());
 
         ActivitiesService activityService = new ActivityServiceImpl();
-        //Activity activity1 = new Activity(5, "Title2", "Hello World", 1, 0);
-        //Activity activity2 = new Activity(5, "Title3", "Hello World3", 1, 0);
-        // activityService.insertActivity(activity1);
-        //activityService.insertActivity(activity2);
+        Activity activity1 = new Activity(5, "Title2", "Hello World", 1, 0);
+        Activity activity2 = new Activity(5, "Title3", "Hello World3", 1, 0);
+        activityService.insertActivity(activity1);
+        activityService.insertActivity(activity2);
 
         //   activityService.deleteActivity(new Activity(2, "Title2", "Hello World", 1, 0));
 

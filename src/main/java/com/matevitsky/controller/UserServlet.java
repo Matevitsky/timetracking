@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/userservlet")
+@WebServlet("/userServlet")
 public class UserServlet extends HttpServlet {
 
     ActivitiesService activitiesService = new ActivityServiceImpl();
@@ -28,7 +28,7 @@ public class UserServlet extends HttpServlet {
         req.getSession().setAttribute("userId", userId);
         req.setAttribute("activityList", activityListByUserId);
         req.setAttribute("userId", userId);
-        req.getRequestDispatcher("jsp/userPageTest.jsp").forward(req, resp);
+        req.getRequestDispatcher("jsp/userPage.jsp").forward(req, resp);
 
     }
 }

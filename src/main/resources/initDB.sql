@@ -1,9 +1,10 @@
 DROP TABLE IF EXISTS activities;
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS role;
+
+
 DROP TABLE IF EXISTS activityRequests;
 
-
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS role;
 
 create table role
 (
@@ -27,10 +28,11 @@ create table users
 
 create table activityRequests
 (
+    ID     int auto_increment,
     UserId int not null,
 
 
-    PRIMARY KEY (UserId),
+    PRIMARY KEY (ID),
     FOREIGN KEY (UserId) REFERENCES users (ID)
 
 );
