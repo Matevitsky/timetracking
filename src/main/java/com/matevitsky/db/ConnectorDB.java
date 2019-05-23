@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ConnectorDB {
+public final class ConnectorDB {
 
     private BasicDataSource ds = new BasicDataSource();
 
@@ -26,6 +26,7 @@ public class ConnectorDB {
         ds.setMinIdle(5);
         ds.setMaxIdle(10);
         ds.setMaxOpenPreparedStatements(poolSize);
+        //TODO:сделать конструктор с параметром чтобы имя пропертей с которых считывать данные
 
         return ds.getConnection();
     }

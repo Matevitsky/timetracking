@@ -45,8 +45,13 @@ public class LoginServlet extends HttpServlet {
 
         if (userByEmail.isPresent()) {
             LOGGER.info("Is present " + userByEmail.get());
-            List<Activity> activityListByUserId = activitiesService.getActivityListByUserId(userByEmail.get().getId());
+            Integer userId = userByEmail.get().getId();
+
+            List<Activity> activityListByUserId = activitiesService.getActivityListByUserId(userId);
+
+            req.getSession().setAttribute("userId", userId);
             req.setAttribute("activityList", activityListByUserId);
+            req.setAttribute("userId", userId);
             req.getRequestDispatcher("jsp/userPageTest.jsp").forward(req, resp);
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/login.jsp");

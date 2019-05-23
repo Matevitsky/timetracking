@@ -10,20 +10,25 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
+    <link href="../css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
     <!-- MDBootstrap Datatables  -->
-    <link href="css/addons/datatables.min.css" rel="stylesheet">
+    <link href="../css/addons/datatables.min.css" rel="stylesheet">
 
 
 </head>
 
 <body>
+
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <form action="RequestServlet" method="get">
+
+        <input type="submit" name="submit" value="RequestActivity" class="button"/>
+    </form>
     <thead>
     <tr>
         <th class="th-sm">Title
@@ -47,7 +52,7 @@
             <td>${activity.content}</td>
             <td>${activity.duration}</td>
             <td>
-                <form action="UserServlet" method="get">
+                <form action="userservlet" method="get">
                     <input type="hidden" name="id" value="${activity.id}"/>
                     <input type="submit" value="Remove" name="remove">
                 </form>

@@ -1,4 +1,4 @@
-package com.matevitsky.Util;
+package com.matevitsky.util;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

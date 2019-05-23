@@ -3,11 +3,11 @@ package com.matevitsky.entity;
 import java.util.Objects;
 
 public class Activity {
+    private final String content; //TODO: description
     private final String title;
-    private final String content;
+    private Integer id;
     private final Integer duration;
     private final Integer userId;
-    private Integer id;
 
 
     public Activity(Integer id, String title, String content, Integer duration, Integer userId) {

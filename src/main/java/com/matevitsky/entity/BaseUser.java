@@ -8,7 +8,7 @@ public abstract class BaseUser {
 
     private final String name;
 
-    private final String Email;
+    private final String Email; //TODO: с маленькой
 
     private final String password;
 

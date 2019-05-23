@@ -2,6 +2,7 @@ package com.matevitsky.repository.db;
 
 import com.matevitsky.db.ConnectorDB;
 import com.sun.rowset.CachedRowSetImpl;
+import org.apache.log4j.Logger;
 
 import javax.sql.rowset.CachedRowSet;
 import java.sql.Connection;
@@ -12,31 +13,32 @@ import java.util.Optional;
 
 public abstract class AbstractGenericRepository<E> implements GenericRepository<E> {
 
-//    private static Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
+    private static Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
 
     ConnectorDB connectorDB = new ConnectorDB();
 
     protected E createEntity(E entity, String query) {
-        //   LOGGER.debug("getEntity" + entity.toString() + " Query = " + query);
+        LOGGER.debug("getEntity" + entity.toString() + " Query = " + query);
         boolean resultOfCreation = false;
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
-                // LOGGER.warn("Creating entity failed, no rows affected.");
+                LOGGER.warn("Creating entity failed, no rows affected.");
 
             } else {
                 resultOfCreation = true;
             }
 
         } catch (SQLException e) {
-            //  LOGGER.error("Failed to add entity to database " + e.getMessage());
+            LOGGER.error("Failed to add entity to database " + e.getMessage());
         }
+        //TODO: подумать что вернуть в случае null gочитать про статус код и перезти юзера на нужную странучку сдеалть заглушку на все случаи жизни
         return entity;
     }
 
     protected Optional<CachedRowSet> getEntity(Integer id, String query) {
-        // LOGGER.debug("getEntity with id " + id + " Query = " + query);
+        LOGGER.debug("getEntity with id " + id + " Query = " + query);
 
         //TODO: заменить casherowset
 
@@ -48,22 +50,22 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
             rows.populate(resultSet);
 
         } catch (SQLException e) {
-            // LOGGER.error("Failed to get entity from database " + e.getMessage());
+            LOGGER.error("Failed to get entity from database " + e.getMessage());
         }
-        return Optional.of(rows);
+        return Optional.ofNullable(rows);
     }
 
     protected boolean deleteEntity(String query) {
         boolean result = true;
-        //  LOGGER.debug("deleteEntity with id " + entity.toString() + " Query = " + query);
+        LOGGER.debug("deleteEntity " + " Query = " + query);
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             if (preparedStatement.executeUpdate() == 0) {
-                // LOGGER.warn("DeleteEntity " + entity.toString() + " failed ");
+                LOGGER.warn("DeleteEntity " + " failed ");
                 result = false;
             }
         } catch (SQLException e) {
-            //  LOGGER.error("DeleteEntity failed " + e.getMessage());
+            LOGGER.error("DeleteEntity failed " + e.getMessage());
         }
 
         return result;
@@ -71,30 +73,30 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
 
 
     protected E updateEntity(E entity, String query) {
-        //  LOGGER.debug("updateEntity with id " + entity.toString() + " Query = " + query);
+        LOGGER.debug("updateEntity with id " + entity.toString() + " Query = " + query);
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             if (preparedStatement.executeUpdate(query) > 0) {
                 return entity;
             } else {
-                //  LOGGER.warn("Update entity " + entity.toString() + " filed");
+                LOGGER.warn("Update entity " + entity.toString() + " filed");
             }
 
         } catch (SQLException e) {
-            // LOGGER.error("updateEntity" + e.getMessage());
+            LOGGER.error("updateEntity" + e.getMessage());
         }
         return entity;
     }
 
 
     protected CachedRowSet getAll(String query) {
-        // LOGGER.debug("getAllEntity " + " Query = " + query);
+        LOGGER.debug("getAllEntity " + " Query = " + query);
         CachedRowSet allEntity = null;
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery(query);
             allEntity = new CachedRowSetImpl();
             allEntity.populate(resultSet);
         } catch (SQLException e) {
-            // LOGGER.error("updateEntity" + e.getMessage());
+            LOGGER.error("updateEntity" + e.getMessage());
         }
         return allEntity;
     }
