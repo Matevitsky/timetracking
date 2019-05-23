@@ -54,7 +54,7 @@ INSERT INTO users(Name, Email, Password, Role)
 VALUES ('Sergey3', 'serg3@gmail.com', '3333', '1');
 
 INSERT INTO users(Name, Email, Password, Role)
-VALUES ('Sergey4', 'serg4@gmail.com', '4444', '2');
+VALUES ('Sergey4', 'admin', '4444', '2');
 
 INSERT INTO users(Name, Email, Password, Role)
 VALUES ('user', 'user', 'user', '1');

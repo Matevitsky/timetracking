@@ -27,6 +27,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE Email='%s'";
 
     ConnectorDB connectorDB = new ConnectorDB();
+    RoleRepository roleRepository = new RoleRepositoryImpl();
 
     private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
@@ -110,13 +111,15 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
             ResultSet resultSet = preparedStatement.executeQuery(query);
             resultSet.next();
+
+            //TODO: делать запрос по имени колонки
             Integer userId = resultSet.getInt(1);
             String userName = resultSet.getString(2);
             String userEmail = resultSet.getString(3);
             String userPassword = resultSet.getString(4);
-            String role = resultSet.getString(5);
-
-            user = new User(userId, userName, userEmail, userPassword, new Role(role));
+            String roleId = resultSet.getString(5);
+            Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
+            user = new User(userId, userName, userEmail, userPassword, role);
 
 
         } catch (SQLException e) {

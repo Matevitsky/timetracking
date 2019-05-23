@@ -44,15 +44,22 @@ public class LoginServlet extends HttpServlet {
         Optional<User> userByEmail = userService.findUserByEmail(email);
 
         if (userByEmail.isPresent()) {
-            LOGGER.info("Is present " + userByEmail.get());
-            Integer userId = userByEmail.get().getId();
+            User user = userByEmail.get();
+            if (user.getRole().getName().equals("Admin")) {
+                req.getSession().setAttribute("userId", user.getId());
+                req.setAttribute("userId", user.getId());
+                req.getRequestDispatcher("jsp/adminPage.jsp").forward(req, resp);
 
-            List<Activity> activityListByUserId = activitiesService.getActivityListByUserId(userId);
+            } else {
 
-            req.getSession().setAttribute("userId", userId);
-            req.setAttribute("activityList", activityListByUserId);
-            req.setAttribute("userId", userId);
-            req.getRequestDispatcher("jsp/userPageTest.jsp").forward(req, resp);
+                List<Activity> activityListByUserId = activitiesService.getActivityListByUserId(user.getId());
+                req.getSession().setAttribute("userId", user.getId());
+                req.setAttribute("activityList", activityListByUserId);
+                req.setAttribute("userId", user.getId());
+                req.getRequestDispatcher("jsp/userPage.jsp").forward(req, resp);
+            }
+
+
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/login.jsp");
             requestDispatcher.forward(req, resp);

@@ -1,114 +1,112 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="../css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="../css/style.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="grid.css" rel="stylesheet">
+    <!-- MDBootstrap Datatables  -->
+    <link href="../css/addons/datatables.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="<c:url value="/jsp/css/userPage.css"/>">
-    <link rel="stylesheet" href="<c:url value="/jsp/userPage.jsp"/>">
-
-    <%-- <link href="../css/Mycss.css" rel="stylesheet" type="text/css">--%>
 
 </head>
+
 <body>
 
-<table border="1px">
-    <tr>
-        <th>Content</th>
-        <th>Duration</th>
-    </tr>
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+    <form action="RequestServlet" method="get">
 
-    <c:forEach var="activity" items="${activityList}">
-        <tr>
-            <td><c:out value="${activity.content}"/></td>
-            <td><c:out value="${activity.duration}"/></td>
-        </tr>
-    </c:forEach>
-</table>
-</body>
-</html>
-
-
-<table class=" tab_esp table table-striped table-bordered table-condensed">
+        <input type="submit" name="submit" value="RequestActivity" class="button"/>
+    </form>
     <thead>
     <tr>
-        <th>
-            <input type="text" class="form-control" id="title" placeholder="Title">
-        </th>
-        <th>
-            <input type="text" class="form-control" id="content" placeholder="Title">
-        </th>
+        <th class="th-sm">Title
 
-        <th class='center'>
-            <labeL>Duration</label>
         </th>
-        <th>
-            <select class="form-control" id="esp_para">
-                <option>PARAMETRIZADO</option>
-                <option value='1'>Finish</option>
-                <%-- <option value='2'>NAO</option>--%>
-            </select>
+        <th class="th-sm">Content
+
+        </th>
+        <th class="th-sm">Duration
+
+        </th>
+        <th class="th-sm">Bottom
+
         </th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td class='esp_nm'>название</td>
-        <td class='esp_nm'>контент</td>
-
-        <td><input type='text' class='form-control'></input></td>
-        <td class='esp_para center'>
-            <button class='btn btn-danger'>NAO</button>
-        </td>
-    </tr>
-    <tr>
-        <td class='esp_nm'>название</td>
-        <td class='esp_nm'>контент</td>
-        <td><input type='text' class='form-control'></input></td>
-        <td class='esp_para center'>
-            <button class='btn btn-success'>SIM</button>
-        </td>
-    </tr>
-    <tr>
-        <td class='esp_nm'>название</td>
-        <td class='esp_nm'>контент</td>
-        <td><input type='text' class='form-control'></input></td>
-
-        <td class='esp_para center'>
-            <button class='btn btn-danger'>NAO</button>
-        </td>
-    </tr>
-    <tr>
-        <td class='esp_nm'>название</td>
-        <td class='esp_nm'>контент</td>
-        <td><input type='text' class='form-control'></input></td>
-
-        <td class='esp_para center'>
-            <button class='btn btn-success'>SIM</button>
-        </td>
-    </tr>
-    <tr>
-        <td class='esp_nm'>название</td>
-        <td class='esp_nm'>контент</td>
-        <td><input type='text' class='form-control'></input></td>
-
-        <td class='esp_para center'>
-            <button class='btn btn-success'>SIM</button>
-        </td>
-    </tr>
-    <tr>
-        <td class='esp_nm'>название</td>
-        <td class='esp_nm'>контент</td>
-
-
-        <td class='esp_para center'>
-            <button class='btn btn-success'>SIM</button>
-        </td>
-    </tr>
+    <c:forEach items="${activityList}" var="activity">
+        <tr>
+            <td>${activity.title}</td>
+            <td>${activity.content}</td>
+            <td>${activity.duration}</td>
+            <td>
+                <form action="userservlet" method="get">
+                    <input type="hidden" name="id" value="${activity.id}"/>
+                    <input type="submit" value="Remove" name="remove">
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
     </tbody>
+
+
+    <%--   <c:forEach var="activity" items="${activityList}">
+
+           <tr>
+               <td>${activity.title}</td>
+               <td>${activity.content}</td>
+               <td>${activity.duration}</td>
+               <td>
+                   <form action="UserServlet" method="get">
+                       <input type="hidden" name="id" value="${activity.getId}"/>
+                       <input type="submit" value="Remove" name="remove">
+                   </form>
+               </td>
+           </tr>
+
+       </c:forEach>--%>
+    <tfoot>
+    <tr>
+        <th>Title
+        </th>
+        <th>Content
+        </th>
+        <th>Duration
+        </th>
+        <th>Bottom
+        </th>
+    </tr>
+    </tfoot>
 </table>
+<!-- SCRIPTS -->
+<!-- JQuery -->
+<script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript" src="js/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="js/mdb.min.js"></script>
+
+<!-- MDBootstrap Datatables  -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+
+<script>$(document).ready(function () {
+    $('#dtBasicExample').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+});</script>
+</body>
+
+</html>
