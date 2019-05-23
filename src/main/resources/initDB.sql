@@ -1,44 +1,64 @@
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS activities;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS role;
 
-/*CREATE SEQUENCE global_seq START 100000;*/
+
+
+create table role
+(
+    ID   int auto_increment,
+
+    Name varchar(64) not null,
+    PRIMARY KEY (ID)
+
+);
+
 create table users
 (
     ID       int auto_increment,
-    Name     varchar(64)  null,
-    Email    varchar(255) null,
-    Password varchar(32)  null,
-    Role     varchar(255) null,
-    PRIMARY KEY (ID)
+    Name     varchar(64)  not null,
+    Email    varchar(255) not null,
+    Password varchar(32)  not null,
+    Role     int          not null,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (Role) REFERENCES role (ID)
 );
 
 create table activities
 (
     ID       int auto_increment,
 
-    Title    varchar(64)  null,
+    Title    varchar(64)  not null,
     Content  varchar(255) null,
     Duration int          null,
     UserId   int          null,
     PRIMARY KEY (ID),
-    FOREIGN KEY (UserId) REFERENCES Users (ID)
+    FOREIGN KEY (UserId) REFERENCES users (ID)
 
 );
 
-INSERT INTO Users(Name, Email, Password, Role)
-VALUES ('Sergey1', 'serg1@gmail.com', '11111', 'REGULAR');
 
-INSERT INTO Users(Name, Email, Password, Role)
-VALUES ('Sergey2', 'serg2@gmail.com', '2222', 'REGULAR');
+INSERT INTO role(Name)
+VALUES ('User');
 
-INSERT INTO Users(Name, Email, Password, Role)
-VALUES ('Sergey3', 'serg3@gmail.com', '3333', 'REGULAR');
+INSERT INTO role(Name)
+VALUES ('Admin');
 
-INSERT INTO Users(Name, Email, Password, Role)
-VALUES ('Sergey4', 'serg4@gmail.com', '4444', 'ADMIN');
+INSERT INTO users(Name, Email, Password, Role)
+VALUES ('Sergey1', 'serg1@gmail.com', '11111', '1');
 
-INSERT INTO Users(Name, Email, Password, Role)
-VALUES ('user', 'user', 'user', 'REGULAR');
+INSERT INTO users(Name, Email, Password, Role)
+VALUES ('Sergey2', 'serg2@gmail.com', '2222', '1');
 
-INSERT INTO Activities(Title, Content, Duration, UserId)
+INSERT INTO users(Name, Email, Password, Role)
+VALUES ('Sergey3', 'serg3@gmail.com', '3333', '1');
+
+INSERT INTO users(Name, Email, Password, Role)
+VALUES ('Sergey4', 'serg4@gmail.com', '4444', '2');
+
+INSERT INTO users(Name, Email, Password, Role)
+VALUES ('user', 'user', 'user', '1');
+
+INSERT INTO activities(Title, Content, Duration, UserId)
 VALUES ('Tittle1', 'Content1', '100', '1');
+
