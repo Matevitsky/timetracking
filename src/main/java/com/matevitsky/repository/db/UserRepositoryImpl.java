@@ -19,12 +19,12 @@ import java.util.Optional;
 public class UserRepositoryImpl extends AbstractGenericRepository<User> implements UserRepository {
 
 
-    private static final String INSERT_USERS_SQL = "INSERT INTO Users" + "  (Name, Email, Password, Role) VALUES  ('%s', '%s', '%s', '%s')";
-    private static final String DELETE_USERS_SQL = "DELETE FROM Users WHERE ID=%d";
-    private static final String UPDATE_USERS_SQL = "UPDATE Users set Name='%s',Email='%s',Password=%s,Role='%s' where ID=%d";
-    private static final String SELECT_USER_BY_ID = "SELECT * FROM Users WHERE ID=%d";
-    private static final String SELECT_ALL_USERS = "SELECT * FROM Users";
-    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM Users WHERE Email='%s'";
+    private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (Name, Email, Password, Role) VALUES  ('%s', '%s', '%s', '%s')";
+    private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE ID=%d";
+    private static final String UPDATE_USERS_SQL = "UPDATE users set Name='%s',Email='%s',Password=%s,Role='%s' where ID=%d";
+    private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE ID=%d";
+    private static final String SELECT_ALL_USERS = "SELECT * FROM users";
+    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE Email='%s'";
 
     ConnectorDB connectorDB = new ConnectorDB();
 

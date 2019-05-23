@@ -1,27 +1,27 @@
-DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Activities;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS activities;
 
 /*CREATE SEQUENCE global_seq START 100000;*/
-create table Users
+create table users
 (
-    ID       int auto_increment
-        primary key,
-    Name     varchar(255) null,
+    ID       int auto_increment,
+    Name     varchar(64)  null,
     Email    varchar(255) null,
-    Password varchar(255) null,
-    Role     varchar(255) null
-
+    Password varchar(32)  null,
+    Role     varchar(255) null,
+    PRIMARY KEY (ID)
 );
 
-create table Activities
+create table activities
 (
-    ID       int auto_increment
-        primary key,
+    ID       int auto_increment,
 
-    Title    varchar(255) null,
+    Title    varchar(64)  null,
     Content  varchar(255) null,
     Duration int          null,
-    UserId   int          null
+    UserId   int          null,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (UserId) REFERENCES Users (ID)
 
 );
 

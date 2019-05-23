@@ -15,12 +15,12 @@ import java.util.Optional;
 
 public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> implements GenericRepository<Activity> {
 
-    private static final String INSERT_ACTIVITY_SQL = "INSERT INTO Activities" + "  (Title, Content, Duration, UserId) VALUES  ('%s', '%s', '%d', '%d')";
-    private static final String DELETE_ACTIVITY_SQL = "DELETE FROM Activities WHERE ID=%d;";
-    private static final String UPDATE_ACTIVITY_SQL = "UPDATE Activities set Title='%s',Content='%s',Duration=%d WHERE ID=%d";
-    private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM Activities WHERE ID=%d";
-    private static final String SELECT_ALL_ACTIVITY = "SELECT * FROM Activities";
-    private static final String SELECT_ACTIVITY_BY_USER_ID = "SELECT * FROM Activities WHERE UserId=%d";
+    private static final String INSERT_ACTIVITY_SQL = "INSERT INTO activities" + "  (Title, Content, Duration, UserId) VALUES  ('%s', '%s', '%d', '%d')";
+    private static final String DELETE_ACTIVITY_SQL = "DELETE FROM activities WHERE ID=%d;";
+    private static final String UPDATE_ACTIVITY_SQL = "UPDATE activities set Title='%s',Content='%s',Duration=%d WHERE ID=%d";
+    private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM activities WHERE ID=%d";
+    private static final String SELECT_ALL_ACTIVITY = "SELECT * FROM activities";
+    private static final String SELECT_ACTIVITY_BY_USER_ID = "SELECT * FROM activities WHERE UserId=%d";
     private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
