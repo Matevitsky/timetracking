@@ -64,21 +64,6 @@
     </tbody>
 
 
-    <%--   <c:forEach var="activity" items="${activityList}">
-
-           <tr>
-               <td>${activity.title}</td>
-               <td>${activity.content}</td>
-               <td>${activity.duration}</td>
-               <td>
-                   <form action="UserServlet" method="get">
-                       <input type="hidden" name="id" value="${activity.getId}"/>
-                       <input type="submit" value="Remove" name="remove">
-                   </form>
-               </td>
-           </tr>
-
-       </c:forEach>--%>
     <tfoot>
     <tr>
         <th>Title

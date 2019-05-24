@@ -31,8 +31,21 @@ public class Main {
         //System.out.println(userService.getAll());
 
         ActivityService activityService = new ActivityServiceImpl();
-        Activity activity1 = new Activity(5, "Title2", "Hello World", 1, 0);
-        Activity activity2 = new Activity(5, "Title3", "Hello World3", 1, 0);
+        Activity activity1 = Activity.newBuilder().withId(5)
+                .withTittle("Tittle2")
+                .withContent("hello")
+                .withDuration(1)
+                .withUserId(0).build();
+
+
+        /*  (5, "Title2", "Hello World", 1, 0);*/
+        Activity activity2 = Activity.newBuilder().withId(5)
+                .withTittle("Tittle3")
+                .withContent("hello3")
+                .withDuration(1)
+                .withUserId(0).build();
+
+
         activityService.insertActivity(activity1);
         activityService.insertActivity(activity2);
 

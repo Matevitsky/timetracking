@@ -70,7 +70,11 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 String content = allUsersList.getString(3);
                 Integer duration = allUsersList.getInt(4);
                 Integer userId = allUsersList.getInt(5);
-                activity = new Activity(activityId, tittle, content, duration, userId);
+                activity = Activity.newBuilder().withId(activityId)
+                        .withTittle(tittle)
+                        .withContent(content)
+                        .withDuration(duration)
+                        .withUserId(userId).build();
             }
 
         } catch (SQLException e) {
@@ -92,7 +96,11 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 Integer duration = allActivities.getInt(4);
                 Integer userId = allActivities.getInt(5);
 
-                Activity activity = new Activity(activityId, tittle, content, duration, userId);
+                Activity activity = Activity.newBuilder().withId(activityId)
+                        .withTittle(tittle)
+                        .withContent(content)
+                        .withDuration(duration)
+                        .withUserId(userId).build();
                 activityList.add(activity);
             }
         } catch (SQLException e) {
@@ -115,7 +123,11 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 String content = resultSet.getString("Content");
                 Integer duration = resultSet.getInt("Duration");
 
-                Activity activity = new Activity(activityId, tittle, content, duration, userId);
+                Activity activity = Activity.newBuilder().withId(activityId)
+                        .withTittle(tittle)
+                        .withContent(content)
+                        .withDuration(duration)
+                        .withUserId(userId).build();
                 activityList.add(activity);
             }
 
@@ -136,7 +148,11 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 String tittle = resultSet.getString("Title");
                 String content = resultSet.getString("Content");
                 Integer duration = resultSet.getInt("Duration");
-                Activity activity = new Activity(activityId, tittle, content, duration, 0);
+                Activity activity = Activity.newBuilder().withId(activityId)
+                        .withTittle(tittle)
+                        .withContent(content)
+                        .withDuration(duration)
+                        .withUserId(0).build();
                 unAssignedActivityList.add(activity);
             }
         } catch (SQLException e) {

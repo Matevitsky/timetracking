@@ -8,7 +8,13 @@ public enum CommandList {
 
     USER_REQUEST_ACTIVITY(new UserRequestActivityCommand()),
 
-    ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand());
+    ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand()),
+
+    ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand());
+
+
+
+
 
 
 

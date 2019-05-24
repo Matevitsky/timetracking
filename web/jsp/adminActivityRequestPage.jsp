@@ -33,6 +33,7 @@
 
     <input type="submit" name="submit" value="Old Activity" class="button"/>
 </form>
+
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
@@ -41,41 +42,67 @@
         </th>
         <th>
             Available Activity
-
-        <th class="th-sm">Bottom
-
         </th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${userForActivityRequestList}" var="user">
         <tr>
-            <td>${user.name}</td>
-            <td>
-                <div class="dropdown open">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Available Activity
-                    </button>
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <form>
+                <td>${user.name}</td>
 
-                        <c:forEach items="${unAssignedActivityList}" var="unAssignedActivityList">
-                            <a class="dropdown-item">${unAssignedActivityList.title}</a>
-                        </c:forEach>
+                <td>
 
-                            <%-- <a class="dropdown-item" href="#">Action</a>
-                             <a class="dropdown-item" href="#">Another action</a>
-                             <a class="dropdown-item" href="#">Something else here</a>--%>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <form action="/app" method="get">
-                        <%--  <input type="hidden" name="id" value="${activity.id}"/>--%>
-                    <input type="submit" value="Assign task" name="assign">
-                </form>
-            </td>
+                    <form action="/" method="get">
+
+                        Please select an element:
+
+
+                        <select id="unAssignedActivityList" name="selectedRecord">
+
+                            <c:forEach var="unAssignedActivityList" items="${unAssignedActivityList}">
+
+                                <option value="${unAssignedActivityList}">${unAssignedActivityList.title}</option>
+                                <input type="hidden" name="userId" value= ${user.id}>
+                            </c:forEach>
+
+                        </select>
+
+                            <%--  <input type="submit" value="Submit" align="middle">--%>
+
+
+                        <form action="/app" method="get">
+                            <input type="submit" value="Assign task">
+                            <input type="hidden" name="command" value="assign_activity_command">
+
+                        </form>
+
+
+                    </form>
+
+                        <%-- <div class="dropdown open">
+                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Available Activity
+                             </button>
+
+
+                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                     <c:forEach items="${unAssignedActivityList}" var="unAssignedActivityList">
+                                         <a class="dropdown-item">${unAssignedActivityList.title}</a>
+                                     </c:forEach>
+
+                                 </div>
+                         </div>--%>
+
+
+                </td>
+
+
+            </form>
+
         </tr>
     </c:forEach>
     </tbody>
@@ -88,12 +115,17 @@
         <th>
             Activity Requests
 
-        <th class="th-sm">Bottom
-
         </th>
     </tr>
     </tfoot>
 </table>
+
+<script>
+    $(".dropdown-menu li a").click(function () {
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    });
+</script>
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
@@ -107,10 +139,10 @@
 <!-- MDBootstrap Datatables  -->
 <script type="text/javascript" src="js/addons/datatables.min.js"></script>
 
-<script>$(document).ready(function () {
+<%--<script>$(document).ready(function () {
     $('#dtBasicExample').DataTable();
     $('.dataTables_length').addClass('bs-select');
-});</script>
+});</script>--%>
 </body>
 
 </html>

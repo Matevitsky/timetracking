@@ -3,28 +3,21 @@ package com.matevitsky.entity;
 import java.util.Objects;
 
 public class Activity {
-    private final String content; //TODO: description
-    private final String title;
     private Integer id;
-    private final Integer duration;
-    private final Integer userId;
+    private String content; //TODO: description
+    private String title;
+
+    private Integer duration;
+    private Integer userId;
 
 
-    public Activity(Integer id, String title, String content, Integer duration, Integer userId) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.duration = duration;
-        this.userId = userId;
+    private Activity() {
+
     }
 
     public Integer getId() {
         return id;
     }
-
-
-//TODO: creation constructors for duration and userId is required
-
 
     public String getTitle() {
         return title;
@@ -38,7 +31,48 @@ public class Activity {
         return duration;
     }
 
+    public static Builder newBuilder() {
+        return new Activity().new Builder();
+    }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public class Builder {
+        private Builder() {
+
+        }
+
+        public Builder withId(Integer id) {
+            Activity.this.id = id;
+            return this;
+        }
+
+        public Builder withContent(String content) {
+            Activity.this.content = content;
+            return this;
+        }
+
+        public Builder withTittle(String title) {
+            Activity.this.title = title;
+            return this;
+        }
+
+        public Builder withDuration(Integer duration) {
+            Activity.this.duration = duration;
+            return this;
+        }
+
+        public Builder withUserId(Integer userId) {
+            Activity.this.userId = userId;
+            return this;
+        }
+
+        public Activity build() {
+            return Activity.this;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
