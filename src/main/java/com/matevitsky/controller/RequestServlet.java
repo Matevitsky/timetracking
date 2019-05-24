@@ -1,3 +1,4 @@
+/*
 package com.matevitsky.controller;
 
 import com.matevitsky.entity.Activity;
@@ -37,3 +38,4 @@ public class RequestServlet extends HttpServlet {
 
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.matevitsky.controller;
 
 import com.matevitsky.entity.Activity;
@@ -69,4 +70,4 @@ public class LoginServlet extends HttpServlet {
 
         //:TODO сделать страницу
     }
-}
+}*/

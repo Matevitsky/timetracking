@@ -52,7 +52,8 @@
             <td>${activity.content}</td>
             <td>${activity.duration}</td>
             <td>
-                <form action="/userServlet" method="get">
+                <form action="/app" method="get">
+                    <input type="hidden" name="command" value="user_activity_remove">
                     <input type="hidden" name="id" value="${activity.id}"/>
                     <input type="submit" value="Remove" name="remove">
                 </form>

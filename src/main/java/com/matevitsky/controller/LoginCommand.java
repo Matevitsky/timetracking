@@ -37,7 +37,6 @@ public class LoginCommand implements Command {
                 return ADMIN_PAGE;
 
             } else {
-
                 List<Activity> activityListByUserId = activitiyService.getActivityListByUserId(user.getId());
                 request.getSession().setAttribute("userId", user.getId());
                 request.setAttribute("activityList", activityListByUserId);
