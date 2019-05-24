@@ -7,7 +7,7 @@ import com.matevitsky.repository.ActivityRepositoryImpl;
 import java.util.List;
 import java.util.Optional;
 
-public class ActivityServiceImpl implements ActivitiesService {
+public class ActivityServiceImpl implements ActivitiyService {
 
     private ActivityRepositoryImpl activityRepository = new ActivityRepositoryImpl();
 

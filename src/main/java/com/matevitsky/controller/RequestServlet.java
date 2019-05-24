@@ -1,7 +1,7 @@
 package com.matevitsky.controller;
 
 import com.matevitsky.entity.Activity;
-import com.matevitsky.service.ActivitiesService;
+import com.matevitsky.service.ActivitiyService;
 import com.matevitsky.service.ActivityRequestService;
 import com.matevitsky.service.ActivityRequestServiceImpl;
 import com.matevitsky.service.ActivityServiceImpl;
@@ -19,7 +19,7 @@ public class RequestServlet extends HttpServlet {
 
     ActivityRequestService activityRequestService = new ActivityRequestServiceImpl();
 
-    ActivitiesService activitiesService = new ActivityServiceImpl();
+    ActivitiyService activitiyService = new ActivityServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class RequestServlet extends HttpServlet {
         Integer userId = (Integer) req.getSession().getAttribute("userId");
         activityRequestService.createRequest(userId);
 
-        List<Activity> activityListByUserId = activitiesService.getActivityListByUserId(userId);
+        List<Activity> activityListByUserId = activitiyService.getActivityListByUserId(userId);
 
         req.getSession().setAttribute("userId", userId);
         req.setAttribute("activityList", activityListByUserId);

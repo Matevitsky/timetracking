@@ -6,7 +6,7 @@ import com.matevitsky.entity.Activity;
 import java.util.List;
 import java.util.Optional;
 
-public interface ActivitiesService {
+public interface ActivitiyService {
 
     Activity insertActivity(Activity activity);
 

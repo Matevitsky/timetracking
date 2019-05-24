@@ -59,11 +59,12 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Req
         List<Request> requestList = new ArrayList<>();
         String query = String.format(SELECT_REQUEST_ID, id);
         Optional<CachedRowSet> entity = getEntity(id, query);
-        CachedRowSet rowSet = entity.isPresent() ? entity.get() : null;
+        CachedRowSet resultSet = entity.isPresent() ? entity.get() : null;
         try {
-            while (rowSet.next()) {
-                Integer userId = rowSet.getInt(1);
-                Request request = new Request(userId);
+            while (resultSet.next()) {
+                Integer requestId = resultSet.getInt("ID");
+                Integer userId = resultSet.getInt("UserId");
+                Request request = new Request(requestId, userId);
                 requestList.add(request);
             }
         } catch (SQLException e) {
@@ -89,9 +90,10 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Req
             resultSet.next();
 
             while (resultSet.next()) {
-                int userId = resultSet.getInt("UserId");
+                Integer requestId = resultSet.getInt("ID");
+                Integer userId = resultSet.getInt("UserId");
 
-                Request request = new Request(userId);
+                Request request = new Request(requestId, userId);
                 activityRequestList.add(request);
 
             }

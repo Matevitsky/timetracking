@@ -15,7 +15,7 @@ public class ActivityRequestServiceImpl implements ActivityRequestService {
     @Override
     public Request createRequest(Integer userId) {
         LOGGER.debug("Method createRequest with userId " + userId + " started");
-        Request request = new Request(userId);
+        Request request = new Request(0, userId);
         return activityRequestRepository.create(request);
 
     }

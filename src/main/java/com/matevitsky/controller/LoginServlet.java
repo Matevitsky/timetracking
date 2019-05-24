@@ -2,7 +2,7 @@ package com.matevitsky.controller;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.User;
-import com.matevitsky.service.ActivitiesService;
+import com.matevitsky.service.ActivitiyService;
 import com.matevitsky.service.ActivityServiceImpl;
 import com.matevitsky.service.UserService;
 import com.matevitsky.service.UserServiceImpl;
@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 
     private static Logger LOGGER = Logger.getLogger(LoginServlet.class);
     UserService userService = new UserServiceImpl();
-    ActivitiesService activitiesService = new ActivityServiceImpl();
+    ActivitiyService activitiyService = new ActivityServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
 
             } else {
 
-                List<Activity> activityListByUserId = activitiesService.getActivityListByUserId(user.getId());
+                List<Activity> activityListByUserId = activitiyService.getActivityListByUserId(user.getId());
                 req.getSession().setAttribute("userId", user.getId());
                 req.setAttribute("activityList", activityListByUserId);
                 req.setAttribute("userId", user.getId());
