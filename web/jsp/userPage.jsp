@@ -23,9 +23,10 @@
 </head>
 
 <body>
-<form action="/requestServlet" method="get">
+<form action="/app?command=user_request_activity" method="get">
+    <input type="hidden" name="command" value="user_request_activity">
 
-    <input type="submit" value="RequestActivity" name="requestActivity">
+    <input type="submit" value="Request Activity">
 </form>
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 

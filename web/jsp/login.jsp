@@ -10,7 +10,7 @@
 <body>
 <div id="wrapper">
 
-    <form name="login-form" class="login-form" action="/app" method="post">
+    <form name="login-form" class="login-form" action="" method="post">
         <input type="hidden" name="command" value="login">
         <div class="header">
             <h1>Login Form</h1>
