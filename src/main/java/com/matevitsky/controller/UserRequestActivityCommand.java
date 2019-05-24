@@ -1,9 +1,9 @@
 package com.matevitsky.controller;
 
 import com.matevitsky.entity.Activity;
-import com.matevitsky.service.ActivitiyService;
 import com.matevitsky.service.ActivityRequestService;
 import com.matevitsky.service.ActivityRequestServiceImpl;
+import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.ActivityServiceImpl;
 
 import javax.servlet.ServletException;
@@ -19,7 +19,7 @@ public class UserRequestActivityCommand implements Command {
 
     ActivityRequestService activityRequestService = new ActivityRequestServiceImpl();
 
-    ActivitiyService activitiyService = new ActivityServiceImpl();
+    ActivityService activityService = new ActivityServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,7 +28,7 @@ public class UserRequestActivityCommand implements Command {
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         activityRequestService.createRequest(userId);
 
-        List<Activity> activityListByUserId = activitiyService.getActivityListByUserId(userId);
+        List<Activity> activityListByUserId = activityService.getActivityListByUserId(userId);
 
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("activityList", activityListByUserId);

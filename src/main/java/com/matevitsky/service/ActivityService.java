@@ -6,7 +6,8 @@ import com.matevitsky.entity.Activity;
 import java.util.List;
 import java.util.Optional;
 
-public interface ActivitiyService {
+public interface ActivityService {
+
 
     Activity insertActivity(Activity activity);
 
@@ -19,5 +20,7 @@ public interface ActivitiyService {
     List<Activity> getAll();
 
     List<Activity> getActivityListByUserId(Integer userId);
+
+    List<Activity> getUnAssignedActivityList();
 
 }

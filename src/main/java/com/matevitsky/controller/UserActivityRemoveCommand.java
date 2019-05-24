@@ -1,7 +1,7 @@
 package com.matevitsky.controller;
 
 import com.matevitsky.entity.Activity;
-import com.matevitsky.service.ActivitiyService;
+import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.ActivityServiceImpl;
 
 import javax.servlet.ServletException;
@@ -14,15 +14,15 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 
 public class UserActivityRemoveCommand implements Command {
 
-    ActivitiyService activitiyService = new ActivityServiceImpl();
+    ActivityService activityService = new ActivityServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String activityId = request.getParameter("id");
         Integer userId = (Integer) request.getSession().getAttribute("userId");
-        activitiyService.deleteActivity(Integer.parseInt(activityId));
+        activityService.deleteActivity(Integer.parseInt(activityId));
 
-        List<Activity> activityListByUserId = activitiyService.getActivityListByUserId(userId);
+        List<Activity> activityListByUserId = activityService.getActivityListByUserId(userId);
 
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("activityList", activityListByUserId);

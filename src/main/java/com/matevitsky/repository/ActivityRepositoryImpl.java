@@ -21,6 +21,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM activities WHERE ID=%d";
     private static final String SELECT_ALL_ACTIVITY = "SELECT * FROM activities";
     private static final String SELECT_ACTIVITY_BY_USER_ID = "SELECT * FROM activities WHERE UserId=%d";
+    private static final String SELECT_ALL_UNASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE UserId IS NULL";
     private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
@@ -40,7 +41,6 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
 
         return deleteEntity(query);
-
 
 
     }
@@ -110,10 +110,10 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Integer activityId = resultSet.getInt(1);
-                String tittle = resultSet.getString(2);
-                String content = resultSet.getString(3);
-                Integer duration = resultSet.getInt(4);
+                Integer activityId = resultSet.getInt("ID");
+                String tittle = resultSet.getString("Title");
+                String content = resultSet.getString("Content");
+                Integer duration = resultSet.getInt("Duration");
 
                 Activity activity = new Activity(activityId, tittle, content, duration, userId);
                 activityList.add(activity);
@@ -123,5 +123,25 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
             LOGGER.warn("Field to get activity List byUserId " + userId + " " + e.getMessage());
         }
         return activityList;
+    }
+
+    public List<Activity> getUnAssignedActivityList() {
+        LOGGER.debug("Method getUnAssignedActivityList started ");
+        List<Activity> unAssignedActivityList = new ArrayList<>();
+        try (Connection connection = connectorDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_UNASSIGNED_ACTIVITY)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Integer activityId = resultSet.getInt("ID");
+                String tittle = resultSet.getString("Title");
+                String content = resultSet.getString("Content");
+                Integer duration = resultSet.getInt("Duration");
+                Activity activity = new Activity(activityId, tittle, content, duration, 0);
+                unAssignedActivityList.add(activity);
+            }
+        } catch (SQLException e) {
+            LOGGER.warn("Filed to get UnAssigned Activity " + e.getMessage());
+        }
+        return unAssignedActivityList;
     }
 }

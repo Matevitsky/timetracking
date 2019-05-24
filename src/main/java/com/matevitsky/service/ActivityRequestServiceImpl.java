@@ -1,6 +1,6 @@
 package com.matevitsky.service;
 
-import com.matevitsky.entity.Request;
+import com.matevitsky.entity.ActivityRequest;
 import com.matevitsky.repository.ActivityRequestRepository;
 import com.matevitsky.repository.ActivityRequestRepositoryImpl;
 import org.apache.log4j.Logger;
@@ -13,10 +13,10 @@ public class ActivityRequestServiceImpl implements ActivityRequestService {
     ActivityRequestRepository activityRequestRepository = new ActivityRequestRepositoryImpl();
 
     @Override
-    public Request createRequest(Integer userId) {
+    public ActivityRequest createRequest(Integer userId) {
         LOGGER.debug("Method createRequest with userId " + userId + " started");
-        Request request = new Request(0, userId);
-        return activityRequestRepository.create(request);
+        ActivityRequest activityRequest = new ActivityRequest(0, userId);
+        return activityRequestRepository.create(activityRequest);
 
     }
 
@@ -27,22 +27,22 @@ public class ActivityRequestServiceImpl implements ActivityRequestService {
     }
 
     @Override
-    public List<Request> getAllRequests() {
+    public List<ActivityRequest> getAllRequests() {
         LOGGER.debug("Method getAllRequests started");
-        List<Request> requestList = activityRequestRepository.getAll();
-        if (requestList.isEmpty()) {
+        List<ActivityRequest> activityRequestList = activityRequestRepository.getAll();
+        if (activityRequestList.isEmpty()) {
             LOGGER.warn("activityRequestList is empty");
         }
-        return requestList;
+        return activityRequestList;
     }
 
     @Override
-    public List<Request> getAllRequestsByUserId(Integer userId) {
+    public List<ActivityRequest> getAllRequestsByUserId(Integer userId) {
         LOGGER.debug("Method getAllRequestsByUserId started");
-        List<Request> requestList = activityRequestRepository.getByUserId(userId);
-        if (requestList.isEmpty()) {
+        List<ActivityRequest> activityRequestList = activityRequestRepository.getByUserId(userId);
+        if (activityRequestList.isEmpty()) {
             LOGGER.warn("activityRequestList is empty");
         }
-        return requestList;
+        return activityRequestList;
     }
 }

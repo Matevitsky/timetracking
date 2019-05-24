@@ -7,7 +7,7 @@ import com.matevitsky.repository.ActivityRepositoryImpl;
 import java.util.List;
 import java.util.Optional;
 
-public class ActivityServiceImpl implements ActivitiyService {
+public class ActivityServiceImpl implements ActivityService {
 
     private ActivityRepositoryImpl activityRepository = new ActivityRepositoryImpl();
 
@@ -39,8 +39,15 @@ public class ActivityServiceImpl implements ActivitiyService {
         return activityRepository.getAll();
     }
 
+
     public List<Activity> getActivityListByUserId(Integer userId) {
 
         return activityRepository.getActivityListByUserId(userId);
+    }
+
+    @Override
+    public List<Activity> getUnAssignedActivityList() {
+        return activityRepository.getUnAssignedActivityList();
+
     }
 }

@@ -1,16 +1,16 @@
 package com.matevitsky.service;
 
-import com.matevitsky.entity.Request;
+import com.matevitsky.entity.ActivityRequest;
 
 import java.util.List;
 
 public interface ActivityRequestService {
 
-    Request createRequest(Integer userId);
+    ActivityRequest createRequest(Integer userId);
 
     boolean deleteRequest(Integer id);
 
-    List<Request> getAllRequests();
+    List<ActivityRequest> getAllRequests();
 
-    List<Request> getAllRequestsByUserId(Integer userId);
+    List<ActivityRequest> getAllRequestsByUserId(Integer userId);
 }

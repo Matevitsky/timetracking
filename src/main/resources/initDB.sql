@@ -75,3 +75,10 @@ VALUES ('user', 'user', 'user', '1');
 INSERT INTO activities(Title, Content, Duration, UserId)
 VALUES ('Tittle1', 'Content1', '100', '1');
 
+INSERT INTO activities(Title, Content, Duration, UserId)
+VALUES ('Tittle2', 'Content2', '100', NULL);
+
+INSERT INTO activities(Title, Content, Duration, UserId)
+VALUES ('Tittle3', 'Content3', '100', NULL);
+
+

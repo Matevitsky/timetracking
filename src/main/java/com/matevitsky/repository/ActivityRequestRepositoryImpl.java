@@ -1,7 +1,7 @@
 package com.matevitsky.repository;
 
 import com.matevitsky.db.ConnectorDB;
-import com.matevitsky.entity.Request;
+import com.matevitsky.entity.ActivityRequest;
 import org.apache.log4j.Logger;
 
 import javax.sql.RowSet;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Request> implements ActivityRequestRepository {
+public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<ActivityRequest> implements ActivityRequestRepository {
 
     private static final String SELECT_ALL_REQUESTS = "SELECT * FROM activityRequests";
     private static final String INSERT_REQUEST_SQL = "INSERT INTO activityRequests" + "  (UserId) VALUES  ('%d')";
@@ -26,11 +26,11 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Req
 
 
     @Override
-    public Request create(Request request) {
-        LOGGER.debug("Method create request with UserId " + request.getUserId());
-        String query = String.format(INSERT_REQUEST_SQL, request.getUserId());
+    public ActivityRequest create(ActivityRequest activityRequest) {
+        LOGGER.debug("Method create activityRequest with UserId " + activityRequest.getUserId());
+        String query = String.format(INSERT_REQUEST_SQL, activityRequest.getUserId());
 
-        Request entity = createEntity(request, query);
+        ActivityRequest entity = createEntity(activityRequest, query);
 
         return entity;
     }
@@ -45,18 +45,18 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Req
     }
 
     @Override
-    public Request update(Request entity) {
+    public ActivityRequest update(ActivityRequest entity) {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Optional<Request> getById(Integer id) {
+    public Optional<ActivityRequest> getById(Integer id) {
         throw new UnsupportedOperationException();
     }
 
-    public List<Request> getByUserId(Integer id) {
+    public List<ActivityRequest> getByUserId(Integer id) {
         LOGGER.debug("Method  getRequestById " + id + " started");
-        List<Request> requestList = new ArrayList<>();
+        List<ActivityRequest> activityRequestList = new ArrayList<>();
         String query = String.format(SELECT_REQUEST_ID, id);
         Optional<CachedRowSet> entity = getEntity(id, query);
         CachedRowSet resultSet = entity.isPresent() ? entity.get() : null;
@@ -64,21 +64,21 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Req
             while (resultSet.next()) {
                 Integer requestId = resultSet.getInt("ID");
                 Integer userId = resultSet.getInt("UserId");
-                Request request = new Request(requestId, userId);
-                requestList.add(request);
+                ActivityRequest activityRequest = new ActivityRequest(requestId, userId);
+                activityRequestList.add(activityRequest);
             }
         } catch (SQLException e) {
             LOGGER.warn(e.fillInStackTrace().getMessage());
         }
 
 
-        return requestList;
+        return activityRequestList;
 
     }
 
     @Override
-    public List<Request> getAll() {
-        List<Request> activityRequestList = new ArrayList<>();
+    public List<ActivityRequest> getAll() {
+        List<ActivityRequest> activityActivityRequestList = new ArrayList<>();
 
         LOGGER.debug("Method getAll activities started ");
 
@@ -93,13 +93,13 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Req
                 Integer requestId = resultSet.getInt("ID");
                 Integer userId = resultSet.getInt("UserId");
 
-                Request request = new Request(requestId, userId);
-                activityRequestList.add(request);
+                ActivityRequest activityRequest = new ActivityRequest(requestId, userId);
+                activityActivityRequestList.add(activityRequest);
 
             }
         } catch (SQLException e) {
             LOGGER.warn("Failed to get Requests error:" + e.getMessage());
         }
-        return activityRequestList;
+        return activityActivityRequestList;
     }
 }

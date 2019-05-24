@@ -23,8 +23,8 @@
 </head>
 
 <body>
-<form action="/app?command=admin_activity_requests" method="get">
-    <input type="hidden" name="command" value="admin_activity_requests">
+<form action="/app?command=admin_activity_request" method="get">
+    <input type="hidden" name="command" value="admin_new_activity">
 
     <input type="submit" name="submit" value="Activity Requests" class="button"/>
 </form>
@@ -36,30 +36,44 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th class="th-sm">Title
+        <th class="th-sm">User Name
 
         </th>
-        <th class="th-sm">Content
+        <th>
+            Available Activity
 
-        </th>
-        <th class="th-sm">Duration
-
-        </th>
         <th class="th-sm">Bottom
 
         </th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${activityRequest}" var="activityRequest">
+    <c:forEach items="${userForActivityRequestList}" var="user">
         <tr>
-            <td>${activityRequest.title}</td>
-            <td>${activityRequest.content}</td>
-            <td>${activityRequest.duration}</td>
+            <td>${user.name}</td>
+            <td>
+                <div class="dropdown open">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Available Activity
+                    </button>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                        <c:forEach items="${unAssignedActivityList}" var="unAssignedActivityList">
+                            <a class="dropdown-item">${unAssignedActivityList.title}</a>
+                        </c:forEach>
+
+                            <%-- <a class="dropdown-item" href="#">Action</a>
+                             <a class="dropdown-item" href="#">Another action</a>
+                             <a class="dropdown-item" href="#">Something else here</a>--%>
+                    </div>
+                </div>
+            </td>
             <td>
                 <form action="/app" method="get">
                         <%--  <input type="hidden" name="id" value="${activity.id}"/>--%>
-                    <input type="submit" value="Remove" name="remove">
+                    <input type="submit" value="Assign task" name="assign">
                 </form>
             </td>
         </tr>
@@ -68,13 +82,14 @@
 
     <tfoot>
     <tr>
-        <th>Title
+        <th class="th-sm">User Name
+
         </th>
-        <th>Content
-        </th>
-        <th>Duration
-        </th>
-        <th>Bottom
+        <th>
+            Activity Requests
+
+        <th class="th-sm">Bottom
+
         </th>
     </tr>
     </tfoot>

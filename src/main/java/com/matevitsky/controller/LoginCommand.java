@@ -2,7 +2,7 @@ package com.matevitsky.controller;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.User;
-import com.matevitsky.service.ActivitiyService;
+import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.ActivityServiceImpl;
 import com.matevitsky.service.UserService;
 import com.matevitsky.service.UserServiceImpl;
@@ -20,7 +20,7 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 
 public class LoginCommand implements Command {
     UserService userService = new UserServiceImpl();
-    ActivitiyService activitiyService = new ActivityServiceImpl();
+    ActivityService activityService = new ActivityServiceImpl();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,7 +37,7 @@ public class LoginCommand implements Command {
                 return ADMIN_PAGE;
 
             } else {
-                List<Activity> activityListByUserId = activitiyService.getActivityListByUserId(user.getId());
+                List<Activity> activityListByUserId = activityService.getActivityListByUserId(user.getId());
                 request.getSession().setAttribute("userId", user.getId());
                 request.setAttribute("activityList", activityListByUserId);
                 request.setAttribute("userId", user.getId());

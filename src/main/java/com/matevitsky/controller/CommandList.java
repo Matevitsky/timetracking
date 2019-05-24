@@ -6,7 +6,11 @@ public enum CommandList {
 
     USER_ACTIVITY_REMOVE(new UserActivityRemoveCommand()),
 
-    USER_REQUEST_ACTIVITY(new UserRequestActivityCommand());
+    USER_REQUEST_ACTIVITY(new UserRequestActivityCommand()),
+
+    ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand());
+
+
 
     private Command command;
 
