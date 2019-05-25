@@ -1,7 +1,8 @@
-package com.matevitsky.repository;
+package com.matevitsky.repository.impl;
 
 
 import com.matevitsky.entity.Activity;
+import com.matevitsky.repository.interfaces.GenericRepository;
 import org.apache.log4j.Logger;
 
 import javax.sql.rowset.CachedRowSet;

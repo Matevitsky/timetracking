@@ -51,10 +51,12 @@
         <tr>
             <td>${activity.title}</td>
             <td>${activity.content}</td>
-            <td>${activity.duration}</td>
+            <td>
+                <input name="duration" input placeholder="Duration" type="text" tabindex="Duration" required autofocus>
+            </td>
             <td>
                 <form action="" method="get">
-                    <input type="hidden" name="command" value="user_activity_remove">
+                    <input type="hidden" name="command" value="user_activity_remove_request">
                     <input type="hidden" name="id" value="${activity.id}"/>
                     <input type="submit" value="Remove" name="remove">
                 </form>

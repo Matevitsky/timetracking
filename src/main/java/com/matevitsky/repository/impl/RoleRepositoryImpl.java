@@ -1,7 +1,8 @@
-package com.matevitsky.repository;
+package com.matevitsky.repository.impl;
 
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.Role;
+import com.matevitsky.repository.interfaces.RoleRepository;
 import org.apache.log4j.Logger;
 
 import javax.sql.RowSet;

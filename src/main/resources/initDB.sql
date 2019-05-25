@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS activities;
 
 
 DROP TABLE IF EXISTS activityRequests;
+DROP TABLE IF EXISTS removeActivityRequests;
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS role;
@@ -37,6 +38,8 @@ create table activityRequests
 
 );
 
+
+
 create table activities
 (
     ID       int auto_increment,
@@ -50,6 +53,18 @@ create table activities
 
 );
 
+create table removeActivityRequests
+(
+    ID         int auto_increment,
+    UserId     int not null,
+    ActivityId int not null,
+
+
+    PRIMARY KEY (ID),
+    FOREIGN KEY (UserId) REFERENCES users (ID),
+    FOREIGN KEY (ActivityId) REFERENCES activities (ID)
+
+);
 
 INSERT INTO role(Name)
 VALUES ('User');

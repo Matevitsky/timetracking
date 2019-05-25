@@ -1,6 +1,7 @@
-package com.matevitsky.repository;
+package com.matevitsky.repository.impl;
 
 import com.matevitsky.db.ConnectorDB;
+import com.matevitsky.repository.interfaces.GenericRepository;
 import com.sun.rowset.CachedRowSetImpl;
 import org.apache.log4j.Logger;
 

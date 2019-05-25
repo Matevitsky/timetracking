@@ -1,4 +1,4 @@
-package com.matevitsky.repository;
+package com.matevitsky.repository.interfaces;
 
 
 import com.matevitsky.entity.User;

@@ -1,9 +1,11 @@
-package com.matevitsky.repository;
+package com.matevitsky.repository.impl;
 
 
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
+import com.matevitsky.repository.interfaces.RoleRepository;
+import com.matevitsky.repository.interfaces.UserRepository;
 import org.apache.log4j.Logger;
 
 import javax.sql.rowset.CachedRowSet;
@@ -56,7 +58,13 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
                 String userPassword = cachedRowSet.getString(4);
                 String role = cachedRowSet.getString(5);
 
-                user = new User(userId, userName, userEmail, userPassword, new Role(role));
+                user = User.newBuilder().withId(userId)
+                        .withName(userName)
+                        .withEmail(userEmail)
+                        .withPassword(userPassword)
+                        .withRole(new Role(role)).build();
+
+
             }
 
         } catch (SQLException e) {
@@ -89,12 +97,16 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         try {
             while (allUsers.next()) {
                 int id = allUsers.getInt("ID");
-                String name = allUsers.getString("Name");
-                String email = allUsers.getString("Email");
-                String password = allUsers.getString("Password");
-                String role = allUsers.getString("Role");
+                String userName = allUsers.getString("Name");
+                String userEmail = allUsers.getString("Email");
+                String userPassword = allUsers.getString("Password");
+                String userRole = allUsers.getString("Role");
 
-                User user = new User(id, name, email, password, new Role(role));
+                User user = User.newBuilder().withId(id)
+                        .withName(userName)
+                        .withEmail(userEmail)
+                        .withPassword(userPassword)
+                        .withRole(new Role(userRole)).build();
                 allUserList.add(user);
             }
         } catch (SQLException e) {
@@ -119,7 +131,11 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
             String userPassword = resultSet.getString(4);
             String roleId = resultSet.getString(5);
             Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
-            user = new User(userId, userName, userEmail, userPassword, role);
+            user = User.newBuilder().withId(userId)
+                    .withName(userName)
+                    .withEmail(userEmail)
+                    .withPassword(userPassword)
+                    .withRole(role).build();
 
 
         } catch (SQLException e) {

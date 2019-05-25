@@ -80,11 +80,11 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${activityRequest}" var="activityRequest">
+    <c:forEach items="${addActivityRequest}" var="addActivityRequest">
         <tr>
-            <td>${activityRequest.title}</td>
-            <td>${activityRequest.content}</td>
-            <td>${activityRequest.duration}</td>
+            <td>${addActivityRequest.title}</td>
+            <td>${addActivityRequest.content}</td>
+            <td>${addActivityRequest.duration}</td>
             <td>
                 <form action="" method="get">
                         <%--  <input type="hidden" name="id" value="${activity.id}"/>--%>

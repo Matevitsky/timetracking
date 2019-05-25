@@ -1,9 +1,10 @@
-package com.matevitsky.service;
+package com.matevitsky.service.impl;
 
 
 import com.matevitsky.entity.User;
-import com.matevitsky.repository.UserRepository;
-import com.matevitsky.repository.UserRepositoryImpl;
+import com.matevitsky.repository.impl.UserRepositoryImpl;
+import com.matevitsky.repository.interfaces.UserRepository;
+import com.matevitsky.service.interfaces.UserService;
 
 import java.util.List;
 import java.util.Optional;
