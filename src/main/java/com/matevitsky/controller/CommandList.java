@@ -10,7 +10,9 @@ public enum CommandList {
 
     ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand()),
 
-    ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand());
+    ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand()),
+
+    ADMIN_CREATE_NEW_ACTIVITY(new AdminCreateNewActivityCommand());
 
 
 

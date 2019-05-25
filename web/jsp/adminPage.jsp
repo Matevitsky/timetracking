@@ -10,19 +10,46 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Bootstrap core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/modules/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="../css/mdb.min.css" rel="stylesheet">
+    <link href="../css/modules/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="../css/style.css" rel="stylesheet">
 
     <!-- MDBootstrap Datatables  -->
     <link href="../css/addons/datatables.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="<c:url value="../css/createActivity.css"/>">
+
 
 </head>
 
 <body>
+
+<div class="container">
+
+    <form id="contact" action="" method="get">
+        <input type="hidden" name="command" value="admin_create_new_activity">
+
+        <h3>Create activity</h3>
+        <fieldset>
+            <input name="title" input placeholder="Title" type="text" tabindex="Title" required autofocus>
+
+        </fieldset>
+
+        <fieldset>
+            <input name="description" textarea placeholder="Type activity description." tabindex="Description"
+                   required></inputtextarea>
+
+        </fieldset>
+
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Create activity</button>
+        </fieldset>
+
+    </form>
+</div>
+
 <form action="" method="get">
     <input type="submit" value="Activity Requests"/>
     <input type="hidden" name="command" value="admin_activity_requests">
@@ -33,6 +60,7 @@
 
     <input type="submit" name="submit" value="Old Activity" class="button"/>
 </form>
+
 
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>

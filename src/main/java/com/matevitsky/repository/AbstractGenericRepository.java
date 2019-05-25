@@ -18,7 +18,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     ConnectorDB connectorDB = new ConnectorDB();
 
     protected E createEntity(E entity, String query) {
-        LOGGER.debug("getById" + entity.toString() + " Query = " + query);
+        LOGGER.debug("createEntity" + entity.toString() + " Query = " + query);
         boolean resultOfCreation = false;
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 

@@ -16,6 +16,7 @@ import java.util.Optional;
 public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> implements GenericRepository<Activity> {
 
     private static final String INSERT_ACTIVITY_SQL = "INSERT INTO activities" + "  (Title, Content, Duration, UserId) VALUES  ('%s', '%s', '%d', '%d')";
+    private static final String INSERT_ACTIVITY_WITHOUT_USER_ID_SQL = "INSERT INTO activities" + "  (Title, Content, Duration) VALUES  ('%s', '%s', '%d')";
     private static final String DELETE_ACTIVITY_SQL = "DELETE FROM activities WHERE ID=%d;";
     private static final String UPDATE_ACTIVITY_SQL = "UPDATE activities set Title='%s',Content='%s',Duration=%d,UserId=%d WHERE ID=%d";
     private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM activities WHERE ID=%d";
@@ -27,9 +28,14 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     @Override
     public Activity create(Activity activity) {
         LOGGER.debug("Method create started, for Activity with Title " + activity.getTitle());
+        String query = "";
+        if (activity.getUserId() == null) {
+            query = String.format(INSERT_ACTIVITY_WITHOUT_USER_ID_SQL, activity.getTitle(), activity.getContent(), activity.getDuration());
 
-        String query = String.format(INSERT_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getId());
+        } else {
 
+            query = String.format(INSERT_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getUserId());
+        }
         return createEntity(activity, query);
 
     }
@@ -48,8 +54,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     @Override
     public Activity update(Activity activity) {
         LOGGER.debug("Method update started, for Activity with Title " + activity.getTitle());
-
         String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getUserId(), activity.getId());
+
         return updateEntity(activity, query);
 
     }
