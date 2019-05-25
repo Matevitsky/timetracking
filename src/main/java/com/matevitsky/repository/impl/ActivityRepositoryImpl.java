@@ -2,7 +2,7 @@ package com.matevitsky.repository.impl;
 
 
 import com.matevitsky.entity.Activity;
-import com.matevitsky.repository.interfaces.GenericRepository;
+import com.matevitsky.repository.interfaces.ActivityRepository;
 import org.apache.log4j.Logger;
 
 import javax.sql.rowset.CachedRowSet;
@@ -14,28 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> implements GenericRepository<Activity> {
+public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> implements ActivityRepository {
 
-    private static final String INSERT_ACTIVITY_SQL = "INSERT INTO activities" + "  (Title, Content, Duration, UserId) VALUES  ('%s', '%s', '%d', '%d')";
-    private static final String INSERT_ACTIVITY_WITHOUT_USER_ID_SQL = "INSERT INTO activities" + "  (Title, Content, Duration) VALUES  ('%s', '%s', '%d')";
+    private static final String INSERT_ACTIVITY_SQL = "INSERT INTO activities" + "  (Title, Description, Duration, UserId,Status) VALUES  ('%s', '%s', '%d', '%d','%s)";
+    private static final String INSERT_ACTIVITY_WITHOUT_USER_ID_SQL = "INSERT INTO activities" + "  (Title, Description, Duration, Status) VALUES  ('%s', '%s', '%d','%s')";
     private static final String DELETE_ACTIVITY_SQL = "DELETE FROM activities WHERE ID=%d;";
-    private static final String UPDATE_ACTIVITY_SQL = "UPDATE activities set Title='%s',Content='%s',Duration=%d,UserId=%d WHERE ID=%d";
+    private static final String UPDATE_ACTIVITY_SQL = "UPDATE activities set Title='%s',Description='%s',Duration=%d, UserId=%d, Status='%s' WHERE ID=%d";
     private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM activities WHERE ID=%d";
     private static final String SELECT_ALL_ACTIVITY = "SELECT * FROM activities";
     private static final String SELECT_ACTIVITY_BY_USER_ID = "SELECT * FROM activities WHERE UserId=%d";
-    private static final String SELECT_ALL_UNASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE UserId IS NULL";
-    private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
+    private static final String SELECT_ALL_UNASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE Status='NEW'";
+
+    private static Logger LOGGER = Logger.getLogger(ActivityRepositoryImpl.class);
 
     @Override
     public Activity create(Activity activity) {
         LOGGER.debug("Method create started, for Activity with Title " + activity.getTitle());
         String query = "";
         if (activity.getUserId() == null) {
-            query = String.format(INSERT_ACTIVITY_WITHOUT_USER_ID_SQL, activity.getTitle(), activity.getContent(), activity.getDuration());
+            query = String.format(INSERT_ACTIVITY_WITHOUT_USER_ID_SQL, activity.getTitle(), activity.getDescription(), activity.getDuration(), Activity.Status.NEW);
 
         } else {
 
-            query = String.format(INSERT_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getUserId());
+            query = String.format(INSERT_ACTIVITY_SQL, activity.getTitle(), activity.getDescription(), activity.getDuration(), activity.getUserId(), Activity.Status.ACTIVE);
         }
         return createEntity(activity, query);
 
@@ -55,7 +56,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     @Override
     public Activity update(Activity activity) {
         LOGGER.debug("Method update started, for Activity with Title " + activity.getTitle());
-        String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getUserId(), activity.getId());
+        String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getDescription(), activity.getDuration(), activity.getUserId(), activity.getStatus(), activity.getId());
 
         return updateEntity(activity, query);
 
@@ -72,16 +73,18 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
         CachedRowSet allUsersList = entity.isPresent() ? entity.get() : null;
         try {
             while (allUsersList.next()) {
-                Integer activityId = allUsersList.getInt(1);
-                String tittle = allUsersList.getString(2);
-                String content = allUsersList.getString(3);
-                Integer duration = allUsersList.getInt(4);
-                Integer userId = allUsersList.getInt(5);
+                Integer activityId = allUsersList.getInt("ID");
+                String tittle = allUsersList.getString("Title");
+                String description = allUsersList.getString("Description");
+                Integer duration = allUsersList.getInt("Duration");
+                Integer userId = allUsersList.getInt("UserId");
+                String status = allUsersList.getString("Status");
                 activity = Activity.newBuilder().withId(activityId)
                         .withTittle(tittle)
-                        .withContent(content)
+                        .withDescription(description)
                         .withDuration(duration)
-                        .withUserId(userId).build();
+                        .withUserId(userId)
+                        .withStatus(Activity.Status.valueOf(status)).build();
             }
 
         } catch (SQLException e) {
@@ -97,17 +100,19 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
         CachedRowSet allActivities = getAll(SELECT_ALL_ACTIVITY);
         try {
             while (allActivities.next()) {
-                Integer activityId = allActivities.getInt(1);
-                String tittle = allActivities.getString(2);
-                String content = allActivities.getString(3);
-                Integer duration = allActivities.getInt(4);
-                Integer userId = allActivities.getInt(5);
+                Integer activityId = allActivities.getInt("ID");
+                String tittle = allActivities.getString("Title");
+                String description = allActivities.getString("Description");
+                Integer duration = allActivities.getInt("Duration");
+                Integer userId = allActivities.getInt("UserId");
+                String status = allActivities.getString("Status");
 
                 Activity activity = Activity.newBuilder().withId(activityId)
                         .withTittle(tittle)
-                        .withContent(content)
+                        .withDescription(description)
                         .withDuration(duration)
-                        .withUserId(userId).build();
+                        .withUserId(userId)
+                        .withStatus(Activity.Status.valueOf(status)).build();
                 activityList.add(activity);
             }
         } catch (SQLException e) {
@@ -127,14 +132,15 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
             while (resultSet.next()) {
                 Integer activityId = resultSet.getInt("ID");
                 String tittle = resultSet.getString("Title");
-                String content = resultSet.getString("Content");
+                String description = resultSet.getString("Description");
                 Integer duration = resultSet.getInt("Duration");
-
+                String status = resultSet.getString("Status");
                 Activity activity = Activity.newBuilder().withId(activityId)
                         .withTittle(tittle)
-                        .withContent(content)
+                        .withDescription(description)
                         .withDuration(duration)
-                        .withUserId(userId).build();
+                        .withUserId(userId)
+                        .withStatus(Activity.Status.valueOf(status)).build();
                 activityList.add(activity);
             }
 
@@ -153,13 +159,15 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
             while (resultSet.next()) {
                 Integer activityId = resultSet.getInt("ID");
                 String tittle = resultSet.getString("Title");
-                String content = resultSet.getString("Content");
+                String description = resultSet.getString("Description");
                 Integer duration = resultSet.getInt("Duration");
+                String status = resultSet.getString("Status");
                 Activity activity = Activity.newBuilder().withId(activityId)
                         .withTittle(tittle)
-                        .withContent(content)
+                        .withDescription(description)
                         .withDuration(duration)
-                        .withUserId(0).build();
+                        .withUserId(0)
+                        .withStatus(Activity.Status.valueOf(status)).build();
                 unAssignedActivityList.add(activity);
             }
         } catch (SQLException e) {

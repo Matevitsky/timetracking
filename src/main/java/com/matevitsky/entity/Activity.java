@@ -3,12 +3,18 @@ package com.matevitsky.entity;
 import java.util.Objects;
 
 public class Activity {
-    private Integer id;
-    private String content; //TODO: description
-    private String title;
 
+    private String description;
+
+    private Integer id;
+    private Status status;
+    private String title;
     private Integer duration;
     private Integer userId;
+
+    public String getDescription() {
+        return description;
+    }
 
 
     private Activity() {
@@ -23,8 +29,8 @@ public class Activity {
         return title;
     }
 
-    public String getContent() {
-        return content;
+    public String getStatus() {
+        return status.name();
     }
 
     public Integer getDuration() {
@@ -39,6 +45,43 @@ public class Activity {
         return userId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Activity)) {
+            return false;
+        }
+        Activity activity = (Activity) o;
+        return Objects.equals(title, activity.title) &&
+                Objects.equals(description, activity.description) &&
+                Objects.equals(duration, activity.duration) &&
+                Objects.equals(userId, activity.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, duration, userId);
+    }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", duration=" + duration +
+                ", userId=" + userId +
+                '}';
+    }
+
+    public enum Status {
+        NEW,
+        ACTIVE,
+        DONE
+    }
+
     public class Builder {
         private Builder() {
 
@@ -49,8 +92,8 @@ public class Activity {
             return this;
         }
 
-        public Builder withContent(String content) {
-            Activity.this.content = content;
+        public Builder withDescription(String description) {
+            Activity.this.description = description;
             return this;
         }
 
@@ -69,39 +112,13 @@ public class Activity {
             return this;
         }
 
+        public Builder withStatus(Status status) {
+            Activity.this.status = status;
+            return this;
+        }
+
         public Activity build() {
             return Activity.this;
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Activity)) {
-            return false;
-        }
-        Activity activity = (Activity) o;
-        return Objects.equals(title, activity.title) &&
-                Objects.equals(content, activity.content) &&
-                Objects.equals(duration, activity.duration) &&
-                Objects.equals(userId, activity.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, content, duration, userId);
-    }
-
-    @Override
-    public String toString() {
-        return "Activity{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", duration=" + duration +
-                ", userId=" + userId +
-                '}';
     }
 }

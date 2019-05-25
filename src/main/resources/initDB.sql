@@ -1,8 +1,9 @@
+DROP TABLE IF EXISTS removeActivityRequests;
 DROP TABLE IF EXISTS activities;
 
 
 DROP TABLE IF EXISTS activityRequests;
-DROP TABLE IF EXISTS removeActivityRequests;
+
 
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS role;
@@ -42,12 +43,13 @@ create table activityRequests
 
 create table activities
 (
-    ID       int auto_increment,
+    ID          int auto_increment,
 
-    Title    varchar(64)  not null,
-    Content  varchar(255) null,
-    Duration int          null,
-    UserId   int          null,
+    Title       varchar(64)  not null,
+    Description varchar(255) null,
+    Duration    int          null,
+    UserId      int          null,
+    Status      varchar(64)  not null,
     PRIMARY KEY (ID),
     FOREIGN KEY (UserId) REFERENCES users (ID)
 
@@ -87,13 +89,13 @@ VALUES ('Sergey4', 'admin', '4444', '2');
 INSERT INTO users(Name, Email, Password, Role)
 VALUES ('user', 'user', 'user', '1');
 
-INSERT INTO activities(Title, Content, Duration, UserId)
-VALUES ('Tittle1', 'Content1', '100', '1');
+INSERT INTO activities(Title, Description, Duration, UserId, Status)
+VALUES ('Tittle1', 'Content1', '100', '1', 'ACTIVE');
 
-INSERT INTO activities(Title, Content, Duration, UserId)
-VALUES ('Tittle2', 'Content2', '100', NULL);
+INSERT INTO activities(Title, Description, Duration, UserId, Status)
+VALUES ('Tittle2', 'Content2', '100', NULL, 'NEW');
 
-INSERT INTO activities(Title, Content, Duration, UserId)
-VALUES ('Tittle3', 'Content3', '100', NULL);
+INSERT INTO activities(Title, Description, Duration, UserId, Status)
+VALUES ('Tittle3', 'Content3', '100', NULL, 'NEW');
 
 

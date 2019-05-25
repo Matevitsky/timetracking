@@ -33,7 +33,7 @@ public class Main {
         ActivityService activityService = new ActivityServiceImpl();
         Activity activity1 = Activity.newBuilder().withId(5)
                 .withTittle("Tittle2")
-                .withContent("hello")
+                .withDescription("hello")
                 .withDuration(1)
                 .withUserId(0).build();
 
@@ -41,10 +41,12 @@ public class Main {
         /*  (5, "Title2", "Hello World", 1, 0);*/
         Activity activity2 = Activity.newBuilder().withId(5)
                 .withTittle("Tittle3")
-                .withContent("hello3")
+                .withDescription("hello3")
                 .withDuration(1)
-                .withUserId(0).build();
+                .withUserId(0)
+                .withStatus(Activity.Status.NEW).build();
 
+        System.out.println(activity2.getStatus());
 
         activityService.insertActivity(activity1);
         activityService.insertActivity(activity2);

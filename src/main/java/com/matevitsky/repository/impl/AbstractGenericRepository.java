@@ -76,7 +76,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     protected E updateEntity(E entity, String query) {
         LOGGER.debug("update with id " + entity.toString() + " Query = " + query);
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            if (preparedStatement.executeUpdate(query) > 0) {
+            if (preparedStatement.executeUpdate() > 0) {
                 return entity;
             } else {
                 LOGGER.warn("Update entity " + entity.toString() + " filed");
