@@ -23,16 +23,17 @@
 </head>
 
 <body>
-<form action="/app?command=admin_activity_requests" method="get">
+<form action="" method="get">
+    <input type="submit" value="Activity Requests"/>
     <input type="hidden" name="command" value="admin_activity_requests">
 
-    <input type="submit" name="submit" value="Activity Requests" class="button"/>
 </form>
 
 <form action="RequestServlet" method="get">
 
     <input type="submit" name="submit" value="Old Activity" class="button"/>
 </form>
+
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
@@ -57,7 +58,7 @@
             <td>${activityRequest.content}</td>
             <td>${activityRequest.duration}</td>
             <td>
-                <form action="/app" method="get">
+                <form action="" method="get">
                         <%--  <input type="hidden" name="id" value="${activity.id}"/>--%>
                     <input type="submit" value="Remove" name="remove">
                 </form>

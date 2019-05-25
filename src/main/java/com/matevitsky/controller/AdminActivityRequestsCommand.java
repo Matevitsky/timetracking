@@ -40,6 +40,7 @@ public class AdminActivityRequestsCommand implements Command {
             }
         }
 
+
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("userForActivityRequestList", userForActivityRequestList);

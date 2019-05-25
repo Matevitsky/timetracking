@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<form action="/app?command=user_request_activity" method="get">
+<form action="" method="get">
     <input type="hidden" name="command" value="user_request_activity">
 
     <input type="submit" value="Request Activity">
@@ -53,7 +53,7 @@
             <td>${activity.content}</td>
             <td>${activity.duration}</td>
             <td>
-                <form action="/app" method="get">
+                <form action="" method="get">
                     <input type="hidden" name="command" value="user_activity_remove">
                     <input type="hidden" name="id" value="${activity.id}"/>
                     <input type="submit" value="Remove" name="remove">

@@ -7,7 +7,6 @@ import com.matevitsky.service.ActivityServiceImpl;
 import com.matevitsky.service.UserService;
 import com.matevitsky.service.UserServiceImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,8 +14,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import static com.matevitsky.controller.constant.PageConstant.ADMIN_PAGE;
-import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
+import static com.matevitsky.controller.constant.PageConstant.*;
 
 public class LoginCommand implements Command {
     UserService userService = new UserServiceImpl();
@@ -43,12 +41,8 @@ public class LoginCommand implements Command {
                 request.setAttribute("userId", user.getId());
                 return USER_PAGE;
             }
-
-        } else {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("jsp/login.jsp");
-            requestDispatcher.forward(request, response);
         }
-        return null;
-    }
+        return LOGIN_PAGE;
 
+    }
 }

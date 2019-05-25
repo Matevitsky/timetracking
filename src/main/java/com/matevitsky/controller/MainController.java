@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/app/*")
+@WebServlet(urlPatterns = "")
 public class MainController extends HttpServlet {
 
     @Override

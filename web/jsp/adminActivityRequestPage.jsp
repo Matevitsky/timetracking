@@ -23,7 +23,7 @@
 </head>
 
 <body>
-<form action="/app?command=admin_activity_request" method="get">
+<form action="" method="get">
     <input type="hidden" name="command" value="admin_new_activity">
 
     <input type="submit" name="submit" value="Activity Requests" class="button"/>
@@ -64,15 +64,15 @@
                             <c:forEach var="unAssignedActivityList" items="${unAssignedActivityList}">
 
                                 <option value="${unAssignedActivityList}">${unAssignedActivityList.title}</option>
-                                <input type="hidden" name="userId" value= ${user.id}>
+
                             </c:forEach>
 
                         </select>
-
+                        <input type="hidden" name="userId" value= ${user.id}>
                             <%--  <input type="submit" value="Submit" align="middle">--%>
 
 
-                        <form action="/app" method="get">
+                        <form action="/" method="get">
                             <input type="submit" value="Assign task">
                             <input type="hidden" name="command" value="assign_activity_command">
 

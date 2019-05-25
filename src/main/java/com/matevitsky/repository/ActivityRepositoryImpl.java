@@ -17,7 +17,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
     private static final String INSERT_ACTIVITY_SQL = "INSERT INTO activities" + "  (Title, Content, Duration, UserId) VALUES  ('%s', '%s', '%d', '%d')";
     private static final String DELETE_ACTIVITY_SQL = "DELETE FROM activities WHERE ID=%d;";
-    private static final String UPDATE_ACTIVITY_SQL = "UPDATE activities set Title='%s',Content='%s',Duration=%d WHERE ID=%d";
+    private static final String UPDATE_ACTIVITY_SQL = "UPDATE activities set Title='%s',Content='%s',Duration=%d,UserId=%d WHERE ID=%d";
     private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM activities WHERE ID=%d";
     private static final String SELECT_ALL_ACTIVITY = "SELECT * FROM activities";
     private static final String SELECT_ACTIVITY_BY_USER_ID = "SELECT * FROM activities WHERE UserId=%d";
@@ -49,7 +49,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     public Activity update(Activity activity) {
         LOGGER.debug("Method update started, for Activity with Title " + activity.getTitle());
 
-        String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getId());
+        String query = String.format(UPDATE_ACTIVITY_SQL, activity.getTitle(), activity.getContent(), activity.getDuration(), activity.getUserId(), activity.getId());
         return updateEntity(activity, query);
 
     }

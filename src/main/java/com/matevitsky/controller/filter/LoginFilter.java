@@ -1,10 +1,6 @@
 package com.matevitsky.controller.filter;
 
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import java.io.IOException;
-
-
+/*
 @WebFilter("/")
 public class LoginFilter implements Filter {
 
@@ -27,3 +23,4 @@ public class LoginFilter implements Filter {
 
     }
 }
+*/
