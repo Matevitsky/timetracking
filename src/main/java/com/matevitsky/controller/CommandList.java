@@ -10,8 +10,6 @@ public enum CommandList {
 
     USER_REQUEST_ACTIVITY(new UserRequestActivityCommand()),
 
-    USER_ACTIVITY_REMOVE_REQUEST(new UserActivityRemoveRequestCommand()),
-
     ADMIN_GET_FINISHED_ACTIVITIES(new AdminGetFinishedActivitiesCommand()),
 
     ADMIN_CREATE_NEW_ACTIVITY(new AdminCreateNewActivityCommand()),

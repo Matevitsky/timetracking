@@ -1,16 +1,19 @@
 package com.matevitsky.controller;
 
+import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
+import com.matevitsky.service.impl.ActivityServiceImpl;
 import com.matevitsky.service.impl.UserServiceImpl;
+import com.matevitsky.service.interfaces.ActivityService;
 import com.matevitsky.service.interfaces.UserService;
 import com.matevitsky.util.MD5Util;
 import org.apache.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 import static com.matevitsky.controller.constant.PageConstant.LOGIN_PAGE;
 import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
@@ -19,10 +22,11 @@ public class RegisterCommand implements Command {
 
     private static Logger LOGGER = Logger.getLogger(RegisterCommand.class);
 
-    UserService userService = new UserServiceImpl();
+    private UserService userService = new UserServiceImpl();
+    private ActivityService activityService = new ActivityServiceImpl();
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Registration Started");
         String name = request.getParameter("username");
         String email = request.getParameter("email");
@@ -43,7 +47,17 @@ public class RegisterCommand implements Command {
                     .withRole(new Role(1))
                     .withPassword(encryptedPass).build();
             if (userService.insertUser(user)) {
-                return USER_PAGE;
+                Optional<User> userByEmail = userService.findUserByEmail(email);
+                if (userByEmail.isPresent()) {
+                    List<Activity> activityListByUserId = activityService.getActivityListByUserId(user.getId());
+                    Integer userId = userByEmail.get().getId();
+                    request.getSession().setAttribute("userId", userId);
+                    request.setAttribute("activityList", activityListByUserId);
+                    request.setAttribute("userId", userId);
+                    return USER_PAGE;
+                }
+                //TODO: сделать страницу для ошибки
+                throw new UnsupportedOperationException();
             } else {
                 return LOGIN_PAGE;
 
