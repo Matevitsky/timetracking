@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    User insertUser(User user);
+    boolean insertUser(User user);
 
     boolean deleteUser(Integer userId);
 

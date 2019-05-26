@@ -18,7 +18,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
 
     ConnectorDB connectorDB = new ConnectorDB();
 
-    protected E createEntity(E entity, String query) {
+    boolean createEntity(E entity, String query) {
         LOGGER.debug("createEntity" + entity.toString() + " Query = " + query);
         boolean resultOfCreation = false;
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -35,7 +35,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
             LOGGER.error("Failed to add entity to database " + e.getMessage());
         }
         //TODO: подумать что вернуть в случае null gочитать про статус код и перезти юзера на нужную странучку сдеалть заглушку на все случаи жизни
-        return entity;
+        return resultOfCreation;
     }
 
     protected Optional<CachedRowSet> getEntity(Integer id, String query) {

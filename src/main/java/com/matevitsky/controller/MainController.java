@@ -29,6 +29,8 @@ public class MainController extends HttpServlet {
             request.getRequestDispatcher(goTo).forward(request, response);
         } else {
             //  response.sendRedirect(PageConstants.ERROR);
+
+            //TODO: добавть страницу на случай ошибки
         }
     }
 }

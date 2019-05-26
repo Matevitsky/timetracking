@@ -27,13 +27,13 @@ public class AddActivityRequestRepositoryImpl extends AbstractGenericRepository<
 
 
     @Override
-    public AddActivityRequest create(AddActivityRequest addActivityRequest) {
+    public boolean create(AddActivityRequest addActivityRequest) {
         LOGGER.debug("Method create addActivityRequest with UserId " + addActivityRequest.getUserId());
         String query = String.format(INSERT_REQUEST_SQL, addActivityRequest.getUserId());
 
-        AddActivityRequest entity = createEntity(addActivityRequest, query);
+        return createEntity(addActivityRequest, query);
 
-        return entity;
+
     }
 
     @Override

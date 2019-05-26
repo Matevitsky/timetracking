@@ -94,7 +94,7 @@ public class User {
             return this;
         }
 
-        public User.Builder withPassword(String name) {
+        public User.Builder withPassword(String password) {
             User.this.password = password;
             return this;
 

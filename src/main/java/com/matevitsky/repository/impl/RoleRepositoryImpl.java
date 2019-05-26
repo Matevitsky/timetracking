@@ -29,7 +29,7 @@ public class RoleRepositoryImpl implements RoleRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             String roleName = resultSet.getString("Name");
-            role = new Role(roleName);
+            role = new Role(id, roleName);
 
         } catch (SQLException e) {
             LOGGER.error("Failed to get Role with id " + id + " error:" + e.getMessage());

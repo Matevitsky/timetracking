@@ -30,7 +30,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static Logger LOGGER = Logger.getLogger(ActivityRepositoryImpl.class);
 
     @Override
-    public Activity create(Activity activity) {
+    public boolean create(Activity activity) {
         LOGGER.debug("Method create started, for Activity with Title " + activity.getTitle());
         String query = "";
         if (activity.getUserId() == null) {

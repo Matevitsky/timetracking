@@ -24,7 +24,7 @@ public class RemoveActivityRequestRepositoryImpl extends AbstractGenericReposito
     private static Logger LOGGER = Logger.getLogger(RemoveActivityRequestRepositoryImpl.class);
 
     @Override
-    public RemoveActivityRequest create(RemoveActivityRequest removeRequest) {
+    public boolean create(RemoveActivityRequest removeRequest) {
         LOGGER.debug("Method create started for remove request with id " + removeRequest.getId());
         String query = String.format(INSERT_REQUEST_FOR_REMOVE_SQL, removeRequest.getUserId(), removeRequest.getActivityId());
         return createEntity(removeRequest, query);

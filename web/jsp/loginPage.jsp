@@ -2,10 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Time Tracking</title>
 
     <link rel="stylesheet" href="<c:url value="../css/MyCss.css"/>">
-    <%--    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">--%>
+
 </head>
 <body>
 <div id="wrapper">
@@ -25,9 +25,13 @@
         </div>
 
         <div class="footer">
+            <form>
 
-            <input type="submit" name="submit" value="Login" class="button"/>
-            <input type="submit" name="submit" value="Register" class="register"/>
+                <input type="submit" name="command" value="Login" class="button"/>
+            </form>
+            <form>
+                <input type="submit" value="Register" class="register"/>
+            </form>
         </div>
 
     </form>

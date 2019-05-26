@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface GenericRepository<E> {
 
-    E create(E entity);
+    boolean create(E entity);
 
     boolean delete(Integer id);
 

@@ -34,10 +34,10 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
-    public User create(User user) {
+    public boolean create(User user) {
         LOGGER.debug("Method create started, for user with Email " + user.getEmail());
 
-        String query = String.format(INSERT_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole());
+        String query = String.format(INSERT_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole().getId());
 
         return createEntity(user, query);
 
@@ -56,13 +56,14 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
                 String userName = cachedRowSet.getString(2);
                 String userEmail = cachedRowSet.getString(3);
                 String userPassword = cachedRowSet.getString(4);
-                String role = cachedRowSet.getString(5);
+                String roleId = cachedRowSet.getString(5);
+                Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
 
                 user = User.newBuilder().withId(userId)
                         .withName(userName)
                         .withEmail(userEmail)
                         .withPassword(userPassword)
-                        .withRole(new Role(role)).build();
+                        .withRole(role).build();
 
 
             }
@@ -100,13 +101,14 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
                 String userName = allUsers.getString("Name");
                 String userEmail = allUsers.getString("Email");
                 String userPassword = allUsers.getString("Password");
-                String userRole = allUsers.getString("Role");
+                String roleId = allUsers.getString("Role");
+                Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
 
                 User user = User.newBuilder().withId(id)
                         .withName(userName)
                         .withEmail(userEmail)
                         .withPassword(userPassword)
-                        .withRole(new Role(userRole)).build();
+                        .withRole(role).build();
                 allUserList.add(user);
             }
         } catch (SQLException e) {

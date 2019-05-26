@@ -14,7 +14,7 @@ public class RemoveActivityRequestServiceImpl implements RemoveActivityRequestSe
     RemoveActivityRequestRepository removeActivityRequestRepository = new RemoveActivityRequestRepositoryImpl();
 
     @Override
-    public RemoveActivityRequest createRemoveActivityRequest(Integer userId, Integer activityId) {
+    public boolean createRemoveActivityRequest(Integer userId, Integer activityId) {
 
         return removeActivityRequestRepository.create(new RemoveActivityRequest(0, userId, activityId));
 

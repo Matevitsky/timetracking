@@ -4,6 +4,8 @@ public enum CommandList {
 
     LOGIN(new LoginCommand()),
 
+    REGISTER(new RegisterCommand()),
+
     USER_ACTIVITY_REMOVE(new UserActivityRemoveCommand()),
 
     USER_REQUEST_ACTIVITY(new UserRequestActivityCommand()),

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface RemoveActivityRequestService {
 
-    RemoveActivityRequest createRemoveActivityRequest(Integer userId, Integer activityId);
+    boolean createRemoveActivityRequest(Integer userId, Integer activityId);
 
     boolean deleteRemoveActivityRequest(Integer id);
 

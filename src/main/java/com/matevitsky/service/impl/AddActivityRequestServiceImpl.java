@@ -14,7 +14,7 @@ public class AddActivityRequestServiceImpl implements AddActivityRequestService 
     AddActivityRequestRepository addActivityRequestRepository = new AddActivityRequestRepositoryImpl();
 
     @Override
-    public AddActivityRequest createAddActivityRequest(Integer userId) {
+    public boolean createAddActivityRequest(Integer userId) {
         LOGGER.debug("Method createAddActivityRequest with userId " + userId + " started");
         AddActivityRequest addActivityRequest = new AddActivityRequest(0, userId);
         return addActivityRequestRepository.create(addActivityRequest);
