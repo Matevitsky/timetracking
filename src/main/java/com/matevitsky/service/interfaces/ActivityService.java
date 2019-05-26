@@ -21,6 +21,6 @@ public interface ActivityService {
 
     List<Activity> getActivityListByUserId(Integer userId);
 
-    List<Activity> getUnAssignedActivityList();
+    List<Activity> getGetAllActivityByStatus(String status);
 
 }

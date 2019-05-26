@@ -56,9 +56,10 @@
 
 </form>
 
-<form action="RequestServlet" method="get">
+<form action="" method="get">
 
-    <input type="submit" name="submit" value="Old Activity" class="button"/>
+    <input type="submit" name="submit" value="Finished Activity" class="button"/>
+    <input type="hidden" name="command" value="admin_get_finished_activities">
 </form>
 
 
@@ -74,23 +75,22 @@
         <th class="th-sm">Duration
 
         </th>
-        <th class="th-sm">Bottom
 
-        </th>
     </tr>
     </thead>
     <tbody>
     <c:forEach items="${addActivityRequest}" var="addActivityRequest">
         <tr>
             <td>${addActivityRequest.title}</td>
-            <td>${addActivityRequest.content}</td>
-            <td>${addActivityRequest.duration}</td>
-            <td>
+            <td>${addActivityRequest.description}</td>
+            <td>${addActivityRequest.duration}
                 <form action="" method="get">
-                        <%--  <input type="hidden" name="id" value="${activity.id}"/>--%>
-                    <input type="submit" value="Remove" name="remove">
+                    <input type="hidden" name="command" value="admin_remove_activity">
+                    <input type="hidden" name="id" value="${addActivityRequest.id}"/>
+                    <input type="submit" align="center" value="Remove" name="remove">
                 </form>
             </td>
+
         </tr>
     </c:forEach>
     </tbody>
@@ -103,8 +103,7 @@
         </th>
         <th>Duration
         </th>
-        <th>Bottom
-        </th>
+
     </tr>
     </tfoot>
 </table>

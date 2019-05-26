@@ -3,6 +3,7 @@ package com.matevitsky;
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.db.DbInitScriptRunner;
 import com.matevitsky.entity.Activity;
+import com.matevitsky.repository.impl.ActivityRepositoryImpl;
 import com.matevitsky.repository.impl.UserRepositoryImpl;
 import com.matevitsky.service.impl.ActivityServiceImpl;
 import com.matevitsky.service.interfaces.ActivityService;
@@ -50,6 +51,9 @@ public class Main {
 
         activityService.insertActivity(activity1);
         activityService.insertActivity(activity2);
+
+        ActivityRepositoryImpl activityRepository = new ActivityRepositoryImpl();
+        System.out.println(activityRepository.getGetAllActivityByStatus("NEW"));
 
         //   activityService.deleteActivity(new Activity(2, "Title2", "Hello World", 1, 0));
 

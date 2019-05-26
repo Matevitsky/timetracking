@@ -32,7 +32,7 @@ public class AdminActivityRequestsCommand implements Command {
         List<UserForActivityRequest> userForActivityRequestList = new ArrayList<>();
 
         List<AddActivityRequest> addActivityRequestList = addActivityRequestService.getAllAddActivityRequests();
-        List<Activity> unAssignedActivityList = activityService.getUnAssignedActivityList();
+        List<Activity> unAssignedActivityList = activityService.getGetAllActivityByStatus(Activity.Status.NEW.name());
 
 
         for (AddActivityRequest addActivityRequest : addActivityRequestList) {

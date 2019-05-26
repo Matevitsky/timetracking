@@ -3,6 +3,7 @@ package com.matevitsky.service.impl;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.repository.impl.ActivityRepositoryImpl;
+import com.matevitsky.repository.interfaces.ActivityRepository;
 import com.matevitsky.service.interfaces.ActivityService;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 public class ActivityServiceImpl implements ActivityService {
 
-    private ActivityRepositoryImpl activityRepository = new ActivityRepositoryImpl();
+    ActivityRepository activityRepository = new ActivityRepositoryImpl();
 
     @Override
     public Activity insertActivity(Activity activity) {
@@ -47,8 +48,11 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> getUnAssignedActivityList() {
-        return activityRepository.getUnAssignedActivityList();
+    public List<Activity> getGetAllActivityByStatus(String status) {
+        //TODO: проверить существует ли такой статус до вызова репозитория
 
+        return activityRepository.getGetAllActivityByStatus(status);
     }
+
+
 }

@@ -24,6 +24,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static final String SELECT_ALL_ACTIVITY = "SELECT * FROM activities";
     private static final String SELECT_ACTIVITY_BY_USER_ID = "SELECT * FROM activities WHERE UserId=%d";
     private static final String SELECT_ALL_UNASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE Status='NEW'";
+    private static final String SELECT_FINISHED_ACTIVITY = "SELECT * FROM activities WHERE Status='DONE'";
+    private static final String SELECT_ALL__ACTIVITIES_BY_STATUS = "SELECT * FROM activities WHERE Status='%s'";
 
     private static Logger LOGGER = Logger.getLogger(ActivityRepositoryImpl.class);
 
@@ -150,29 +152,37 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
         return activityList;
     }
 
-    public List<Activity> getUnAssignedActivityList() {
-        LOGGER.debug("Method getUnAssignedActivityList started ");
-        List<Activity> unAssignedActivityList = new ArrayList<>();
+    @Override
+    public List<Activity> getGetAllActivityByStatus(String status) {
+        LOGGER.debug("Method getGetAllActivityByStatus started ");
+
+        //TODO: сделать валидацию статуса - что такой статус существует
+
+        List<Activity> activityList = new ArrayList<>();
+
+        String query = String.format(SELECT_ALL__ACTIVITIES_BY_STATUS, status);
+
         try (Connection connection = connectorDB.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_UNASSIGNED_ACTIVITY)) {
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Integer activityId = resultSet.getInt("ID");
                 String tittle = resultSet.getString("Title");
                 String description = resultSet.getString("Description");
                 Integer duration = resultSet.getInt("Duration");
-                String status = resultSet.getString("Status");
+                String activityStatus = resultSet.getString("Status");
                 Activity activity = Activity.newBuilder().withId(activityId)
                         .withTittle(tittle)
                         .withDescription(description)
                         .withDuration(duration)
                         .withUserId(0)
-                        .withStatus(Activity.Status.valueOf(status)).build();
-                unAssignedActivityList.add(activity);
+                        .withStatus(Activity.Status.valueOf(activityStatus)).build();
+                activityList.add(activity);
             }
         } catch (SQLException e) {
             LOGGER.warn("Filed to get UnAssigned Activity " + e.getMessage());
         }
-        return unAssignedActivityList;
+        return activityList;
     }
+
 }
