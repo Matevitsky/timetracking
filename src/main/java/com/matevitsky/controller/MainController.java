@@ -1,5 +1,7 @@
 package com.matevitsky.controller;
 
+import com.matevitsky.controller.constant.PageConstant;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,9 +30,7 @@ public class MainController extends HttpServlet {
         if (goTo != null) {
             request.getRequestDispatcher(goTo).forward(request, response);
         } else {
-            //  response.sendRedirect(PageConstants.ERROR);
-
-            //TODO: добавть страницу на случай ошибки
+            response.sendRedirect(PageConstant.ERROR);
         }
     }
 }

@@ -6,6 +6,7 @@ import com.matevitsky.service.impl.ActivityServiceImpl;
 import com.matevitsky.service.impl.UserServiceImpl;
 import com.matevitsky.service.interfaces.ActivityService;
 import com.matevitsky.service.interfaces.UserService;
+import com.matevitsky.util.MD5Util;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,23 +27,23 @@ public class LoginCommand implements Command {
         String password = request.getParameter("password");
         Optional<User> userByEmail = userService.findUserByEmail(email);
 
+
         if (userByEmail.isPresent()) {
             User user = userByEmail.get();
-            if (user.getRole().getName().equals("Admin")) {
+            String encryptedPassword = MD5Util.encryptPassword(password);
+            if (encryptedPassword.equals(user.getPassword())) {
+                if (user.getRole().getName().equals("Admin")) {
+                    request.getSession().setAttribute("userId", user.getId());
+                    request.setAttribute("userId", user.getId());
+                    return ADMIN_PAGE;
 
-
-                request.getSession().setAttribute("userId", user.getId());
-                request.setAttribute("userId", user.getId());
-
-
-                return ADMIN_PAGE;
-
-            } else {
-                List<Activity> activityListByUserId = activityService.getActivityListByUserId(user.getId());
-                request.getSession().setAttribute("userId", user.getId());
-                request.setAttribute("activityList", activityListByUserId);
-                request.setAttribute("userId", user.getId());
-                return USER_PAGE;
+                } else {
+                    List<Activity> activityListByUserId = activityService.getActivityListByUserId(user.getId());
+                    request.getSession().setAttribute("userId", user.getId());
+                    request.setAttribute("activityList", activityListByUserId);
+                    request.setAttribute("userId", user.getId());
+                    return USER_PAGE;
+                }
             }
         }
         return LOGIN_PAGE;

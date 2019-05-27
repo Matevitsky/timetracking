@@ -1,6 +1,5 @@
 package com.matevitsky.controller;
 
-import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
 import com.matevitsky.service.impl.ActivityServiceImpl;
@@ -12,7 +11,6 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.Optional;
 
 import static com.matevitsky.controller.constant.PageConstant.LOGIN_PAGE;
@@ -49,10 +47,10 @@ public class RegisterCommand implements Command {
             if (userService.insertUser(user)) {
                 Optional<User> userByEmail = userService.findUserByEmail(email);
                 if (userByEmail.isPresent()) {
-                    List<Activity> activityListByUserId = activityService.getActivityListByUserId(user.getId());
+
                     Integer userId = userByEmail.get().getId();
                     request.getSession().setAttribute("userId", userId);
-                    request.setAttribute("activityList", activityListByUserId);
+
                     request.setAttribute("userId", userId);
                     return USER_PAGE;
                 }
