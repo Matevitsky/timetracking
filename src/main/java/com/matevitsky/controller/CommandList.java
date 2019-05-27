@@ -18,7 +18,9 @@ public enum CommandList {
 
     ADMIN_REMOVE_ACTIVITY(new AdminRemoveActivityCommand()),
 
-    ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand()); //TODO: добавит к имени админ
+    ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand()), //TODO: добавит к имени админ
+
+    ERROR(new ErrorCommand());
 
 
     private Command command;

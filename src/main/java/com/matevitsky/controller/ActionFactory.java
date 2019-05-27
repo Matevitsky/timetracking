@@ -13,7 +13,8 @@ public class ActionFactory {
             CommandList command = CommandList.valueOf(action.toUpperCase());
             current = command.getCommand();
         } catch (IllegalArgumentException e) {
-
+            //TODO: написать логер
+            return current = new ErrorCommand();
         }
         return current;
     }
