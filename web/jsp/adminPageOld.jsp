@@ -1,6 +1,30 @@
-<%@include file="adminHeader.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../css/modules/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="../css/modules/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="../css/style.css" rel="stylesheet">
+
+    <!-- MDBootstrap Datatables  -->
+    <link href="../css/addons/datatables.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="<c:url value="../css/createActivity.css"/>">
 
 
+</head>
+
+<body>
 
 <div class="container">
 
@@ -20,13 +44,23 @@
         </fieldset>
 
         <fieldset>
-            <button name="submit" type="submit" id="contact-submit" class="btn btn-secondary btn-lg">Create activity
-            </button>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Create activity</button>
         </fieldset>
 
     </form>
 </div>
 
+<form action="" method="get">
+    <input type="submit" value="Activity Requests"/>
+    <input type="hidden" name="command" value="admin_activity_requests">
+
+</form>
+
+<form action="" method="get">
+
+    <input type="submit" name="submit" value="Finished Activity" class="button"/>
+    <input type="hidden" name="command" value="admin_get_finished_activities">
+</form>
 
 
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
@@ -73,7 +107,6 @@
     </tr>
     </tfoot>
 </table>
-
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
@@ -93,14 +126,4 @@
 });</script>
 </body>
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="/docs/4.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
-        crossorigin="anonymous"></script>
-</body>
 </html>
-

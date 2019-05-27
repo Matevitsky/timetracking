@@ -29,9 +29,12 @@ public class LoginCommand implements Command {
         if (userByEmail.isPresent()) {
             User user = userByEmail.get();
             if (user.getRole().getName().equals("Admin")) {
+
+
                 request.getSession().setAttribute("userId", user.getId());
                 request.setAttribute("userId", user.getId());
-                // request.getRequestDispatcher("jsp/adminPage.jsp").forward(request, response);
+
+
                 return ADMIN_PAGE;
 
             } else {
