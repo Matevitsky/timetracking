@@ -21,6 +21,10 @@ public interface ActivityService {
 
     List<Activity> getActivityListByUserId(Integer userId);
 
-    List<Activity> getGetAllActivityByStatus(String status);
+    List<Activity> getAllActivityByStatus(String status);
+
+    boolean changeActivityStatus(Integer id, String status);
+
+    List<Activity> getAssignedActivityList(Integer userId);
 
 }

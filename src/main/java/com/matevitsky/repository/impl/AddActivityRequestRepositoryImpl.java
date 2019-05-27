@@ -90,7 +90,7 @@ public class AddActivityRequestRepositoryImpl extends AbstractGenericRepository<
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REQUESTS)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
+
 
             while (resultSet.next()) {
                 Integer requestId = resultSet.getInt("ID");

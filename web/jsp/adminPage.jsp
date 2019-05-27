@@ -32,30 +32,71 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th class="th-sm">Title
+        <th class="th-sm">User Name
 
         </th>
-        <th class="th-sm">Content
-
+        <th>
+            Available Activity
         </th>
-        <th class="th-sm">Duration
-
-        </th>
-
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${addActivityRequest}" var="addActivityRequest">
+    <c:forEach items="${userForActivityRequestList}" var="user">
         <tr>
-            <td>${addActivityRequest.title}</td>
-            <td>${addActivityRequest.description}</td>
-            <td>${addActivityRequest.duration}
-                <form action="" method="get">
-                    <input type="hidden" name="command" value="admin_remove_activity">
-                    <input type="hidden" name="id" value="${addActivityRequest.id}"/>
-                    <input type="submit" align="center" value="Remove" name="remove">
-                </form>
-            </td>
+
+            <form>
+                <td>${user.name}</td>
+
+                <td>
+
+                    <form action="/" method="get">
+
+                        Please select an element:
+
+
+                        <select id="unAssignedActivityList" name="selectedRecord">
+
+                            <c:forEach var="unAssignedActivityList" items="${unAssignedActivityList}">
+
+                                <option value="${unAssignedActivityList}">${unAssignedActivityList.title}</option>
+
+                            </c:forEach>
+
+                        </select>
+                        <input type="hidden" name="userId" value= ${user.id}>
+                            <%--  <input type="submit" value="Submit" align="middle">--%>
+
+
+                        <form action="/" method="get">
+                            <input type="submit" value="Assign task">
+                            <input type="hidden" name="command" value="assign_activity_command">
+
+                        </form>
+
+
+                    </form>
+
+                        <%-- <div class="dropdown open">
+                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Available Activity
+                             </button>
+
+
+                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                     <c:forEach items="${unAssignedActivityList}" var="unAssignedActivityList">
+                                         <a class="dropdown-item">${unAssignedActivityList.title}</a>
+                                     </c:forEach>
+
+                                 </div>
+                         </div>--%>
+
+
+                </td>
+
+
+            </form>
 
         </tr>
     </c:forEach>
@@ -63,17 +104,23 @@
 
     <tfoot>
     <tr>
-        <th>Title
-        </th>
-        <th>Content
-        </th>
-        <th>Duration
-        </th>
+        <th class="th-sm">User Name
 
+        </th>
+        <th>
+            Activity Requests
+
+        </th>
     </tr>
     </tfoot>
 </table>
 
+<script>
+    $(".dropdown-menu li a").click(function () {
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    });
+</script>
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
@@ -87,11 +134,6 @@
 <!-- MDBootstrap Datatables  -->
 <script type="text/javascript" src="js/addons/datatables.min.js"></script>
 
-<script>$(document).ready(function () {
-    $('#dtBasicExample').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});</script>
-</body>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

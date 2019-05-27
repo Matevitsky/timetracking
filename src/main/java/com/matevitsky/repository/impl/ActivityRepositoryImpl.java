@@ -26,6 +26,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static final String SELECT_ALL_UNASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE Status='NEW'";
     private static final String SELECT_FINISHED_ACTIVITY = "SELECT * FROM activities WHERE Status='DONE'";
     private static final String SELECT_ALL__ACTIVITIES_BY_STATUS = "SELECT * FROM activities WHERE Status='%s'";
+    private static final String UPDATE_ACTIVITY_STATUS = "UPDATE activities set Status='%s' WHERE ID=%d";
+    private static final String SELECT_ASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE Status='ACTIVE' AND UserId=%d";
 
     private static Logger LOGGER = Logger.getLogger(ActivityRepositoryImpl.class);
 
@@ -154,7 +156,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
     @Override
     public List<Activity> getGetAllActivityByStatus(String status) {
-        LOGGER.debug("Method getGetAllActivityByStatus started ");
+        LOGGER.debug("Method getAllActivityByStatus started ");
 
         //TODO: сделать валидацию статуса - что такой статус существует
 
@@ -184,5 +186,55 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
         }
         return activityList;
     }
+
+    @Override
+    public boolean changeActivityStatus(Integer id, String status) {
+        LOGGER.debug("Method changeActivityStatus started ");
+        boolean result = false;
+        String query = String.format(UPDATE_ACTIVITY_STATUS, status, id);
+        try (Connection connection = connectorDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows > 0) {
+                result = true;
+            }
+
+        } catch (SQLException e) {
+            LOGGER.warn("Filed to change status to activity with Id " + id);
+        }
+        return result;
+    }
+
+    @Override
+    public List<Activity> getAssignedActivityList(Integer userId) {
+        LOGGER.debug("Method getAssignedActivityList started");
+        String query = String.format(SELECT_ASSIGNED_ACTIVITY, userId);
+        List<Activity> assignedActivityList = new ArrayList<>();
+        try (Connection connection = connectorDB.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Integer activityId = resultSet.getInt("ID");
+                String tittle = resultSet.getString("Title");
+                String description = resultSet.getString("Description");
+                Integer duration = resultSet.getInt("Duration");
+
+                String activityStatus = resultSet.getString("Status");
+                Activity activity = Activity.newBuilder().withId(activityId)
+                        .withTittle(tittle)
+                        .withDescription(description)
+                        .withDuration(duration)
+                        .withUserId(userId)
+                        .withStatus(Activity.Status.valueOf(activityStatus)).build();
+                assignedActivityList.add(activity);
+            }
+        } catch (SQLException e) {
+
+        }
+        return assignedActivityList;
+    }
+
 
 }

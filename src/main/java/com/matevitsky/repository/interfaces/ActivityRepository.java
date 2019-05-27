@@ -9,4 +9,8 @@ public interface ActivityRepository extends GenericRepository<Activity> {
     List<Activity> getActivityListByUserId(Integer userId);
 
     List<Activity> getGetAllActivityByStatus(String status);
+
+    boolean changeActivityStatus(Integer id, String status);
+
+    List<Activity> getAssignedActivityList(Integer userId);
 }

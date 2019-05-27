@@ -6,7 +6,7 @@ public enum CommandList {
 
     REGISTER(new RegisterCommand()),
 
-    USER_ACTIVITY_REMOVE(new UserActivityRemoveCommand()),
+    USER_ACTIVITY_REMOVE_REQUEST(new UserActivityRemoveCommand()),
 
     USER_REQUEST_ACTIVITY(new UserRequestActivityCommand()),
 

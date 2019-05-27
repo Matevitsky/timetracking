@@ -28,7 +28,7 @@ public class UserRequestActivityCommand implements Command {
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         addActivityRequestService.createAddActivityRequest(userId);
 
-        List<Activity> activityListByUserId = activityService.getActivityListByUserId(userId);
+        List<Activity> activityListByUserId = activityService.getAssignedActivityList(userId);
 
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("activityList", activityListByUserId);

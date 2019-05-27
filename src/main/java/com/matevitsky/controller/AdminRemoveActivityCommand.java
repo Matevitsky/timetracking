@@ -27,7 +27,7 @@ public class AdminRemoveActivityCommand implements Command {
         activityService.deleteActivity(Integer.parseInt(activityId));
 
 
-        List<Activity> finishedActivityList = activityService.getGetAllActivityByStatus(Activity.Status.DONE.name());
+        List<Activity> finishedActivityList = activityService.getAllActivityByStatus(Activity.Status.DONE.name());
 
         Integer userId2 = (Integer) request.getSession().getAttribute("userId");
         request.getSession().setAttribute("userId", userId2);

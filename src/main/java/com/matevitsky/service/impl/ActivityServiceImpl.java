@@ -48,10 +48,21 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public List<Activity> getGetAllActivityByStatus(String status) {
+    public List<Activity> getAllActivityByStatus(String status) {
         //TODO: проверить существует ли такой статус до вызова репозитория
 
         return activityRepository.getGetAllActivityByStatus(status);
+    }
+
+    @Override
+    public boolean changeActivityStatus(Integer id, String status) {
+
+        return activityRepository.changeActivityStatus(id, status);
+    }
+
+    @Override
+    public List<Activity> getAssignedActivityList(Integer userId) {
+        return activityRepository.getAssignedActivityList(userId);
     }
 
 

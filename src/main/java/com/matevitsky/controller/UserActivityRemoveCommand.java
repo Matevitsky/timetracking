@@ -20,12 +20,12 @@ public class UserActivityRemoveCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String activityId = request.getParameter("id");
         Integer userId = (Integer) request.getSession().getAttribute("userId");
-        activityService.deleteActivity(Integer.parseInt(activityId));
+        activityService.changeActivityStatus(Integer.parseInt(activityId), Activity.Status.DONE.name());
 
-        List<Activity> activityListByUserId = activityService.getActivityListByUserId(userId);
+        List<Activity> assignedActivityList = activityService.getAssignedActivityList(userId);
 
         request.getSession().setAttribute("userId", userId);
-        request.setAttribute("activityList", activityListByUserId);
+        request.setAttribute("activityList", assignedActivityList);
         request.setAttribute("userId", userId);
         //   request.getRequestDispatcher("jsp/userPage.jsp").forward(request, response);
         return USER_PAGE;

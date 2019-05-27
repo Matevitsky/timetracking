@@ -20,7 +20,7 @@ public class AdminGetFinishedActivitiesCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Activity> finishedActivityList = activityService.getGetAllActivityByStatus(Activity.Status.DONE.name());
+        List<Activity> finishedActivityList = activityService.getAllActivityByStatus(Activity.Status.DONE.name());
 
 
         Integer userId2 = (Integer) request.getSession().getAttribute("userId");

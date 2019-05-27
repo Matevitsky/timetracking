@@ -53,7 +53,7 @@ public class AdminAssignActivityCommand implements Command {
 
         List<AddActivityRequest> addActivityRequestList = addActivityRequestService.getAllAddActivityRequests();
 
-        List<Activity> unAssignedActivityList = activityService.getGetAllActivityByStatus(Activity.Status.NEW.name());
+        List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
 
 
         for (AddActivityRequest addActivityRequest : addActivityRequestList) {
