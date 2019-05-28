@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Time Tracking</title>
+    <title>Time Tracking Registration page</title>
 
     <link rel="stylesheet" href="<c:url value="../css/MyCss.css"/>">
 

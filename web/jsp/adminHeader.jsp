@@ -23,11 +23,7 @@
             crossorigin="anonymous"></script>
 
 
-    <title>Time Tracking</title>
-
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/navbar-static/">
-
-
 
 
     <style>
