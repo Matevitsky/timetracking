@@ -25,18 +25,6 @@
 </head>
 
 <body>
-<form action="" method="get">
-    <input type="submit" name="submit" value="Activity Requests" class="button"/>
-    <input type="hidden" name="command" value="admin_new_activity">
-
-
-</form>
-
-
-<form action="" method="get">
-
-    <input type="submit" name="submit" value="Old Activity" class="button"/>
-</form>
 
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
@@ -85,23 +73,6 @@
 
                     </form>
 
-                        <%-- <div class="dropdown open">
-                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 Available Activity
-                             </button>
-
-
-                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                                     <c:forEach items="${unAssignedActivityList}" var="unAssignedActivityList">
-                                         <a class="dropdown-item">${unAssignedActivityList.title}</a>
-                                     </c:forEach>
-
-                                 </div>
-                         </div>--%>
-
-
                 </td>
 
 
@@ -113,13 +84,9 @@
 
     <tfoot>
     <tr>
-        <th class="th-sm">User Name
+        <th class="th-sm">User Name</th>
 
-        </th>
-        <th>
-            Activity Requests
-
-        </th>
+        <th>Activity Requests</th>
     </tr>
     </tfoot>
 </table>
@@ -130,6 +97,13 @@
         $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
     });
 </script>
+
+<script>$(document).ready(function () {
+    $('#dtBasicExample').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+});</script>
+
+
 <!-- SCRIPTS -->
 <!-- JQuery -->
 <script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>

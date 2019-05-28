@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static com.matevitsky.controller.constant.PageConstant.ADMIN_PAGE;
+import static com.matevitsky.controller.constant.PageConstant.ADMIN_GET_FINISHED_ACTIVITIES;
 
 public class AdminRemoveActivityCommand implements Command {
 
@@ -31,9 +31,9 @@ public class AdminRemoveActivityCommand implements Command {
 
         Integer userId2 = (Integer) request.getSession().getAttribute("userId");
         request.getSession().setAttribute("userId", userId2);
-        request.setAttribute("addActivityRequest", finishedActivityList);
+        request.setAttribute("activityList", finishedActivityList);
 
 
-        return ADMIN_PAGE;
+        return ADMIN_GET_FINISHED_ACTIVITIES;
     }
 }

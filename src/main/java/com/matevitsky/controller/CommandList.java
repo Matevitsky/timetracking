@@ -12,6 +12,8 @@ public enum CommandList {
 
     ADMIN_GET_FINISHED_ACTIVITIES(new AdminGetFinishedActivitiesCommand()),
 
+    ADMIN_MAIN_PAGE(new AdminMainPageCommand()),
+
     ADMIN_CREATE_NEW_ACTIVITY(new AdminCreateNewActivityCommand()),
 
     ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand()),

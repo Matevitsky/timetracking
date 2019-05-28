@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 
@@ -20,7 +21,21 @@ public class UserActivityRemoveCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String activityId = request.getParameter("id");
         Integer userId = (Integer) request.getSession().getAttribute("userId");
-        activityService.changeActivityStatus(Integer.parseInt(activityId), Activity.Status.DONE.name());
+        Integer duration = Integer.parseInt(request.getParameter("duration"));
+
+        Optional<Activity> activity = activityService.getActivity(Integer.parseInt(activityId));
+
+        if (activity.isPresent()) {
+            Activity activityWithDuration = Activity.newBuilder()
+                    .withId(activity.get().getId())
+                    .withTittle(activity.get().getTitle())
+                    .withDescription(activity.get().getDescription())
+                    .withDuration(duration)
+                    .withStatus(Activity.Status.DONE)
+                    .build();
+            activityService.updateActivity(activityWithDuration);
+        }
+
 
         List<Activity> assignedActivityList = activityService.getAssignedActivityList(userId);
 

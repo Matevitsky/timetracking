@@ -8,4 +8,6 @@ public interface PageConstant {
     String ADMIN_PAGE = "/jsp/adminPage.jsp";
     String ADMIN_ACTIVITY_REQUESTS_PAGE = "/jsp/adminActivityRequestPage.jsp";
     String ERROR = "/jsp/error.jsp";
+    String ADMIN_GET_FINISHED_ACTIVITIES = "jsp/adminFinishedActivities.jsp";
+
 }

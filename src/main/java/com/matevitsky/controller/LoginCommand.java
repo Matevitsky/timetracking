@@ -33,6 +33,8 @@ public class LoginCommand implements Command {
             String encryptedPassword = MD5Util.encryptPassword(password);
             if (encryptedPassword.equals(user.getPassword())) {
                 if (user.getRole().getName().equals("Admin")) {
+                    List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
+                    request.setAttribute("activityList", unAssignedActivityList);
                     request.getSession().setAttribute("userId", user.getId());
                     request.setAttribute("userId", user.getId());
                     return ADMIN_PAGE;
