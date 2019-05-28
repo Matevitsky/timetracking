@@ -71,6 +71,11 @@
                 <input type="hidden" name="command" value="admin_main_page">
             </form>
 
+            <form action="" method="get" class="nav navbar-nav navbar-right">
+
+                <input type="submit" name="submit" value="Logout" class="btn btn-danger"/>
+                <input type="hidden" name="command" value="logout">
+            </form>
 
         </ul>
     </div>
