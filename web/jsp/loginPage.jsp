@@ -4,9 +4,13 @@
 <html>
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="/css/loginForm.css">
+
     <title>Time Tracker Login Page</title>
+
+
 </head>
 <body>
 
@@ -21,6 +25,7 @@
                         </div>
                         <div class="col-xs-6">
                             <a href="#" id="register-form-link">Register</a>
+
                         </div>
                     </div>
                     <hr>
@@ -33,7 +38,7 @@
                                 <input type="hidden" name="command" value="login">
                                 <div class="form-group">
                                     <input type="text" name="email" id="email" tabindex="1" class="form-control"
-                                           placeholder="Email" value="">
+                                           placeholder="Email" value=""><span id="loginValid"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" tabindex="2"
@@ -47,7 +52,7 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                   class="btn btn-primary btn-lg btn-block" value="Log In">
+                                                   class="btn btn-primary btn-lg btn-block" value="Log In" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +63,11 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <script src="/js/loginEmailValidation.js"></script>
                             </form>
+
+
                             <form id="register-form" action="/app" method="post"
                                   role="form" style="display: none;">
                                 <input type="hidden" name="command" value="register">
@@ -68,9 +77,9 @@
                                            placeholder="Username" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" id="emailRegistration" tabindex="1"
+                                    <input type="email" name="emailRegistration" id="emailRegistration" tabindex="1"
                                            class="form-control"
-                                           placeholder="Email Address" value="">
+                                           placeholder="Email Address" value=""><span id="registrationValid"></span>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="passwordRegistration" tabindex="2"
@@ -85,11 +94,13 @@
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="register-submit" id="register-submit"
                                                    tabindex="4" class="btn btn-primary btn-lg btn-block"
-                                                   value="Register Now">
+                                                   value="Register Now" disabled>
                                         </div>
                                     </div>
                                 </div>
+                                <script src="/js/registrationEmailValidation.js"></script>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -118,6 +129,6 @@
 });
 </script>
 
-
 </body>
+
 </html>

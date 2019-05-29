@@ -4,18 +4,16 @@ import java.util.Objects;
 
 public class Activity {
 
-    private String description;
-
     private Integer id;
-    private Status status;
     private String title;
+    private String description;
     private Integer duration;
     private Integer userId;
+    private Status status;
 
     public String getDescription() {
         return description;
     }
-
 
     private Activity() {
 
@@ -29,57 +27,26 @@ public class Activity {
         return title;
     }
 
-    public String getStatus() {
-        return status.name();
+    public Integer getUserId() {
+        return userId;
     }
 
     public Integer getDuration() {
         return duration;
     }
 
-    public static Builder newBuilder() {
-        return new Activity().new Builder();
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Activity)) {
-            return false;
-        }
-        Activity activity = (Activity) o;
-        return Objects.equals(title, activity.title) &&
-                Objects.equals(description, activity.description) &&
-                Objects.equals(duration, activity.duration) &&
-                Objects.equals(userId, activity.userId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, description, duration, userId);
-    }
-
-    @Override
-    public String toString() {
-        return "Activity{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", duration=" + duration +
-                ", userId=" + userId +
-                '}';
+    public Status getStatus() {
+        return status;
     }
 
     public enum Status {
         NEW,
         ACTIVE,
         DONE
+    }
+
+    public static Builder newBuilder() {
+        return new Activity().new Builder();
     }
 
     public class Builder {
@@ -120,5 +87,35 @@ public class Activity {
         public Activity build() {
             return Activity.this;
         }
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Activity)) {
+            return false;
+        }
+        Activity activity = (Activity) o;
+        return Objects.equals(title, activity.title) &&
+                Objects.equals(description, activity.description) &&
+                Objects.equals(duration, activity.duration) &&
+                Objects.equals(userId, activity.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, description, duration, userId);
+    }
+
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", duration=" + duration +
+                ", userId=" + userId +
+                '}';
     }
 }

@@ -21,7 +21,7 @@ create table users
 (
     ID       int auto_increment,
     Name     varchar(64)  not null,
-    Email    varchar(255) not null,
+    Email    varchar(255) not null UNIQUE,
     Password varchar(32)  not null,
     Role     int          not null,
     PRIMARY KEY (ID),
@@ -65,10 +65,10 @@ VALUES ('Admin');
 
 
 INSERT INTO users(Name, Email, Password, Role)
-VALUES ('Sergey4', 'admin', '21232f297a57a5a743894a0e4a801fc3', '2');
+VALUES ('Sergey4', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '2');
 
 INSERT INTO users(Name, Email, Password, Role)
-VALUES ('user', 'user', 'ee11cbb19052e40b07aac0ca060c23ee', '1');
+VALUES ('user', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', '1');
 
 
 INSERT INTO activities(Title, Description, Duration, UserId, Status)

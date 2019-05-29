@@ -66,6 +66,11 @@ public class Main {
         // System.out.println(userRepositoryImplDataBase.selectUser(3));
         // System.out.println( userRepositoryImplDataBase.deleteUser(new User(1,"Sergey","12345")));
         // System.out.println(userRepositoryImplDataBase.getAllUsers());
+
+
+        //TODO: продумать логику на случай попытки регистрации с существующим email
+        //TODO: валидация данных на входе
+        //TODO: написать тесты
     }
 
 }
