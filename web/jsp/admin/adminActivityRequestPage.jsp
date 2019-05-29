@@ -58,7 +58,7 @@
 
                         <form action="/app" method="get">
                             <input type="submit" value="Assign task">
-                            <input type="hidden" name="command" value="assign_activity_command">
+                            <input type="hidden" name="command" value="admin_assign_activity_command">
 
                         </form>
 

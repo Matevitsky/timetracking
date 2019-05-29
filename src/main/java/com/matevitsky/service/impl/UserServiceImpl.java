@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //:TODO boolean is login(String email, String password){
-    //TODO: validate email and password искать только по мэйлу. вытащить юзера и сравнить его пароль с тем что ввел юзер
+    //:TODO boolean is login(String loginEmail, String password){
+    //TODO: validate loginEmail and password искать только по мэйлу. вытащить юзера и сравнить его пароль с тем что ввел юзер
 
 }

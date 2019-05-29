@@ -1,21 +1,23 @@
 $(document).ready(function () {
 });
 var pattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-var email = $('#email');
-email.blur(function () {
-    if (email.val() != '') {
-        if (email.val().search(pattern) == 0) {
+var loginEmail = $('#email');
+
+loginEmail.blur(function () {
+    if (loginEmail.val() != '') {
+        if (loginEmail.val().search(pattern) == 0) {
             $('#loginValid').text('Подходит');
             $('#login-submit').attr('disabled', false);
-            email.removeClass('error').addClass('ok');
+            loginEmail.removeClass('error').addClass('ok');
         } else {
             $('#loginValid').text('Не подходит');
             $('#login-submit').attr('disabled', true);
-            email.addClass('ok');
+            loginEmail.addClass('ok');
         }
     } else {
-        $('#loginValid').text('Поле e-email не должно быть пустым!');
-        email.addClass('error');
+        $('#loginValid').text('Поле e-mail не должно быть пустым!');
+        loginEmail.addClass('error');
         $('#login-submit').attr('disabled', true);
     }
+
 });

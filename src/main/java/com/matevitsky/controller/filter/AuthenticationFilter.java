@@ -31,6 +31,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
+
         if (request.getAttribute("role") == null) {
 
             response.sendRedirect(PageConstant.LOGIN_PAGE);

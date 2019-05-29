@@ -27,9 +27,12 @@ public class RegisterCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Registration Started");
         String name = request.getParameter("username");
-        String email = request.getParameter("email");
+        String email = request.getParameter("emailRegistration");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm-password");
+
+        //TODO: провреять что все поля заполнены
+
         if (!password.equals(confirmPassword)) {
             LOGGER.debug("Confirmation password failed");
             //TODO: create exception and throw it

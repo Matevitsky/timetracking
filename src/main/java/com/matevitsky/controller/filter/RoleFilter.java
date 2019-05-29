@@ -41,7 +41,11 @@ public class RoleFilter implements Filter {
                 }
             }
         } else {
-            chain.doFilter(req, response);
+            if (command.contains("register") || command.contains("login")) {
+                chain.doFilter(req, response);
+            } else {
+                resp.sendRedirect(PageConstant.LOGIN_PAGE);
+            }
         }
     }
 }

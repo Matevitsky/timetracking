@@ -77,7 +77,8 @@
                                            placeholder="Username" value="">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="emailRegistration" id="emailRegistration" tabindex="1"
+                                    <input type="emailRegistration" name="emailRegistration" id="emailRegistration"
+                                           tabindex="1"
                                            class="form-control"
                                            placeholder="Email Address" value=""><span id="registrationValid"></span>
                                 </div>

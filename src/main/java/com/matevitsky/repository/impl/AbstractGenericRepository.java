@@ -34,7 +34,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
         } catch (SQLException e) {
             LOGGER.error("Failed to add entity to database " + e.getMessage());
         }
-        //TODO: подумать что вернуть в случае null gочитать про статус код и перезти юзера на нужную странучку сдеалть заглушку на все случаи жизни
+        //TODO: подумать что вернуть в случае null почитать про статус код и перезти юзера на нужную странучку сдеалть заглушку на все случаи жизни
         return resultOfCreation;
     }
 

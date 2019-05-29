@@ -68,7 +68,7 @@ public class Main {
         // System.out.println(userRepositoryImplDataBase.getAllUsers());
 
 
-        //TODO: продумать логику на случай попытки регистрации с существующим email
+        //TODO: продумать логику на случай попытки регистрации с существующим loginEmail
         //TODO: валидация данных на входе
         //TODO: написать тесты
     }

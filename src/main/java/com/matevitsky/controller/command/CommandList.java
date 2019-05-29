@@ -20,7 +20,7 @@ public enum CommandList {
 
     ADMIN_REMOVE_ACTIVITY(new AdminRemoveActivityCommand()),
 
-    ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand()),
+    ADMIN_ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand()),
 
     ERROR(new ErrorCommand()),
 

@@ -118,7 +118,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     }
 
     public Optional<User> findUserByEmail(String email) {
-        LOGGER.debug("findUserByEmail with email " + email);
+        LOGGER.debug("findUserByEmail with loginEmail " + email);
         String query = String.format(SELECT_USER_BY_EMAIL, email);
         User user = null;
         try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {

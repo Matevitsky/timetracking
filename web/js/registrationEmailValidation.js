@@ -2,6 +2,7 @@ $(document).ready(function () {
 });
 var pattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 var email = $('#emailRegistration');
+
 email.blur(function () {
     if (email.val() != '') {
         if (email.val().search(pattern) == 0) {
@@ -14,7 +15,7 @@ email.blur(function () {
             email.addClass('ok');
         }
     } else {
-        $('#registrationValid').text('Поле e-email не должно быть пустым!');
+        $('#registrationValid').text('Поле e-loginEmail не должно быть пустым!');
         email.addClass('error');
         $('#register-submit').attr('disabled', true);
     }
