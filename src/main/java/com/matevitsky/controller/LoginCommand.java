@@ -35,6 +35,7 @@ public class LoginCommand implements Command {
                 if (user.getRole().getName().equals("Admin")) {
                     List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
                     request.setAttribute("activityList", unAssignedActivityList);
+                    request.getSession().setAttribute("role", user.getRole().getName());
                     request.getSession().setAttribute("userId", user.getId());
                     request.setAttribute("userId", user.getId());
                     return ADMIN_PAGE;
@@ -43,6 +44,7 @@ public class LoginCommand implements Command {
                     List<Activity> assignedActivityList = activityService.getAssignedActivityList(user.getId());
                     request.getSession().setAttribute("userId", user.getId());
                     request.setAttribute("activityList", assignedActivityList);
+                    request.getSession().setAttribute("role", user.getRole().getName());
                     request.setAttribute("userId", user.getId());
                     return USER_PAGE;
                 }

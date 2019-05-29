@@ -11,7 +11,7 @@
 
 
     <!-- MDBootstrap Datatables  -->
-    <link href="../css/addons/datatables.min.css" rel="stylesheet">
+    <link href="../../css/addons/datatables.min.css" rel="stylesheet">
 
 
 </head>
@@ -38,7 +38,7 @@
 
                 <td>
 
-                    <form action="/" method="get">
+                    <form action="/app" method="get">
 
                         Please select an element:
 
@@ -56,7 +56,7 @@
                             <%--  <input type="submit" value="Submit" align="middle">--%>
 
 
-                        <form action="/" method="get">
+                        <form action="/app" method="get">
                             <input type="submit" value="Assign task">
                             <input type="hidden" name="command" value="assign_activity_command">
 

@@ -25,7 +25,7 @@
             <td>${activity.description}</td>
             <td>
 
-                <form action="" method="get">
+                <form action="/app" method="get">
                     <input name="duration" input placeholder="Duration" type="text" tabindex="duration" required
                            autofocus>
                     <input type="hidden" name="command" value="user_activity_remove_request">

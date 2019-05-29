@@ -28,7 +28,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form id="login-form" action="" method="post" role="form"
+                            <form id="login-form" action="/app" method="post" role="form"
                                   style="display: block;">
                                 <input type="hidden" name="command" value="login">
                                 <div class="form-group">
@@ -59,7 +59,7 @@
                                     </div>
                                 </div>
                             </form>
-                            <form id="register-form" action="" method="post"
+                            <form id="register-form" action="/app" method="post"
                                   role="form" style="display: none;">
                                 <input type="hidden" name="command" value="register">
                                 <div class="form-group">

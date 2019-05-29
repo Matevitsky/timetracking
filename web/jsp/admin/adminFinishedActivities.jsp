@@ -1,35 +1,24 @@
 <%@include file="adminHeader.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <link href="../css/addons/datatables.min.css" rel="stylesheet">
-    <title>Admin Main Page</title>
+    <title>Finished activity</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/modules/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+
+
+    <!-- MDBootstrap Datatables  -->
+    <link href="../../css/addons/datatables.min.css" rel="stylesheet">
 </head>
-
-
-<div class="container">
-
-    <form id="contact" action="" method="get">
-        <input type="hidden" name="command" value="admin_create_new_activity">
-
-        <h3>Create activity</h3>
-        <fieldset>
-            <input name="title" input placeholder="Title" type="text" tabindex="Title" required autofocus>
-
-        </fieldset>
-
-        <fieldset>
-            <input name="description" textarea placeholder="Type activity description." tabindex="Description"
-                   required></inputtextarea>
-
-        </fieldset>
-
-        <fieldset>
-            <button name="submit" type="submit" id="contact-submit" class="btn btn-secondary btn-lg">Create activity
-            </button>
-        </fieldset>
-
-    </form>
-</div>
-
+<body>
 
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
@@ -45,7 +34,7 @@
     <c:forEach items="${activityList}" var="activity">
 
         <tr>
-            <form action="" method="get">
+            <form action="/app" method="get">
                 <td>${activity.title}</td>
                 <td>${activity.description}</td>
                 <td>${activity.duration}
@@ -84,10 +73,9 @@
 });</script>
 
 
-<!-- MDBootstrap Datatables -->
+<!-- MDBootstrap Datatables  -->
 <script type="text/javascript" src="js/addons/datatables.min.js"></script>
 
 
 </body>
 </html>
-

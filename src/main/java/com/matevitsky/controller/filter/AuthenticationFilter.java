@@ -1,6 +1,8 @@
 package com.matevitsky.controller.filter;
 
 
+import com.matevitsky.controller.constant.PageConstant;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -13,15 +15,7 @@ import java.util.Set;
 
 
 @WebFilter(filterName = "AuthenticationFilter",
-        urlPatterns = {"/",
-                "/jsp/adminActivityRequestPage.jsp",
-                "/jsp/adminActivityFinishedPage.jsp",
-                "/jsp/adminHeader.jsp",
-                "/jsp/adminPage.jsp",
-                "/jsp/error.jsp",
-                "/jsp/userHeader.jsp",
-                "/jsp/userPage.jsp",
-                "/jsp/loginPage.jsp"})
+        urlPatterns = "/")
 public class AuthenticationFilter implements Filter {
 
     private final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
@@ -37,28 +31,16 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String uri = request.getRequestURI();
+        if (request.getAttribute("role") == null) {
 
-
-        filterChain.doFilter(request, response);
-
+            response.sendRedirect(PageConstant.LOGIN_PAGE);
+        } else {
+            filterChain.doFilter(request, response);
+        }
 
     }
 
 }
-
-
-
-
-
-      /*  if (userId == 0 && !uri.endsWith("/jsp/login.jsp") && !uri.endsWith("/jsp/register.jsp")) {
-
-            request.getRequestDispatcher(PageConstant.LOGIN_PAGE).forward(request,response);
-        } else {
-            if (userId != 0 && (uri.endsWith("/jsp/loginPage.jsp"))) {
-                response.sendRedirect(PageConstant.USER_ACTIVITY);
-            }
-
-        filterChain.doFilter(request, response);*/
 
 
 //TODO:

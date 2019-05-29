@@ -15,14 +15,14 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Bootstrap core CSS -->
-    <link href="../css/modules/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/modules/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
-    <link href="../css/modules/mdb.min.css" rel="stylesheet">
+    <link href="../../css/modules/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
-    <link href="../css/style.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
 
     <!-- MDBootstrap Datatables  -->
-    <link href="../css/addons/datatables.min.css" rel="stylesheet">
+    <link href="../../css/addons/datatables.min.css" rel="stylesheet">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -67,7 +67,7 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="<c:url value="../css/createActivity.css"/>">
+    <link rel="stylesheet" href="<c:url value="../../css/createActivity.css"/>">
 
 </head>
 <body>
@@ -76,10 +76,16 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
 
-            <form action="" method="get">
+            <form action="/app" method="get">
                 <input type="submit" value="Request Activity" class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="user_request_activity">
 
+            </form>
+
+            <form action="/app" method="get" class="nav navbar-nav navbar-right">
+
+                <input type="submit" name="submit" value="Logout" class="btn btn-danger"/>
+                <input type="hidden" name="command" value="logout">
             </form>
         </ul>
     </div>

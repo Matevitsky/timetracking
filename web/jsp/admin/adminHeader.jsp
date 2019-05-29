@@ -45,7 +45,7 @@
     <!-- Custom styles for this template -->
     <link href="navbar-top.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="<c:url value="../css/createActivity.css"/>">
+    <link rel="stylesheet" href="<c:url value="../../css/createActivity.css"/>">
 
 </head>
 <body>
@@ -53,25 +53,25 @@
 
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <form action="" method="get">
+            <form action="/app" method="get">
                 <input type="submit" value="Activity Requests" class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="admin_activity_requests">
 
             </form>
 
-            <form action="" method="get">
+            <form action="/app" method="get">
 
                 <input type="submit" name="submit" value="Finished Activity" class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="admin_get_finished_activities">
             </form>
 
-            <form action="" method="get">
+            <form action="/app" method="get">
 
                 <input type="submit" name="submit" value="Main Page" class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="admin_main_page">
             </form>
 
-            <form action="" method="get" class="nav navbar-nav navbar-right">
+            <form action="/app" method="get" class="nav navbar-nav navbar-right">
 
                 <input type="submit" name="submit" value="Logout" class="btn btn-danger"/>
                 <input type="hidden" name="command" value="logout">

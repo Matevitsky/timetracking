@@ -33,7 +33,7 @@
             <h1>Oops!</h1>
             <h2>404 - The Page can't be found</h2>
         </div>
-        <form action="" method="get">
+        <form action="/app" method="get">
             <a href="/">Go TO Homepage</a>
 
         </form>
