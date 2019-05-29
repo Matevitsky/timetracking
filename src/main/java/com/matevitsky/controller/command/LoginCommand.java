@@ -1,4 +1,4 @@
-package com.matevitsky.controller;
+package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.User;

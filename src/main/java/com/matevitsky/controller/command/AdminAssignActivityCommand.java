@@ -1,14 +1,14 @@
-package com.matevitsky.controller;
+package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
-import com.matevitsky.entity.AddActivityRequest;
+import com.matevitsky.entity.ActivityRequest;
 import com.matevitsky.entity.User;
 import com.matevitsky.entity.dto.UserForActivityRequest;
+import com.matevitsky.service.impl.ActivityRequestServiceImpl;
 import com.matevitsky.service.impl.ActivityServiceImpl;
-import com.matevitsky.service.impl.AddActivityRequestServiceImpl;
 import com.matevitsky.service.impl.UserServiceImpl;
+import com.matevitsky.service.interfaces.ActivityRequestService;
 import com.matevitsky.service.interfaces.ActivityService;
-import com.matevitsky.service.interfaces.AddActivityRequestService;
 import com.matevitsky.service.interfaces.UserService;
 
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class AdminAssignActivityCommand implements Command {
 
 
     ActivityService activityService = new ActivityServiceImpl();
-    AddActivityRequestService addActivityRequestService = new AddActivityRequestServiceImpl();
+    ActivityRequestService activityRequestService = new ActivityRequestServiceImpl();
     UserService userService = new UserServiceImpl();
 
 
@@ -47,17 +47,17 @@ public class AdminAssignActivityCommand implements Command {
                 .withUserId(userId)
                 .withStatus(Activity.Status.ACTIVE).build();
         activityService.updateActivity(assignedActivity);
-        addActivityRequestService.deleteAddActivityRequest(activityId);
+        activityRequestService.deleteActivityRequest(activityId);
 
         List<UserForActivityRequest> userForActivityRequestList = new ArrayList<>();
 
-        List<AddActivityRequest> addActivityRequestList = addActivityRequestService.getAllAddActivityRequests();
+        List<ActivityRequest> activityRequestList = activityRequestService.getAllActivityRequests();
 
         List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
 
 
-        for (AddActivityRequest addActivityRequest : addActivityRequestList) {
-            int userId1 = addActivityRequest.getUserId();
+        for (ActivityRequest activityRequest : activityRequestList) {
+            int userId1 = activityRequest.getUserId();
             Optional<User> user = userService.getUser(userId1);
             if (user.isPresent()) {
                 UserForActivityRequest userForActivityRequest =

@@ -1,10 +1,10 @@
-package com.matevitsky.controller;
+package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
+import com.matevitsky.service.impl.ActivityRequestServiceImpl;
 import com.matevitsky.service.impl.ActivityServiceImpl;
-import com.matevitsky.service.impl.AddActivityRequestServiceImpl;
+import com.matevitsky.service.interfaces.ActivityRequestService;
 import com.matevitsky.service.interfaces.ActivityService;
-import com.matevitsky.service.interfaces.AddActivityRequestService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 public class UserRequestActivityCommand implements Command {
 
 
-    AddActivityRequestService addActivityRequestService = new AddActivityRequestServiceImpl();
+    ActivityRequestService activityRequestService = new ActivityRequestServiceImpl();
 
     ActivityService activityService = new ActivityServiceImpl();
 
@@ -26,7 +26,8 @@ public class UserRequestActivityCommand implements Command {
 
 
         Integer userId = (Integer) request.getSession().getAttribute("userId");
-        addActivityRequestService.createAddActivityRequest(userId);
+        //TODO:// проверять на ноль юзер айди
+        activityRequestService.createActivityRequest(userId);
 
         List<Activity> activityListByUserId = activityService.getAssignedActivityList(userId);
 

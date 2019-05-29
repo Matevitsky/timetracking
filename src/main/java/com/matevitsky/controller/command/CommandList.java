@@ -1,4 +1,4 @@
-package com.matevitsky.controller;
+package com.matevitsky.controller.command;
 
 public enum CommandList {
 

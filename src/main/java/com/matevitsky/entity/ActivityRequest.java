@@ -1,11 +1,11 @@
 package com.matevitsky.entity;
 
-public abstract class Request {
+public class ActivityRequest {
 
     private final Integer id;
     private final Integer userId;
 
-    public Request(Integer id, Integer userId) {
+    public ActivityRequest(Integer id, Integer userId) {
         this.id = id;
         this.userId = userId;
     }
@@ -17,4 +17,6 @@ public abstract class Request {
     public Integer getUserId() {
         return userId;
     }
+
+
 }
