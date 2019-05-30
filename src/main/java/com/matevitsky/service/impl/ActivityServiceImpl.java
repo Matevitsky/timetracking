@@ -4,7 +4,7 @@ package com.matevitsky.service.impl;
 import com.matevitsky.entity.Activity;
 import com.matevitsky.repository.impl.ActivityRepositoryImpl;
 import com.matevitsky.repository.interfaces.ActivityRepository;
-import com.matevitsky.service.interfaces.ActivityService;
+import com.matevitsky.service.ActivityService;
 
 import java.util.List;
 import java.util.Optional;

@@ -2,10 +2,10 @@ package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.User;
+import com.matevitsky.service.ActivityService;
+import com.matevitsky.service.UserService;
 import com.matevitsky.service.impl.ActivityServiceImpl;
 import com.matevitsky.service.impl.UserServiceImpl;
-import com.matevitsky.service.interfaces.ActivityService;
-import com.matevitsky.service.interfaces.UserService;
 import com.matevitsky.util.MD5Util;
 import org.apache.log4j.Logger;
 

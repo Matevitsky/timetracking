@@ -10,17 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = "/app")
+@WebFilter(filterName = "RoleFilter", urlPatterns = "/app")
 public class RoleFilter implements Filter {
 
-    private Logger LOGGER = Logger.getLogger(RoleFilter.class);
+    private final static Logger LOGGER = Logger.getLogger(RoleFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String command = req.getParameter("command");
-        LOGGER.info("Requested resource:: " + command);
+        String uri = req.getRequestURI();
+        LOGGER.debug(uri);
 
 
         String role = (String) req.getSession().getAttribute("role");

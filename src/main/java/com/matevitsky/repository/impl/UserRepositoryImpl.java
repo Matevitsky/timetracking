@@ -104,11 +104,13 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
                 String roleId = allUsers.getString("Role");
                 Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
 
-                User user = User.newBuilder().withId(id)
+                User user = User.newBuilder()
+                        .withId(id)
                         .withName(userName)
                         .withEmail(userEmail)
                         .withPassword(userPassword)
-                        .withRole(role).build();
+                        .withRole(role)
+                        .build();
                 allUserList.add(user);
             }
         } catch (SQLException e) {

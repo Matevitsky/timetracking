@@ -4,8 +4,8 @@ import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.db.DbInitScriptRunner;
 import com.matevitsky.entity.Activity;
 import com.matevitsky.repository.impl.UserRepositoryImpl;
+import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.impl.ActivityServiceImpl;
-import com.matevitsky.service.interfaces.ActivityService;
 import com.matevitsky.util.MD5Util;
 
 import java.io.File;
@@ -71,6 +71,7 @@ public class Main {
         //TODO: продумать логику на случай попытки регистрации с существующим loginEmail
         //TODO: валидация данных на входе
         //TODO: написать тесты
+        //TODO: отображение времени на страницах
     }
 
 }

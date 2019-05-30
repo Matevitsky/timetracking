@@ -4,7 +4,7 @@ package com.matevitsky.service.impl;
 import com.matevitsky.entity.ActivityRequest;
 import com.matevitsky.repository.impl.ActivityRequestRepositoryImpl;
 import com.matevitsky.repository.interfaces.ActivityRequestRepository;
-import com.matevitsky.service.interfaces.ActivityRequestService;
+import com.matevitsky.service.ActivityRequestService;
 import org.apache.log4j.Logger;
 
 import java.util.List;

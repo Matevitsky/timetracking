@@ -4,7 +4,7 @@ package com.matevitsky.service.impl;
 import com.matevitsky.entity.User;
 import com.matevitsky.repository.impl.UserRepositoryImpl;
 import com.matevitsky.repository.interfaces.UserRepository;
-import com.matevitsky.service.interfaces.UserService;
+import com.matevitsky.service.UserService;
 
 import java.util.List;
 import java.util.Optional;

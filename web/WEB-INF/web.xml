@@ -3,30 +3,9 @@
          xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/error.jsp</location>
-    </error-page>
-
-    <!--  <filter-mapping>
-          <filter-name>AuthenticationFilter</filter-name>
-          <url-pattern>/jsp/adminActivityRequestPage.jsp</url-pattern>
-          <url-pattern>/jsp/adminActivityFinishedPage.jsp</url-pattern>
-          <url-pattern>/jsp/adminHeader.jsp</url-pattern>
-          <url-pattern>/jsp/adminPage.jsp</url-pattern>
-          <url-pattern>/jsp/error.jsp</url-pattern>
-          <url-pattern>/jsp/userHeader.jsp</url-pattern>
-          <url-pattern>/jsp/userPage.jsp</url-pattern>
-          <url-pattern>/jsp/loginPage.jsp</url-pattern>
-      </filter-mapping>-->
-
-    <!-- <filter-mapping>
-         <filter-name>AdminFilter</filter-name>
-         <url-pattern>/*</url-pattern>
-     </filter-mapping>
-
-     <filter-mapping>
-         <filter-name>UserFilter</filter-name>
-         <url-pattern>/*</url-pattern>
-     </filter-mapping>-->
+    <absolute-ordering>
+        <name>ErrorFilter</name>
+        <name>AuthenticationFilter</name>
+        <name>RoleFilter</name>
+    </absolute-ordering>
 </web-app>

@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ActionFactory {
     public Command defineCommand(HttpServletRequest request) {
-        Command current = new LoginCommand();
+        Command current = new ErrorCommand();
         String action = request.getParameter("command");
         if (action == null) {
             return current;

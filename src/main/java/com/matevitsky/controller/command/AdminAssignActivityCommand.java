@@ -4,12 +4,12 @@ import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.ActivityRequest;
 import com.matevitsky.entity.User;
 import com.matevitsky.entity.dto.UserForActivityRequest;
+import com.matevitsky.service.ActivityRequestService;
+import com.matevitsky.service.ActivityService;
+import com.matevitsky.service.UserService;
 import com.matevitsky.service.impl.ActivityRequestServiceImpl;
 import com.matevitsky.service.impl.ActivityServiceImpl;
 import com.matevitsky.service.impl.UserServiceImpl;
-import com.matevitsky.service.interfaces.ActivityRequestService;
-import com.matevitsky.service.interfaces.ActivityService;
-import com.matevitsky.service.interfaces.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

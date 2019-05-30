@@ -1,4 +1,4 @@
-package com.matevitsky.service.interfaces;
+package com.matevitsky.service;
 
 
 import com.matevitsky.entity.Activity;

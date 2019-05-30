@@ -7,9 +7,10 @@ public interface GenericRepository<E> {
 
     boolean create(E entity);
 
-    boolean delete(Integer id);
+    boolean delete(Integer id); //TODO: replace with -delete by Id
 
-    E update(E entity);
+    E update(E entity); //replace with optional
+
 
     Optional<E> getById(Integer id);
 

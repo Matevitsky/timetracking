@@ -6,21 +6,26 @@ import java.util.Objects;
 public class User {
 
 
-    private Integer id;
+    private final Integer id;
 
-    private String name;
+    private final String name;
 
-    private String email;
+    private final String email;
 
-    private String password;
+    private final String password;
 
-    private Role role;
+    private final Role role;
 
-    private User() {
+    public User(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.email = builder.email;
+        this.password = builder.password;
+        this.role = builder.role;
     }
 
     public static Builder newBuilder() {
-        return new User().new Builder();
+        return new Builder();
     }
 
     public Integer getId() {
@@ -75,39 +80,49 @@ public class User {
                 '}';
     }
 
-    public class Builder {
+    public static class Builder {
+
+        private Integer id;
+
+        private String name;
+
+        private String email;
+
+        private String password;
+
+        private Role role;
+
+
         private Builder() {
         }
 
-        public User.Builder withId(Integer id) {
-            User.this.id = id;
+        public Builder withId(Integer id) {
+            this.id = id;
             return this;
         }
 
-        public User.Builder withName(String name) {
-            User.this.name = name;
+        public Builder withName(String name) {
+            this.name = name;
             return this;
         }
 
-        public User.Builder withEmail(String email) {
-            User.this.email = email;
+        public Builder withEmail(String email) {
+            this.email = email;
             return this;
         }
 
-        public User.Builder withPassword(String password) {
-            User.this.password = password;
+        public Builder withPassword(String password) {
+            this.password = password;
             return this;
-
         }
 
-        public User.Builder withRole(Role role) {
-            User.this.role = role;
+        public Builder withRole(Role role) {
+            this.role = role;
             return this;
         }
 
         public User build() {
-            return User.this;
+            return new User(this);
         }
-
     }
 }
