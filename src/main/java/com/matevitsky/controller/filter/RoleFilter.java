@@ -4,13 +4,12 @@ import com.matevitsky.controller.constant.PageConstant;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebFilter(filterName = "RoleFilter", urlPatterns = "/app")
+//@WebFilter(filterName = "RoleFilter")
 public class RoleFilter implements Filter {
 
     private final static Logger LOGGER = Logger.getLogger(RoleFilter.class);

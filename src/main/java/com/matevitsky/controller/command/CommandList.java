@@ -24,8 +24,9 @@ public enum CommandList {
 
     ERROR(new ErrorCommand()),
 
-    LOGOUT(new LogOutCommand());
+    LOGOUT(new LogOutCommand()),
 
+    CHANGE_LOCALE(new ChangeLocaleCommand());
 
     private Command command;
 

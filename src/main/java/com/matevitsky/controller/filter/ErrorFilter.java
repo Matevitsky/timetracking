@@ -8,10 +8,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.stream.Stream;
 
 
-@WebFilter(filterName = "ErrorFilter", urlPatterns = "/*")
+@WebFilter(filterName = "ErrorFilter")
 public class ErrorFilter implements Filter {
 
     private Logger LOGGER = Logger.getLogger(ErrorFilter.class);
@@ -23,8 +22,11 @@ public class ErrorFilter implements Filter {
 
         String uri = request.getRequestURI();
         LOGGER.debug(uri);
+        if (uri.equals("/")) {
+            response.sendRedirect(PageConstant.LOGIN_PAGE);
+        }
 
-        String[] allowPath = {"/jsp", "/css", "/js"};
+       /* String[] allowPath = {"/jsp", "/css", "/js"};
 
         if (uri.equals("/") || uri.equals("/app")) {
             chain.doFilter(request, response);
@@ -37,6 +39,6 @@ public class ErrorFilter implements Filter {
                 //request.getRequestDispatcher("/app").forward(request, response);
                 response.sendRedirect(PageConstant.ERROR_PAGE);
             }
-        }
+        }*/
     }
 }

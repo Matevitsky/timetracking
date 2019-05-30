@@ -1,7 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/jsp/user/i18n.jsp" %>
+
+<html>
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -12,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Time Tracking User Page</title>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <!-- Bootstrap core CSS -->
@@ -23,6 +27,14 @@
 
     <!-- MDBootstrap Datatables  -->
     <link href="../../css/addons/datatables.min.css" rel="stylesheet">
+
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css' rel='stylesheet'
+          type='text/css'>
+
+
+    <script src="../../bootstrap-select-1.12.4/js/bootstrap-select.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -40,7 +52,6 @@
     <title>User Page</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/navbar-static/">
-
 
 
     <style>
@@ -63,6 +74,7 @@
 
     <link rel="stylesheet" href="<c:url value="../../css/createActivity.css"/>">
 
+
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
@@ -71,19 +83,41 @@
         <ul class="navbar-nav mr-auto">
 
             <form action="/app" method="get">
-                <input type="submit" value="Request Activity" class="btn btn-secondary btn-lg"/>
+                <input type="submit" value="<fmt:message bundle="${common}" key="request.activity"/>"
+                       class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="user_request_activity">
 
             </form>
 
-            <form action="/app" method="get" class="nav navbar-nav navbar-right">
 
-                <input type="submit" name="submit" value="Logout" class="btn btn-danger"/>
-                <input type="hidden" name="command" value="logout">
-            </form>
         </ul>
     </div>
 
+
+    <form action="/app" method="POST">
+        <input type="hidden" name="command" value="change_locale">
+        <input type="hidden" name="uri" value="${pageContext.request.requestURI}">
+        <select class="selectpicker picker" data-size="3" data-style="btn-info" style="width: 60%" name="locale"
+                onchange="submit()">
+            <option data-content='<span class="flag-icon flag-icon-us"></span> ENGLISH'
+                    value="en-US" ${locale == 'en-US' ? 'selected' : ''}><fmt:message bundle="${common}"
+                                                                                      key="language.en"/></option>
+
+            <option data-content='<span class="flag-icon flag-icon-ru"></span> RUSSIAN'
+                    value="ru-RU" ${locale == 'ru-RU' ? 'selected' : ''}><fmt:message bundle="${common}"
+                                                                                      key="language.ru"/></option>
+        </select>
+    </form>
+
+
+    <form action="/app" method="get" class="nav navbar-nav">
+
+        <input type="submit" name="logout" value="<fmt:message bundle="${common}" key="log.out"/>"
+               class="btn btn-danger">
+        <input type="hidden" name="command" value="logout">
+    </form>
+
 </nav>
+
 
 <body>
