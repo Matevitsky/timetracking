@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/jsp/user/i18n.jsp" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -51,30 +53,50 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <form action="/app" method="get">
-                <input type="submit" value="Activity Requests" class="btn btn-secondary btn-lg"/>
+                <input type="submit" value="<fmt:message bundle="${common}" key="activity.requests"/>"
+                       class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="admin_activity_requests">
 
             </form>
 
             <form action="/app" method="get">
 
-                <input type="submit" name="submit" value="Finished Activity" class="btn btn-secondary btn-lg"/>
+                <input type="submit" value="<fmt:message bundle="${common}" key="finished.activities"/>"
+                       class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="admin_get_finished_activities">
             </form>
 
             <form action="/app" method="get">
 
-                <input type="submit" name="submit" value="Main Page" class="btn btn-secondary btn-lg"/>
+                <input type="submit" value="<fmt:message bundle="${common}" key="main.page"/>"
+                       class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="admin_main_page">
             </form>
-
-            <form action="/app" method="get" class="nav navbar-nav navbar-right">
-
-                <input type="submit" name="submit" value="Logout" class="btn btn-danger"/>
-                <input type="hidden" name="command" value="logout">
-            </form>
-
         </ul>
+
+        <form action="/app" method="POST">
+            <input type="hidden" name="command" value="change_locale">
+            <input type="hidden" name="uri" value="${pageContext.request.requestURI}">
+            <select class="selectpicker picker" data-size="3" data-style="btn-info" style="width: 60%" name="locale"
+                    onchange="submit()">
+                <option data-content='<span class="flag-icon flag-icon-us"></span> ENGLISH'
+                        value="en-US" ${locale == 'en-US' ? 'selected' : ''}><fmt:message bundle="${common}"
+                                                                                          key="language.en"/></option>
+
+                <option data-content='<span class="flag-icon flag-icon-ru"></span> RUSSIAN'
+                        value="ru-RU" ${locale == 'ru-RU' ? 'selected' : ''}><fmt:message bundle="${common}"
+                                                                                          key="language.ru"/></option>
+            </select>
+        </form>
+
+
+        <form action="/app" method="get" class="nav navbar-nav">
+
+            <input type="submit" name="logout" value="<fmt:message bundle="${common}" key="log.out"/>"
+                   class="btn btn-danger">
+            <input type="hidden" name="command" value="logout">
+        </form>
+
     </div>
 
 </nav>
