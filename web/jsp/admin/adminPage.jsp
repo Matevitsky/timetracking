@@ -10,20 +10,23 @@
     <form id="contact" action="/app" method="get">
         <input type="hidden" name="command" value="admin_create_new_activity">
 
-        <h3>Create activity</h3>
+        <h3><fmt:message bundle="${common}" key="create.activity"/></h3>
         <fieldset>
-            <input name="title" input placeholder="Title" type="text" tabindex="Title" required autofocus>
+            <input name="title" input placeholder=
+            <fmt:message bundle="${common}" key="title"/> type="text" tabindex="Title" required autofocus>
 
         </fieldset>
 
         <fieldset>
-            <input name="description" textarea placeholder="Type activity description." tabindex="Description"
+            <input name="description" textarea
+                   placeholder=<fmt:message bundle="${common}" key="type.activity.description"/>" tabindex=" Description"
                    required></inputtextarea>
 
         </fieldset>
 
         <fieldset>
-            <button name="submit" type="submit" id="contact-submit" class="btn btn-secondary btn-lg">Create activity
+            <button name="submit" type="submit" id="contact-submit" class="btn btn-secondary btn-lg">
+                <fmt:message bundle="${common}" key="create.activity"/>
             </button>
         </fieldset>
 
@@ -34,9 +37,9 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th class="th-sm">Title</th>
-        <th class="th-sm">Content</th>
-        <th class="th-sm">Duration</th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="title"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="description"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="time"/></th>
 
     </tr>
 
@@ -64,9 +67,9 @@
 
     <tfoot>
     <tr>
-        <th class="th-sm">Title</th>
-        <th class="th-sm">Content</th>
-        <th class="th-sm">Duration</th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="title"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="description"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="time"/></th>
     </tr>
     </tfoot>
 </table>

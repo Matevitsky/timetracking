@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/jsp/user/i18n.jsp" %>
 
 <html>
 <head>
@@ -14,6 +15,7 @@
 </head>
 <body>
 
+
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -21,10 +23,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="login-form-link">Login</a>
+                            <a href="#" class="active" id="login-form-link">Login/Вход</a>
                         </div>
                         <div class="col-xs-6">
-                            <a href="#" id="register-form-link">Register</a>
+                            <a href="#" id="register-form-link">Register/Регистрация</a>
 
                         </div>
                     </div>
@@ -46,13 +48,14 @@
                                 </div>
                                 <div class="form-group text-center">
                                     <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-                                    <label for="remember"> Remember Me</label>
+                                    <label for="remember"> Remember Me/Запомнить</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
                                             <input type="submit" name="login-submit" id="login-submit" tabindex="4"
-                                                   class="btn btn-primary btn-lg btn-block" value="Log In" disabled>
+                                                   class="btn btn-primary btn-lg btn-block" value="Log In/Войти"
+                                                   disabled>
                                         </div>
                                     </div>
                                 </div>
