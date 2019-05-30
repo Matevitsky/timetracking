@@ -8,27 +8,12 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Stream;
 
 
 @WebFilter(filterName = "ErrorFilter", urlPatterns = "/*")
 public class ErrorFilter implements Filter {
-    private final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-            Arrays.asList(
-                    "/",
-                    "/app",
-                    "/jsp/loginPage.jsp",
-                    "/css/error.css",
-                    "/jsp/loginPage.jsp",
-                    "/js/loginEmailValidation.js",
-                    "/js/registrationEmailValidation.js",
-                    "/jsp/error.jsp",
-                    "/js",
-                    "/css")));
+
     private Logger LOGGER = Logger.getLogger(ErrorFilter.class);
 
     @Override
