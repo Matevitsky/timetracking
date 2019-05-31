@@ -5,15 +5,23 @@ import com.matevitsky.controller.constant.PageConstant;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
-//@WebFilter(filterName = "AuthenticationFilter")
+@WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 
     private final static Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
+    private final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
+            Arrays.asList(
+                    "/app")));
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -25,18 +33,18 @@ public class AuthenticationFilter implements Filter {
         LOGGER.debug(uri);
 
 
-        if (request.getAttribute("role") == null) {
-            if (request.getAttribute("command") == "error") {
-                response.sendRedirect(PageConstant.ERROR_PAGE);
-            } else {
-                response.sendRedirect(PageConstant.LOGIN_PAGE);
-            }
+        if (uri.equals("/")) {
+            response.sendRedirect(PageConstant.LOGIN_PAGE);
+
         } else {
-            filterChain.doFilter(request, response);
+            if (ALLOWED_PATHS.contains(uri)) {
+                filterChain.doFilter(request, response);
+            } else {
+                response.sendRedirect(PageConstant.ERROR_PAGE);
+            }
         }
 
     }
-
 }
 
 

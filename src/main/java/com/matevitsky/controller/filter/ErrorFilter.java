@@ -1,19 +1,33 @@
 package com.matevitsky.controller.filter;
 
-import com.matevitsky.controller.constant.PageConstant;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
-@WebFilter(filterName = "ErrorFilter")
+//@WebFilter(filterName = "ErrorFilter")
 public class ErrorFilter implements Filter {
 
     private Logger LOGGER = Logger.getLogger(ErrorFilter.class);
+    private final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
+            Arrays.asList(
+                    "/app"
+                    /*"/jsp/loginPage.jsp",
+                    "/css/error.css",
+                    "/jsp/loginPage.jsp",
+                    "/js/loginEmailValidation.js",
+                    "/js/registrationEmailValidation.js",
+                    "/jsp/error.jsp",
+                    "/js",
+                    "/css"*/)));
+
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
@@ -22,23 +36,12 @@ public class ErrorFilter implements Filter {
 
         String uri = request.getRequestURI();
         LOGGER.debug(uri);
-        if (uri.equals("/")) {
+
+       /* if (uri.equals("/")) {
             response.sendRedirect(PageConstant.LOGIN_PAGE);
-        }
-
-       /* String[] allowPath = {"/jsp", "/css", "/js"};
-
-        if (uri.equals("/") || uri.equals("/app")) {
-            chain.doFilter(request, response);
-        } else {
-            if (Stream.of(allowPath)
-                    .anyMatch(uri::startsWith)) {
-                chain.doFilter(request, response);
-            } else {
-                //request.setAttribute("command", "error");
-                //request.getRequestDispatcher("/app").forward(request, response);
-                response.sendRedirect(PageConstant.ERROR_PAGE);
-            }
+        } else if(!ALLOWED_PATHS.contains(uri)){
+            response.sendRedirect(PageConstant.ERROR_PAGE);
         }*/
     }
 }
+
