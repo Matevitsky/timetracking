@@ -46,6 +46,9 @@
                                     <input type="password" name="password" id="password" tabindex="2"
                                            class="form-control" placeholder="Password">
                                 </div>
+
+                                <font color="red"><c:out value="${error}"/></font>
+
                                 <div class="form-group text-center">
                                     <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
                                     <label for="remember"> Remember Me/Запомнить</label>
@@ -111,6 +114,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <script> $(function () {

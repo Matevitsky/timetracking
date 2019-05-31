@@ -145,7 +145,6 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         } catch (SQLException e) {
             LOGGER.error("Failed to get entity from database " + e.getMessage());
 
-            System.out.println(e.getMessage());
         }
         return Optional.ofNullable(user);
 

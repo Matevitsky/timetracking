@@ -52,7 +52,7 @@ public class Main {
         activityService.insertActivity(activity1);
         activityService.insertActivity(activity2);
 
-        System.out.println(MD5Util.encryptPassword("user"));
+        System.out.println(MD5Util.encryptPassword("admin"));
 
         //   activityService.deleteActivity(new Activity(2, "Title2", "Hello World", 1, 0));
 

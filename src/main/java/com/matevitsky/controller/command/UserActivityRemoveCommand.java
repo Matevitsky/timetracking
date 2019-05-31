@@ -4,10 +4,8 @@ import com.matevitsky.entity.Activity;
 import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.impl.ActivityServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +16,7 @@ public class UserActivityRemoveCommand implements Command {
     ActivityService activityService = new ActivityServiceImpl();
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String activityId = request.getParameter("id");
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         Integer duration = Integer.parseInt(request.getParameter("duration"));

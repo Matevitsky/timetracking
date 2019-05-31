@@ -33,6 +33,7 @@ public class MainController extends HttpServlet {
         LOGGER.debug("Method processRequest " + request.getRequestURI());
         ActionFactory client = new ActionFactory();
         Command command = client.defineCommand(request);
+
         String goTo = command.execute(request, response);
         if (goTo != null) {
             request.getRequestDispatcher(goTo).forward(request, response);

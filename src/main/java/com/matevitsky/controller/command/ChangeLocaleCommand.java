@@ -6,10 +6,8 @@ import com.matevitsky.service.ResourceManager;
 import com.matevitsky.service.impl.ActivityServiceImpl;
 import org.apache.log4j.Logger;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,7 +16,7 @@ public class ChangeLocaleCommand implements Command {
 
     ActivityService activityService = new ActivityServiceImpl();
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
 
         String locale = request.getParameter("locale");
         ResourceManager.INSTANCE.changeResource(Locale.forLanguageTag(locale));

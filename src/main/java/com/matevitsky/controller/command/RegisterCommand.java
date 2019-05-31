@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Optional;
 
 import static com.matevitsky.controller.constant.PageConstant.LOGIN_PAGE;
 import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
@@ -48,10 +47,11 @@ public class RegisterCommand implements Command {
                     .withRole(new Role(1))
                     .withPassword(encryptedPass).build();
             if (userService.insertUser(user)) {
-                Optional<User> userByEmail = userService.findUserByEmail(email);
-                if (userByEmail.isPresent()) {
+                User userByEmail = userService.findUserByEmail(email);
 
-                    Integer userId = userByEmail.get().getId();
+                if (userByEmail != null) {
+
+                    Integer userId = userByEmail.getId();
                     request.getSession().setAttribute("userId", userId);
 
                     request.setAttribute("userId", userId);

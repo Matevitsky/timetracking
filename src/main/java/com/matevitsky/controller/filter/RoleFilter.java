@@ -4,12 +4,13 @@ import com.matevitsky.controller.constant.PageConstant;
 import org.apache.log4j.Logger;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-//@WebFilter(filterName = "RoleFilter")
+@WebFilter(filterName = "RoleFilter")
 public class RoleFilter implements Filter {
 
     private final static Logger LOGGER = Logger.getLogger(RoleFilter.class);
@@ -25,27 +26,24 @@ public class RoleFilter implements Filter {
 
         String role = (String) req.getSession().getAttribute("role");
 
-        if (role != null) {
+        if (!command.equals("login")) {
             if (role.equals("User")) {
-                if (command.contains("user")) {
+                if (command.contains("user") || command.contains("change_locale") || command.contains("logout")) {
                     chain.doFilter(req, response);
                 } else {
                     resp.sendRedirect(PageConstant.LOGIN_PAGE);
                 }
 
             } else if (role.equals("Admin")) {
-                if (command.contains("admin") || command.contains("logout")) {
+                if (command.contains("admin") || command.contains("logout") || command.contains("change_locale")) {
                     chain.doFilter(req, response);
                 } else {
                     resp.sendRedirect(PageConstant.LOGIN_PAGE);
                 }
             }
         } else {
-            if (command.contains("register") || command.contains("login")) {
-                chain.doFilter(req, response);
-            } else {
-                resp.sendRedirect(PageConstant.LOGIN_PAGE);
-            }
+            chain.doFilter(request, response);
         }
     }
 }
+
