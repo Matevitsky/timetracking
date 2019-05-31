@@ -6,16 +6,16 @@ var email = $('#emailRegistration');
 email.blur(function () {
     if (email.val() != '') {
         if (email.val().search(pattern) == 0) {
-            $('#registrationValid').text('Подходит');
+            $('#registrationValid').text('Valid');
             $('#register-submit').attr('disabled', false);
             email.removeClass('error').addClass('ok');
         } else {
-            $('#registrationValid').text('Не подходит');
+            $('#registrationValid').text('Not Valid');
             $('#register-submit').attr('disabled', true);
             email.addClass('ok');
         }
     } else {
-        $('#registrationValid').text('Поле e-loginEmail не должно быть пустым!');
+        $('#registrationValid').text('The e-mail field should not be empty');
         email.addClass('error');
         $('#register-submit').attr('disabled', true);
     }

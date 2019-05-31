@@ -1,21 +1,13 @@
 <%@include file="userHeader.jsp" %>
 <body>
-<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<table id="userTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 
     <thead>
     <tr>
-        <th class="th-sm">Title
+        <th class="th-sm"><fmt:message bundle="${common}" key="title"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="description"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="time"/></th>
 
-        </th>
-        <th class="th-sm">Content
-
-        </th>
-        <th class="th-sm">Duration
-
-        </th>
-        <th class="th-sm">Bottom
-
-        </th>
     </tr>
     </thead>
     <tbody>
@@ -26,14 +18,13 @@
             <td>
 
                 <form action="/app" method="get">
-                    <input name="duration" input placeholder="Duration" type="text" tabindex="duration" required
+                    <input name="duration" input placeholder=
+                        <fmt:message bundle="${common}" key="time"/> type="text" tabindex="duration" required
                            autofocus>
                     <input type="hidden" name="command" value="user_activity_remove_request">
                     <input type="hidden" name="id" value="${activity.id}"/>
                     <input type="submit" value="Remove" name="remove">
                 </form>
-            </td>
-            <td>
 
             </td>
         </tr>
@@ -43,20 +34,16 @@
 
     <tfoot>
     <tr>
-        <th>Title
-        </th>
-        <th>Content
-        </th>
-        <th>Duration
-        </th>
-        <th>Bottom
-        </th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="title"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="description"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="time"/></th>
+
     </tr>
     </tfoot>
 </table>
+
 <!-- SCRIPTS -->
-<!-- JQuery -->
-<script type="text/javascript" src="js/jquery-3.4.0.min.js"></script>
+
 <!-- Bootstrap tooltips -->
 <script type="text/javascript" src="js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
@@ -64,13 +51,23 @@
 <!-- MDB core JavaScript -->
 <script type="text/javascript" src="js/mdb.min.js"></script>
 
-<!-- MDBootstrap Datatables  -->
-<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+<script>
+    $(".dropdown-menu li a").click(function () {
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    });
+</script>
 
 <script>$(document).ready(function () {
-    $('#dtBasicExample').DataTable();
+    $('#userTable').DataTable();
     $('.dataTables_length').addClass('bs-select');
 });</script>
+
+
+<!-- MDBootstrap Datatables -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+
+
 </body>
 
 </html>
