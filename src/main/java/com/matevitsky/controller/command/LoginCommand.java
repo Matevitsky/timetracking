@@ -36,7 +36,6 @@ public class LoginCommand implements Command {
             request.setAttribute("error", "password is empty");
             return LOGIN_PAGE;
         }
-
         try {
             user = userService.findUserByEmail(email);
             String encryptedPassword = MD5Util.encryptPassword(password);

@@ -28,7 +28,7 @@ public class ActivityRequestServiceImpl implements ActivityRequestService {
     @Override
     public boolean deleteActivityRequest(Integer id) {
         LOGGER.debug("Method deleteActivityRequest with Id " + id + " started");
-        return activityRequestRepository.delete(id);
+        return activityRequestRepository.deleteById(id);
     }
 
     @Override

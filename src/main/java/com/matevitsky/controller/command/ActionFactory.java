@@ -1,8 +1,13 @@
 package com.matevitsky.controller.command;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class ActionFactory {
+
+    private static final Logger LOGGER = Logger.getLogger(ActionFactory.class);
+
     public Command defineCommand(HttpServletRequest request) {
         Command current = null;
         String action = request.getParameter("command");
@@ -13,8 +18,9 @@ public class ActionFactory {
             CommandList command = CommandList.valueOf(action.toUpperCase());
             current = command.getCommand();
         } catch (IllegalArgumentException e) {
-            //TODO: написать логер
-            return current = new ErrorCommand();
+
+            LOGGER.warn("The command does not exist");
+            return new ErrorCommand();
         }
         return current;
     }

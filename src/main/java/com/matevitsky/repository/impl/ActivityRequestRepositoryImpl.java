@@ -5,8 +5,6 @@ import com.matevitsky.entity.ActivityRequest;
 import com.matevitsky.repository.interfaces.ActivityRequestRepository;
 import org.apache.log4j.Logger;
 
-import javax.sql.RowSet;
-import javax.sql.rowset.CachedRowSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +23,6 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
     private static Logger LOGGER = Logger.getLogger(ActivityRequestRepositoryImpl.class);
 
 
-
     @Override
     public boolean create(ActivityRequest activityRequest) {
         LOGGER.debug("Method create activityRequest with UserId " + activityRequest.getUserId());
@@ -37,7 +34,7 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean deleteById(Integer id) {
         LOGGER.debug("Method delete request with UserId " + id);
         String query = String.format(DELETE_REQUEST_SQL, id);
         return deleteEntity(query);
@@ -56,24 +53,19 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
     }
 
 
-    //TODO: подумать как назвать метод. лучше воспользоваться готовым
     public List<ActivityRequest> getByUserId(Integer id) {
         LOGGER.debug("Method  getRequestById " + id + " started");
+
         List<ActivityRequest> activityRequestList = new ArrayList<>();
         String query = String.format(SELECT_REQUEST_ID, id);
-        Optional<CachedRowSet> entity = getEntity(id, query);
-        CachedRowSet resultSet = entity.isPresent() ? entity.get() : null;
-        try {
-            while (resultSet.next()) {
-                Integer requestId = resultSet.getInt("ID");
-                Integer userId = resultSet.getInt("UserId");
-                ActivityRequest activityRequest = new ActivityRequest(requestId, userId);
-                activityRequestList.add(activityRequest);
-            }
-        } catch (SQLException e) {
-            LOGGER.warn(e.fillInStackTrace().getMessage());
-        }
 
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            activityRequestList = mapToList(resultSet);
+
+        } catch (SQLException e) {
+            LOGGER.error("Failed to get entity from database " + e.getMessage());
+        }
 
         return activityRequestList;
 
@@ -81,28 +73,32 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
 
     @Override
     public List<ActivityRequest> getAll() {
-        List<ActivityRequest> activityRequestsList = new ArrayList<>();
-
         LOGGER.debug("Method getAll Activities requests started ");
 
-        RowSet rows = null;
+        Optional<List<ActivityRequest>> all = getAll(SELECT_ALL_REQUESTS);
+        if (all.isPresent()) {
+            return all.get();
+        }
+        LOGGER.debug("Method getAll returned empty list ");
+        return null;
+    }
 
-        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REQUESTS)) {
+    @Override
+    protected List<ActivityRequest> mapToList(ResultSet resultSet) throws SQLException {
+        List<ActivityRequest> activityRequestsList = new ArrayList<>();
+        while (resultSet.next()) {
+            Integer requestId = resultSet.getInt("ID");
+            Integer userId = resultSet.getInt("UserId");
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ActivityRequest activityRequest = new ActivityRequest(requestId, userId);
+            activityRequestsList.add(activityRequest);
 
-
-            while (resultSet.next()) {
-                Integer requestId = resultSet.getInt("ID");
-                Integer userId = resultSet.getInt("UserId");
-
-                ActivityRequest activityRequest = new ActivityRequest(requestId, userId);
-                activityRequestsList.add(activityRequest);
-
-            }
-        } catch (SQLException e) {
-            LOGGER.warn("Failed to get Requests error:" + e.getMessage());
         }
         return activityRequestsList;
+    }
+
+    @Override
+    protected ActivityRequest mapToObject(ResultSet rs) throws SQLException {
+        return null;
     }
 }

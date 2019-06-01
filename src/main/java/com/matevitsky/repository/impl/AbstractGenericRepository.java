@@ -2,14 +2,13 @@ package com.matevitsky.repository.impl;
 
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.repository.interfaces.GenericRepository;
-import com.sun.rowset.CachedRowSetImpl;
 import org.apache.log4j.Logger;
 
-import javax.sql.rowset.CachedRowSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class AbstractGenericRepository<E> implements GenericRepository<E> {
@@ -17,43 +16,33 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     private static Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
 
 
-
     boolean createEntity(E entity, String query) {
         LOGGER.debug("createEntity" + entity.toString() + " Query = " + query);
         boolean resultOfCreation = false;
         try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            int affectedRows = preparedStatement.executeUpdate();
-            if (affectedRows == 0) {
+            if (preparedStatement.executeUpdate() == 0) {
                 LOGGER.warn("Creating entity failed, no rows affected.");
-
+                resultOfCreation = false;
             } else {
                 resultOfCreation = true;
             }
-
         } catch (SQLException e) {
             LOGGER.error("Failed to add entity to database " + e.getMessage());
         }
-        //TODO: подумать что вернуть в случае null почитать про статус код и перезти юзера на нужную странучку сдеалть заглушку на все случаи жизни
         return resultOfCreation;
     }
 
-    protected Optional<CachedRowSet> getEntity(Integer id, String query) {
+    protected Optional<E> getById(Integer id, String query) {
         LOGGER.debug("getById with id " + id + " Query = " + query);
 
-        //TODO: заменить casherowset
-
-        CachedRowSet rows = null;
         try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            ResultSet resultSet = preparedStatement.executeQuery(query);
-            rows = new CachedRowSetImpl();
-            rows.populate(resultSet);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return Optional.ofNullable(mapToObject(resultSet));
 
         } catch (SQLException e) {
             LOGGER.error("Failed to get entity from database " + e.getMessage());
         }
-        return Optional.ofNullable(rows);
+        return Optional.empty();
     }
 
     protected boolean deleteEntity(String query) {
@@ -89,18 +78,21 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     }
 
 
-    protected CachedRowSet getAll(String query) {
+    public Optional<List<E>> getAll(String query) {
         LOGGER.debug("getAllEntity " + " Query = " + query);
-        CachedRowSet allEntity = null;
+        List<E> listOfObjects = null;
         try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery(query);
-            allEntity = new CachedRowSetImpl();
-            allEntity.populate(resultSet);
+            listOfObjects = mapToList(resultSet);
         } catch (SQLException e) {
             LOGGER.error("update" + e.getMessage());
         }
-        return allEntity;
+        return Optional.ofNullable(listOfObjects);
     }
+
+    protected abstract List<E> mapToList(ResultSet rs) throws SQLException;
+
+    protected abstract E mapToObject(ResultSet rs) throws SQLException;
 
 }
 

@@ -27,7 +27,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public boolean deleteActivity(Integer activityId) {
-        return activityRepository.delete(activityId);
+        return activityRepository.deleteById(activityId);
     }
 
     @Override

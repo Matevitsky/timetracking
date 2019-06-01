@@ -63,6 +63,9 @@ public class Main {
         // System.out.println( userRepositoryImplDataBase.deleteUser(new User(1,"Sergey","12345")));
         // System.out.println(userRepositoryImplDataBase.getAllUsers());
 
+        UserRepositoryImpl userRepository = new UserRepositoryImpl();
+        userRepository.create(null);
+
 
         //TODO: продумать логику на случай попытки регистрации с существующим loginEmail
         //TODO: валидация данных на входе

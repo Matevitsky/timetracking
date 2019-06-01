@@ -14,6 +14,12 @@
         <url-pattern>/app/*</url-pattern>
     </filter-mapping>
 
+    <!--  <filter-mapping>
+          <filter-name>LoginFilter</filter-name>
+          <url-pattern>/</url-pattern>
+          <url-pattern>/app/*</url-pattern>
+      </filter-mapping>-->
+
     <filter-mapping>
         <filter-name>RoleFilter</filter-name>
         <url-pattern>/app</url-pattern>

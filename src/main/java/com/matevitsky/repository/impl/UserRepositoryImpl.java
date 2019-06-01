@@ -9,7 +9,6 @@ import com.matevitsky.repository.interfaces.RoleRepository;
 import com.matevitsky.repository.interfaces.UserRepository;
 import org.apache.log4j.Logger;
 
-import javax.sql.rowset.CachedRowSet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,6 +36,9 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     @Override
     public boolean create(User user) {
         LOGGER.debug("Method create started, for user with Email " + user.getEmail());
+        if (user == null) {
+            return false;
+        }
         String query = String.format(INSERT_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole().getId());
         return createEntity(user, query);
 
@@ -45,37 +47,19 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     @Override
     public Optional<User> getById(Integer id) {
         // LOGGER.debug("Method getById started, for id " + id);
+
         User user = null;
         String query = String.format(SELECT_USER_BY_ID, id);
-        Optional<CachedRowSet> entity = getEntity(id, query);
-        CachedRowSet cachedRowSet = entity.isPresent() ? entity.get() : null;
-        try {
-            while (cachedRowSet.next()) {
-                Integer userId = cachedRowSet.getInt(1);
-                String userName = cachedRowSet.getString(2);
-                String userEmail = cachedRowSet.getString(3);
-                String userPassword = cachedRowSet.getString(4);
-                String roleId = cachedRowSet.getString(5);
-                Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
-
-                user = User.newBuilder().withId(userId)
-                        .withName(userName)
-                        .withEmail(userEmail)
-                        .withPassword(userPassword)
-                        .withRole(role).build();
-
-
-            }
-
-        } catch (SQLException e) {
-            LOGGER.warn(e.fillInStackTrace().getMessage());
+        Optional<User> userById = getById(id, query);
+        if (userById.isPresent()) {
+            user = userById.get();
         }
+
         return Optional.ofNullable(user);
     }
 
-
     @Override
-    public boolean delete(Integer userId) {
+    public boolean deleteById(Integer userId) {
         boolean result = false;
         String query = String.format(DELETE_USERS_SQL, userId);
         if (deleteEntity(query)) {
@@ -92,24 +76,42 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
     @Override
     public List<User> getAll() {
-        List<User> allUserList = new ArrayList<>();
-        CachedRowSet allUsers = getAll(SELECT_ALL_USERS);
-        try {
-            while (allUsers.next()) {
-                int id = allUsers.getInt("ID");
-                String userName = allUsers.getString("Name");
-                String userEmail = allUsers.getString("Email");
-                String userPassword = allUsers.getString("Password");
-                String roleId = allUsers.getString("Role");
-                Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
 
-                User user = User.newBuilder()
-                        .withId(id)
-                        .withName(userName)
-                        .withEmail(userEmail)
-                        .withPassword(userPassword)
-                        .withRole(role)
-                        .build();
+        Optional<List<User>> userList = getAll(SELECT_ALL_USERS);
+
+        if (userList.isPresent()) {
+            return userList.get();
+        } else {
+            LOGGER.warn("GetAll method return empty List");
+        }
+
+        return null;
+    }
+
+    public Optional<User> findUserByEmail(String email) throws ErrorException {
+        LOGGER.debug("findUserByEmail with loginEmail " + email);
+        String query = String.format(SELECT_USER_BY_EMAIL, email);
+        User user;
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            user = mapToObject(resultSet);
+
+        } catch (SQLException e) {
+            LOGGER.error("Failed to get entity from database " + e.getMessage());
+            throw new ErrorException("email " + email + "not exist, please signup first");
+        }
+        return Optional.ofNullable(user);
+
+    }
+
+    @Override
+    protected List<User> mapToList(ResultSet resultSet) throws SQLException {
+        List<User> allUserList = new ArrayList<>();
+        User user;
+        try {
+            while (resultSet.next()) {
+                user = getUser(resultSet);
                 allUserList.add(user);
             }
         } catch (SQLException e) {
@@ -118,36 +120,37 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         return allUserList;
     }
 
-    public Optional<User> findUserByEmail(String email) throws ErrorException {
-        LOGGER.debug("findUserByEmail with loginEmail " + email);
-        String query = String.format(SELECT_USER_BY_EMAIL, email);
+
+    @Override
+    protected User mapToObject(ResultSet resultSet) throws SQLException {
         User user = null;
-        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            ResultSet resultSet = preparedStatement.executeQuery(query);
+        try {
             resultSet.next();
-
-            //TODO: делать запрос по имени колонки
-            Integer userId = resultSet.getInt(1);
-            String userName = resultSet.getString(2);
-            String userEmail = resultSet.getString(3);
-            String userPassword = resultSet.getString(4);
-            String roleId = resultSet.getString(5);
-            Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
-            user = User.newBuilder().withId(userId)
-                    .withName(userName)
-                    .withEmail(userEmail)
-                    .withPassword(userPassword)
-                    .withRole(role).build();
-
+            user = getUser(resultSet);
 
         } catch (SQLException e) {
-            LOGGER.error("Failed to get entity from database " + e.getMessage());
-            throw new ErrorException("email " + email + "not exist, please signup first");
-
+            LOGGER.warn("Failed to map User entity to Object");
         }
-        return Optional.ofNullable(user);
+        return user;
+    }
 
+    private User getUser(ResultSet resultSet) throws SQLException {
+        User user;
+        int id = resultSet.getInt("ID");
+        String userName = resultSet.getString("Name");
+        String userEmail = resultSet.getString("Email");
+        String userPassword = resultSet.getString("Password");
+        String roleId = resultSet.getString("Role");
+        Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
+
+        user = User.newBuilder()
+                .withId(id)
+                .withName(userName)
+                .withEmail(userEmail)
+                .withPassword(userPassword)
+                .withRole(role)
+                .build();
+        return user;
     }
 }
 

@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(Integer userId) {
-        return userRepository.delete(userId);
+        return userRepository.deleteById(userId);
 
     }
 
