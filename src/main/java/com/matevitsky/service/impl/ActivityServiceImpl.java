@@ -11,7 +11,11 @@ import java.util.Optional;
 
 public class ActivityServiceImpl implements ActivityService {
 
-    ActivityRepository activityRepository = new ActivityRepositoryImpl();
+    private final ActivityRepository activityRepository;
+
+    public ActivityServiceImpl(ActivityRepositoryImpl activityRepository) {
+        this.activityRepository = activityRepository;
+    }
 
     @Override
     public Activity insertActivity(Activity activity) {

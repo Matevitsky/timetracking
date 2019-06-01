@@ -2,10 +2,7 @@ package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
-import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
-import com.matevitsky.service.impl.ActivityServiceImpl;
-import com.matevitsky.service.impl.UserServiceImpl;
 import com.matevitsky.util.MD5Util;
 import org.apache.log4j.Logger;
 
@@ -19,8 +16,12 @@ public class RegisterCommand implements Command {
 
     private static Logger LOGGER = Logger.getLogger(RegisterCommand.class);
 
-    private UserService userService = new UserServiceImpl();
-    private ActivityService activityService = new ActivityServiceImpl();
+    private final UserService userService;
+
+    public RegisterCommand(UserService userService) {
+        this.userService = userService;
+    }
+
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

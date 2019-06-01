@@ -2,7 +2,6 @@ package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.service.ActivityService;
-import com.matevitsky.service.impl.ActivityServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +12,11 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 
 public class UserActivityRemoveCommand implements Command {
 
-    ActivityService activityService = new ActivityServiceImpl();
+    private final ActivityService activityService;
+
+    public UserActivityRemoveCommand(ActivityService activityService) {
+        this.activityService = activityService;
+    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -40,7 +43,6 @@ public class UserActivityRemoveCommand implements Command {
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("activityList", assignedActivityList);
         request.setAttribute("userId", userId);
-        //   request.getRequestDispatcher("jsp/userPage.jsp").forward(request, response);
         return USER_PAGE;
     }
 }

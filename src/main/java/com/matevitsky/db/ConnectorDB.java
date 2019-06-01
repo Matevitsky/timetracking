@@ -27,6 +27,7 @@ public final class ConnectorDB {
         ds.setMaxIdle(10);
         ds.setMaxOpenPreparedStatements(poolSize);
         //TODO:сделать конструктор с параметром чтобы имя пропертей с которых считывать данные
+        //TODO: в константы переменные
 
         return ds.getConnection();
     }

@@ -3,8 +3,6 @@ package com.matevitsky.controller.command;
 import com.matevitsky.entity.Activity;
 import com.matevitsky.service.ActivityRequestService;
 import com.matevitsky.service.ActivityService;
-import com.matevitsky.service.impl.ActivityRequestServiceImpl;
-import com.matevitsky.service.impl.ActivityServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,10 +12,13 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 
 public class UserRequestActivityCommand implements Command {
 
+    private final ActivityService activityService;
+    private final ActivityRequestService activityRequestService;
 
-    ActivityRequestService activityRequestService = new ActivityRequestServiceImpl();
-
-    ActivityService activityService = new ActivityServiceImpl();
+    public UserRequestActivityCommand(ActivityService activityService, ActivityRequestService activityRequestService) {
+        this.activityService = activityService;
+        this.activityRequestService = activityRequestService;
+    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -32,7 +33,7 @@ public class UserRequestActivityCommand implements Command {
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("activityList", activityListByUserId);
         request.setAttribute("userId", userId);
-        //   request.getRequestDispatcher("jsp/userPage.jsp").forward(request, response);
+
 
         return USER_PAGE;
     }

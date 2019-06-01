@@ -19,9 +19,9 @@ import java.util.Set;
 public class AuthenticationFilter implements Filter {
 
     private final static Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
-    private final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-            Arrays.asList(
-                    "/app")));
+    private final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("/app")));
+
+    //TODO: уменьшить коллекцию
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {

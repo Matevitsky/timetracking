@@ -4,8 +4,6 @@ import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.db.DbInitScriptRunner;
 import com.matevitsky.entity.Activity;
 import com.matevitsky.repository.impl.UserRepositoryImpl;
-import com.matevitsky.service.ActivityService;
-import com.matevitsky.service.impl.ActivityServiceImpl;
 import com.matevitsky.util.MD5Util;
 
 import java.io.File;
@@ -31,7 +29,7 @@ public class Main {
         //  System.out.println(userService.updateUser(new User(5, "Matevitsky123", "Sergey.m23@gmail.com", "11111", Role.ADMIN)));
         //System.out.println(userService.getAll());
 
-        ActivityService activityService = new ActivityServiceImpl();
+
         Activity activity1 = Activity.newBuilder().withId(5)
                 .withTittle("Tittle2")
                 .withDescription("hello")
@@ -49,8 +47,6 @@ public class Main {
 
         System.out.println(activity2.getStatus());
 
-        activityService.insertActivity(activity1);
-        activityService.insertActivity(activity2);
 
         System.out.println(MD5Util.encryptPassword("admin"));
 

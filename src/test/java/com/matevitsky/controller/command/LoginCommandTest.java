@@ -1,13 +1,18 @@
 package com.matevitsky.controller.command;
 
 import com.matevitsky.controller.constant.PageConstant;
+import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
+import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
+import com.matevitsky.util.MD5Util;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.mockito.Mock;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,15 +22,16 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mock;
 
-@RunWith(JUnit4.class)
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(MD5Util.class)
 public class LoginCommandTest {
 
     @Mock
     private UserService userService;
+    private ActivityService activityService;
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;
-
 
     @Before
     public void init() {
@@ -33,7 +39,8 @@ public class LoginCommandTest {
         response = mock(HttpServletResponse.class);
         session = mock(HttpSession.class);
         userService = mock(UserService.class);
-
+        activityService = mock(ActivityService.class);
+        PowerMockito.mockStatic(MD5Util.class);
 
     }
 
@@ -41,8 +48,7 @@ public class LoginCommandTest {
     public void shouldReturnLoginPage() {
 
         when(request.getParameter("email")).thenReturn("");
-
-        LoginCommand loginCommand = new LoginCommand();
+        LoginCommand loginCommand = new LoginCommand(userService, activityService);
         String actual = loginCommand.execute(request, response);
 
         String expected = PageConstant.LOGIN_PAGE;
@@ -54,11 +60,11 @@ public class LoginCommandTest {
         when(request.getParameter("email")).thenReturn("admin@gmail.com");
         when(request.getParameter("password")).thenReturn("admin");
         when(request.getSession()).thenReturn(session);
-        User user = User.newBuilder().withEmail("admin@gmail.com").build();
+        User user = User.newBuilder().withEmail("admin@gmail.com").withPassword("admin").withRole(new Role(1, "Admin")).build();
         when(userService.findUserByEmail("admin@gmail.com")).thenReturn(user);
+        PowerMockito.when(MD5Util.encryptPassword("admin")).thenReturn("admin");
 
-
-        LoginCommand loginCommand = new LoginCommand();
+        LoginCommand loginCommand = new LoginCommand(userService, activityService);
         String actual = loginCommand.execute(request, response);
 
         String expected = PageConstant.ADMIN_PAGE;
@@ -70,10 +76,11 @@ public class LoginCommandTest {
         when(request.getParameter("email")).thenReturn("user@gmail.com");
         when(request.getParameter("password")).thenReturn("user");
         when(request.getSession()).thenReturn(session);
-        User user = User.newBuilder().withEmail("user@gmail.com").build();
+        User user = User.newBuilder().withEmail("user@gmail.com").withPassword("user").withRole(new Role(2, "user")).build();
         when(userService.findUserByEmail("user@gmail.com")).thenReturn(user);
+        PowerMockito.when(MD5Util.encryptPassword("user")).thenReturn("user");
 
-        LoginCommand loginCommand = new LoginCommand();
+        LoginCommand loginCommand = new LoginCommand(userService, activityService);
         String actual = loginCommand.execute(request, response);
 
         String expected = PageConstant.USER_PAGE;

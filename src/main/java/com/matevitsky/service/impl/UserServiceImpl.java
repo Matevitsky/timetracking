@@ -2,7 +2,6 @@ package com.matevitsky.service.impl;
 
 
 import com.matevitsky.entity.User;
-import com.matevitsky.repository.impl.UserRepositoryImpl;
 import com.matevitsky.repository.interfaces.UserRepository;
 import com.matevitsky.service.UserService;
 
@@ -11,8 +10,11 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
+    private final UserRepository userRepository;
 
-    UserRepository userRepository = new UserRepositoryImpl();
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
 
     @Override

@@ -2,7 +2,6 @@ package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.service.ActivityService;
-import com.matevitsky.service.impl.ActivityServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,11 @@ public class AdminRemoveActivityCommand implements Command {
 
     //TODO:  вставить логер
 
-    ActivityService activityService = new ActivityServiceImpl();
+    private final ActivityService activityService;
+
+    public AdminRemoveActivityCommand(ActivityService activityService) {
+        this.activityService = activityService;
+    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

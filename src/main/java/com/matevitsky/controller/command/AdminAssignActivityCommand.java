@@ -7,9 +7,6 @@ import com.matevitsky.entity.dto.UserForActivityRequest;
 import com.matevitsky.service.ActivityRequestService;
 import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
-import com.matevitsky.service.impl.ActivityRequestServiceImpl;
-import com.matevitsky.service.impl.ActivityServiceImpl;
-import com.matevitsky.service.impl.UserServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,10 +18,16 @@ import static com.matevitsky.controller.constant.PageConstant.ADMIN_ACTIVITY_REQ
 
 public class AdminAssignActivityCommand implements Command {
 
+    private final UserService userService;
+    private final ActivityService activityService;
+    private final ActivityRequestService activityRequestService;
 
-    ActivityService activityService = new ActivityServiceImpl();
-    ActivityRequestService activityRequestService = new ActivityRequestServiceImpl();
-    UserService userService = new UserServiceImpl();
+
+    public AdminAssignActivityCommand(UserService userService, ActivityService activityService, ActivityRequestService activityRequestService) {
+        this.userService = userService;
+        this.activityService = activityService;
+        this.activityRequestService = activityRequestService;
+    }
 
 
     @Override

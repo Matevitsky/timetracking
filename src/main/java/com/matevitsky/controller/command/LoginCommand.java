@@ -4,8 +4,6 @@ import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.User;
 import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
-import com.matevitsky.service.impl.ActivityServiceImpl;
-import com.matevitsky.service.impl.UserServiceImpl;
 import com.matevitsky.util.MD5Util;
 import com.matevitsky.util.Validation;
 import org.apache.log4j.Logger;
@@ -17,9 +15,15 @@ import java.util.List;
 import static com.matevitsky.controller.constant.PageConstant.*;
 
 public class LoginCommand implements Command {
-    UserService userService = new UserServiceImpl();
-    ActivityService activityService = new ActivityServiceImpl();
+
+    private final UserService userService;
+    private final ActivityService activityService;
     private Logger LOGGER = Logger.getLogger(LoginCommand.class);
+
+    public LoginCommand(UserService userService, ActivityService activityService) {
+        this.userService = userService;
+        this.activityService = activityService;
+    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

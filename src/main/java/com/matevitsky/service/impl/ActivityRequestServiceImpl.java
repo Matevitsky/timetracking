@@ -2,7 +2,6 @@ package com.matevitsky.service.impl;
 
 
 import com.matevitsky.entity.ActivityRequest;
-import com.matevitsky.repository.impl.ActivityRequestRepositoryImpl;
 import com.matevitsky.repository.interfaces.ActivityRequestRepository;
 import com.matevitsky.service.ActivityRequestService;
 import org.apache.log4j.Logger;
@@ -12,7 +11,11 @@ import java.util.List;
 public class ActivityRequestServiceImpl implements ActivityRequestService {
 
     private static Logger LOGGER = Logger.getLogger(ActivityRequestServiceImpl.class);
-    ActivityRequestRepository activityRequestRepository = new ActivityRequestRepositoryImpl();
+    private final ActivityRequestRepository activityRequestRepository;
+
+    public ActivityRequestServiceImpl(ActivityRequestRepository activityRequestRepository) {
+        this.activityRequestRepository = activityRequestRepository;
+    }
 
     @Override
     public boolean createActivityRequest(Integer userId) {
