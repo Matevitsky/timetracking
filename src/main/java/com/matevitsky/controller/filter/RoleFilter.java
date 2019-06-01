@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebFilter(filterName = "RoleFilter")
 public class RoleFilter implements Filter {
 
-    private final static Logger LOGGER = Logger.getLogger(RoleFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(RoleFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -22,30 +22,28 @@ public class RoleFilter implements Filter {
         String command = req.getParameter("command");
         String uri = req.getRequestURI();
         LOGGER.debug(uri);
-
-
         String role = (String) req.getSession().getAttribute("role");
 
-        if (!command.equals("login")) {
-            if (role.equals("User")) {
-                if (command.contains("user") || command.contains("change_locale") || command.contains("logout")) {
-                    chain.doFilter(req, response);
-                } else {
-                    resp.sendRedirect(PageConstant.LOGIN_PAGE);
-                }
-
-            } else if (role.equals("Admin")) {
-                if (command.contains("admin") || command.contains("logout") || command.contains("change_locale")) {
-                    chain.doFilter(req, response);
-                } else {
-                    resp.sendRedirect(PageConstant.LOGIN_PAGE);
-                }
-            }
-        } else {
+        if (!command.equals("login") && !command.equals("register")) {
             chain.doFilter(request, response);
         }
 
-        //TODO: уменшить вложенность
+        if (role.equals("User")) {
+            if (command.contains("user") || command.contains("change_locale") || command.contains("logout")) {
+                chain.doFilter(req, response);
+            } else {
+                resp.sendRedirect(PageConstant.LOGIN_PAGE);
+            }
+
+        }
+        if (role.equals("Admin")) {
+            if (command.contains("admin") || command.contains("logout") || command.contains("change_locale")) {
+                chain.doFilter(req, response);
+            } else {
+                resp.sendRedirect(PageConstant.LOGIN_PAGE);
+            }
+        }
     }
 }
+
 

@@ -2,6 +2,7 @@ package com.matevitsky.controller.command;
 
 import com.matevitsky.controller.constant.PageConstant;
 import com.matevitsky.entity.User;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.mockito.Mock;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -39,7 +41,7 @@ public class RegisterCommandTest {
     }
 
     @Test
-    public void shouldReturnUserPage() {
+    public void shouldReturnUserPage() throws ErrorException {
 
         when(request.getParameter("username")).thenReturn("user");
         when(request.getParameter("emailRegistration")).thenReturn("user@gmail.com");
@@ -48,7 +50,7 @@ public class RegisterCommandTest {
 
         when(request.getSession()).thenReturn(session);
         when(userService.insertUser(any())).thenReturn(true);
-        when(userService.findUserByEmail("user@gmail.com")).thenReturn(user);
+        when(userService.findUserByEmail("user@gmail.com")).thenReturn(Optional.ofNullable(user));
 
 
         RegisterCommand registerCommand = new RegisterCommand(userService);

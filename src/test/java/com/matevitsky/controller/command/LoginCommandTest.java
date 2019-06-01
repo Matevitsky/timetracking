@@ -3,6 +3,7 @@ package com.matevitsky.controller.command;
 import com.matevitsky.controller.constant.PageConstant;
 import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
 import com.matevitsky.util.MD5Util;
@@ -17,6 +18,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -56,12 +58,12 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void shouldReturnAdminPage() {
+    public void shouldReturnAdminPage() throws ErrorException {
         when(request.getParameter("email")).thenReturn("admin@gmail.com");
         when(request.getParameter("password")).thenReturn("admin");
         when(request.getSession()).thenReturn(session);
         User user = User.newBuilder().withEmail("admin@gmail.com").withPassword("admin").withRole(new Role(1, "Admin")).build();
-        when(userService.findUserByEmail("admin@gmail.com")).thenReturn(user);
+        when(userService.findUserByEmail("admin@gmail.com")).thenReturn(Optional.ofNullable(user));
         PowerMockito.when(MD5Util.encryptPassword("admin")).thenReturn("admin");
 
         LoginCommand loginCommand = new LoginCommand(userService, activityService);
@@ -72,12 +74,12 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void shouldReturnUserPage() {
+    public void shouldReturnUserPage() throws ErrorException {
         when(request.getParameter("email")).thenReturn("user@gmail.com");
         when(request.getParameter("password")).thenReturn("user");
         when(request.getSession()).thenReturn(session);
         User user = User.newBuilder().withEmail("user@gmail.com").withPassword("user").withRole(new Role(2, "user")).build();
-        when(userService.findUserByEmail("user@gmail.com")).thenReturn(user);
+        when(userService.findUserByEmail("user@gmail.com")).thenReturn(Optional.ofNullable(user));
         PowerMockito.when(MD5Util.encryptPassword("user")).thenReturn("user");
 
         LoginCommand loginCommand = new LoginCommand(userService, activityService);

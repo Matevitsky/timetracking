@@ -2,6 +2,7 @@ package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.entity.User;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
 import com.matevitsky.util.MD5Util;
@@ -11,6 +12,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 import static com.matevitsky.controller.constant.PageConstant.*;
 
@@ -29,29 +31,25 @@ public class LoginCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        User userByEmail = userService.findUserByEmail(email);
-
-        if (Validation.emailValidation(email) && password != null) {
-            if (userByEmail != null) {
-                User user = userByEmail;
-                String encryptedPassword = MD5Util.encryptPassword(password);
-                if (encryptedPassword.equals(user.getPassword())) {
-                    if (user.getRole().getName().equals("Admin")) {
-                        return adminPage(request, user);
-
-                    } else {
-                        return userPage(request, user);
-                    }
-                } else {
-                    LOGGER.info("The password not match to user " + user.getId());
-
-                }
-            }
-            return LOGIN_PAGE;
-        } else {
+        Optional<User> user = null;
+        if (!Validation.emailValidation(email) || password.isEmpty()) {
+            request.setAttribute("error", "password is empty");
             return LOGIN_PAGE;
         }
 
+        try {
+            user = userService.findUserByEmail(email);
+            String encryptedPassword = MD5Util.encryptPassword(password);
+            if (user.isPresent() && !user.get().getPassword().equals(encryptedPassword)) {
+                request.setAttribute("error", "wrong password");
+                return LOGIN_PAGE;
+            }
+
+        } catch (ErrorException e) {
+            request.setAttribute("error", e.getMessage());
+            return LOGIN_PAGE;
+        }
+        return user.get().getRole().getName().equals("Admin") ? adminPage(request, user.get()) : userPage(request, user.get());
     }
 
 

@@ -2,6 +2,7 @@ package com.matevitsky.service.impl;
 
 
 import com.matevitsky.entity.User;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.repository.interfaces.UserRepository;
 import com.matevitsky.service.UserService;
 
@@ -50,15 +51,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        Optional<User> userByEmail = userRepository.findUserByEmail(email);
+    public Optional<User> findUserByEmail(String email) throws ErrorException {
 
-
-        return userByEmail.isPresent() ? userByEmail.get() : null;
+        return userRepository.findUserByEmail(email);
 
     }
 
-    //:TODO boolean is login(String loginEmail, String password){
-    //TODO: validate loginEmail and password искать только по мэйлу. вытащить юзера и сравнить его пароль с тем что ввел юзер
 
 }

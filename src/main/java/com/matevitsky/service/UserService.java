@@ -2,6 +2,7 @@ package com.matevitsky.service;
 
 
 import com.matevitsky.entity.User;
+import com.matevitsky.exception.ErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,6 @@ public interface UserService {
 
     List<User> getAll();
 
-    User findUserByEmail(String email);
+    Optional<User> findUserByEmail(String email) throws ErrorException;
 
 }

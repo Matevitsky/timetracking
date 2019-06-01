@@ -4,6 +4,7 @@ package com.matevitsky.repository.impl;
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.repository.interfaces.RoleRepository;
 import com.matevitsky.repository.interfaces.UserRepository;
 import org.apache.log4j.Logger;
@@ -117,7 +118,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         return allUserList;
     }
 
-    public Optional<User> findUserByEmail(String email) {
+    public Optional<User> findUserByEmail(String email) throws ErrorException {
         LOGGER.debug("findUserByEmail with loginEmail " + email);
         String query = String.format(SELECT_USER_BY_EMAIL, email);
         User user = null;
@@ -142,6 +143,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
         } catch (SQLException e) {
             LOGGER.error("Failed to get entity from database " + e.getMessage());
+            throw new ErrorException("email " + email + "not exist, please signup first");
 
         }
         return Optional.ofNullable(user);
