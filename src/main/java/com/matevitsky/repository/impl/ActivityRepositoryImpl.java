@@ -84,7 +84,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 Integer userId = allUsersList.getInt("UserId");
                 String status = allUsersList.getString("Status");
                 activity = Activity.newBuilder().withId(activityId)
-                        .withTittle(tittle)
+                        .withTitle(tittle)
                         .withDescription(description)
                         .withDuration(duration)
                         .withUserId(userId)
@@ -112,7 +112,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 String status = allActivities.getString("Status");
 
                 Activity activity = Activity.newBuilder().withId(activityId)
-                        .withTittle(tittle)
+                        .withTitle(tittle)
                         .withDescription(description)
                         .withDuration(duration)
                         .withUserId(userId)
@@ -140,7 +140,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 Integer duration = resultSet.getInt("Duration");
                 String status = resultSet.getString("Status");
                 Activity activity = Activity.newBuilder().withId(activityId)
-                        .withTittle(tittle)
+                        .withTitle(tittle)
                         .withDescription(description)
                         .withDuration(duration)
                         .withUserId(userId)
@@ -174,7 +174,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
                 Integer duration = resultSet.getInt("Duration");
                 String activityStatus = resultSet.getString("Status");
                 Activity activity = Activity.newBuilder().withId(activityId)
-                        .withTittle(tittle)
+                        .withTitle(tittle)
                         .withDescription(description)
                         .withDuration(duration)
                         .withUserId(0)
@@ -223,7 +223,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
                 String activityStatus = resultSet.getString("Status");
                 Activity activity = Activity.newBuilder().withId(activityId)
-                        .withTittle(tittle)
+                        .withTitle(tittle)
                         .withDescription(description)
                         .withDuration(duration)
                         .withUserId(userId)

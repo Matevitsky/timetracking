@@ -31,7 +31,7 @@ public class Main {
 
 
         Activity activity1 = Activity.newBuilder().withId(5)
-                .withTittle("Tittle2")
+                .withTitle("Tittle2")
                 .withDescription("hello")
                 .withDuration(1)
                 .withUserId(0).build();
@@ -39,7 +39,7 @@ public class Main {
 
         /*  (5, "Title2", "Hello World", 1, 0);*/
         Activity activity2 = Activity.newBuilder().withId(5)
-                .withTittle("Tittle3")
+                .withTitle("Tittle3")
                 .withDescription("hello3")
                 .withDuration(1)
                 .withUserId(0)

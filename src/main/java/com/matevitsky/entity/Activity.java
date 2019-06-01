@@ -4,19 +4,28 @@ import java.util.Objects;
 
 public class Activity {
 
-    private Integer id;
-    private String title;
-    private String description;
-    private Integer duration;
-    private Integer userId;
-    private Status status;
+    private final Integer id;
+    private final String title;
+    private final String description;
+    private final Integer duration;
+    private final Integer userId;
+    private final Status status;
+
+    public Activity(Builder builder) {
+        this.id = builder.id;
+        this.title = builder.title;
+        this.description = builder.description;
+        this.duration = builder.duration;
+        this.userId = builder.userId;
+        this.status = builder.status;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
 
     public String getDescription() {
         return description;
-    }
-
-    private Activity() {
-
     }
 
     public Integer getId() {
@@ -39,55 +48,14 @@ public class Activity {
         return status;
     }
 
+
     public enum Status {
         NEW,
         ACTIVE,
         DONE
     }
 
-    public static Builder newBuilder() {
-        return new Activity().new Builder();
-    }
 
-    public class Builder {
-        private Builder() {
-
-        }
-
-        public Builder withId(Integer id) {
-            Activity.this.id = id;
-            return this;
-        }
-
-        public Builder withDescription(String description) {
-            Activity.this.description = description;
-            return this;
-        }
-
-        public Builder withTittle(String title) {
-            Activity.this.title = title;
-            return this;
-        }
-
-        public Builder withDuration(Integer duration) {
-            Activity.this.duration = duration;
-            return this;
-        }
-
-        public Builder withUserId(Integer userId) {
-            Activity.this.userId = userId;
-            return this;
-        }
-
-        public Builder withStatus(Status status) {
-            Activity.this.status = status;
-            return this;
-        }
-
-        public Activity build() {
-            return Activity.this;
-        }
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -117,5 +85,52 @@ public class Activity {
                 ", duration=" + duration +
                 ", userId=" + userId +
                 '}';
+    }
+
+    public static class Builder {
+        private Integer id;
+        private String title;
+        private String description;
+        private Integer duration;
+        private Integer userId;
+        private Status status;
+
+        private Builder() {
+
+        }
+
+        public Builder withId(Integer id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withTitle(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder withDescription(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public Builder withDuration(Integer duration) {
+            this.duration = duration;
+            return this;
+        }
+
+        public Builder withUserId(Integer userId) {
+            this.userId = userId;
+            return this;
+        }
+
+        public Builder withStatus(Status status) {
+            this.status = status;
+            return this;
+        }
+
+        public Activity build() {
+            return new Activity(this);
+        }
     }
 }

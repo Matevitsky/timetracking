@@ -44,7 +44,7 @@ public class AdminAssignActivityCommand implements Command {
         Activity assignedActivity = Activity.newBuilder().withId(activityForAssign.getId())
                 .withDescription(activityForAssign.getDescription())
                 .withDuration(activityForAssign.getDuration())
-                .withTittle(activityForAssign.getTitle())
+                .withTitle(activityForAssign.getTitle())
                 .withUserId(userId)
                 .withStatus(Activity.Status.ACTIVE).build();
         activityService.updateActivity(assignedActivity);

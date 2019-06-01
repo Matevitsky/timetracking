@@ -21,7 +21,7 @@ public class AdminCreateNewActivityCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String title = (String) request.getParameter("title");
         String description = (String) request.getParameter("description");
-        Activity activity = Activity.newBuilder().withTittle(title)
+        Activity activity = Activity.newBuilder().withTitle(title)
                 .withDescription(description)
                 .withDuration(0).build();
         activityService.insertActivity(activity);

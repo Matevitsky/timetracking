@@ -29,7 +29,7 @@ public class UserActivityRemoveCommand implements Command {
         if (activity.isPresent()) {
             Activity activityWithDuration = Activity.newBuilder()
                     .withId(activity.get().getId())
-                    .withTittle(activity.get().getTitle())
+                    .withTitle(activity.get().getTitle())
                     .withDescription(activity.get().getDescription())
                     .withDuration(duration)
                     .withStatus(Activity.Status.DONE)
