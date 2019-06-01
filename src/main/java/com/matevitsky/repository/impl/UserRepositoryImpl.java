@@ -28,7 +28,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE Email='%s'";
 
-    ConnectorDB connectorDB = new ConnectorDB();
+
     RoleRepository roleRepository = new RoleRepositoryImpl();
 
     private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
@@ -36,9 +36,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     @Override
     public boolean create(User user) {
         LOGGER.debug("Method create started, for user with Email " + user.getEmail());
-
         String query = String.format(INSERT_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole().getId());
-
         return createEntity(user, query);
 
     }
@@ -123,7 +121,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         LOGGER.debug("findUserByEmail with loginEmail " + email);
         String query = String.format(SELECT_USER_BY_EMAIL, email);
         User user = null;
-        try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             ResultSet resultSet = preparedStatement.executeQuery(query);
             resultSet.next();

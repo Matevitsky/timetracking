@@ -16,12 +16,12 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
 
     private static Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
 
-    ConnectorDB connectorDB = new ConnectorDB();
+
 
     boolean createEntity(E entity, String query) {
         LOGGER.debug("createEntity" + entity.toString() + " Query = " + query);
         boolean resultOfCreation = false;
-        try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows == 0) {
@@ -44,7 +44,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
         //TODO: заменить casherowset
 
         CachedRowSet rows = null;
-        try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             ResultSet resultSet = preparedStatement.executeQuery(query);
             rows = new CachedRowSetImpl();
@@ -59,7 +59,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     protected boolean deleteEntity(String query) {
         boolean result = true;
         LOGGER.debug("delete " + " Query = " + query);
-        try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             if (preparedStatement.executeUpdate() == 0) {
                 LOGGER.warn("DeleteEntity " + " failed ");
@@ -75,7 +75,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
 
     protected E updateEntity(E entity, String query) {
         LOGGER.debug("update with id " + entity.toString() + " Query = " + query);
-        try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             if (preparedStatement.executeUpdate() > 0) {
                 return entity;
             } else {
@@ -92,7 +92,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     protected CachedRowSet getAll(String query) {
         LOGGER.debug("getAllEntity " + " Query = " + query);
         CachedRowSet allEntity = null;
-        try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery(query);
             allEntity = new CachedRowSetImpl();
             allEntity.populate(resultSet);

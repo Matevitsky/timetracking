@@ -13,8 +13,6 @@ import com.matevitsky.service.impl.UserServiceImpl;
 public enum CommandList {
 
 
-    //TODO: вставить сервисы сюда и передавать их в команды
-
     LOGIN(new LoginCommand(context.userService, context.activityService)),
 
     REGISTER(new RegisterCommand(context.userService)),

@@ -6,15 +6,15 @@ import java.util.ResourceBundle;
 public enum ResourceManager {
     INSTANCE;
 
-    private final static String RESOURCE_NAME = "i18n/common";
+
     private ResourceBundle resourceBundle;
 
     ResourceManager() {
-        resourceBundle = ResourceBundle.getBundle(RESOURCE_NAME, Locale.getDefault());
+        resourceBundle = ResourceBundle.getBundle("i18n/common", Locale.getDefault());
     }
 
     public void changeResource(Locale locale) {
-        resourceBundle = ResourceBundle.getBundle(RESOURCE_NAME, locale);
+        resourceBundle = ResourceBundle.getBundle("i18n/common", locale);
     }
 
     public String getString(String key) {

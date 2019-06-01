@@ -6,9 +6,6 @@
         <option data-content='<span class="flag-icon flag-icon-us"></span> ENGLISH'
                 value="en-US" ${locale == 'en-US' ? 'selected' : ''}><fmt:message bundle="${common}"
                                                                                   key="language.en"/></option>
-        <option data-content='<span class="flag-icon flag-icon-ua"></span> UKRAINIAN'
-                value="uk-UA" ${locale == 'uk-UA' ? 'selected' : ''}><fmt:message bundle="${common}"
-                                                                                  key="language.ua"/></option>
         <option data-content='<span class="flag-icon flag-icon-ru"></span> RUSSIAN'
                 value="ru-RU" ${locale == 'ru-RU' ? 'selected' : ''}><fmt:message bundle="${common}"
                                                                                   key="language.ru"/></option>

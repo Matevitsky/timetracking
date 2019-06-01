@@ -23,7 +23,7 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
     private static final String SELECT_REQUEST_ID = "SELECT * FROM activityRequests WHERE UserId=%d";
 
     private static Logger LOGGER = Logger.getLogger(ActivityRequestRepositoryImpl.class);
-    ConnectorDB connectorDB = new ConnectorDB();
+
 
 
     @Override
@@ -87,7 +87,7 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
 
         RowSet rows = null;
 
-        try (Connection connection = connectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REQUESTS)) {
+        try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_REQUESTS)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

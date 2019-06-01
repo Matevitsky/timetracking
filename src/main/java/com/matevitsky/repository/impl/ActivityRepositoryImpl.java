@@ -1,6 +1,7 @@
 package com.matevitsky.repository.impl;
 
 
+import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.Activity;
 import com.matevitsky.repository.interfaces.ActivityRepository;
 import org.apache.log4j.Logger;
@@ -129,7 +130,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
         LOGGER.debug("Method getActivityListByUserId started ");
         String query = String.format(SELECT_ACTIVITY_BY_USER_ID, userId);
         List<Activity> activityList = new ArrayList<>();
-        try (Connection connection = connectorDB.getConnection();
+        try (Connection connection = ConnectorDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -164,7 +165,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
         String query = String.format(SELECT_ALL__ACTIVITIES_BY_STATUS, status);
 
-        try (Connection connection = connectorDB.getConnection();
+        try (Connection connection = ConnectorDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -192,7 +193,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
         LOGGER.debug("Method changeActivityStatus started ");
         boolean result = false;
         String query = String.format(UPDATE_ACTIVITY_STATUS, status, id);
-        try (Connection connection = connectorDB.getConnection();
+        try (Connection connection = ConnectorDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             int affectedRows = preparedStatement.executeUpdate();
@@ -211,7 +212,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
         LOGGER.debug("Method getAssignedActivityList started");
         String query = String.format(SELECT_ASSIGNED_ACTIVITY, userId);
         List<Activity> assignedActivityList = new ArrayList<>();
-        try (Connection connection = connectorDB.getConnection();
+        try (Connection connection = ConnectorDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
