@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS removeActivityRequests;
 DROP TABLE IF EXISTS activities;
 
 
+
 DROP TABLE IF EXISTS activityRequests;
 
 
@@ -10,9 +11,9 @@ DROP TABLE IF EXISTS role;
 
 create table role
 (
-    ID   int auto_increment,
+    ID       int auto_increment UNIQUE,
 
-    Name varchar(64) not null,
+    RoleName varchar(64) not null UNIQUE,
     PRIMARY KEY (ID)
 
 );
@@ -31,7 +32,7 @@ create table users
 create table activityRequests
 (
     ID     int auto_increment,
-    UserId int not null,
+    UserId int not null UNIQUE,
 
 
     PRIMARY KEY (ID),
@@ -56,10 +57,10 @@ create table activities
 );
 
 
-INSERT INTO role(Name)
+INSERT INTO role(RoleName)
 VALUES ('User');
 
-INSERT INTO role(Name)
+INSERT INTO role(RoleName)
 VALUES ('Admin');
 
 

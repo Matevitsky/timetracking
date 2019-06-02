@@ -19,7 +19,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Activity insertActivity(Activity activity) {
-        activityRepository.create(activity);
+
 
         //TODO: переделать
         return activity;

@@ -5,7 +5,6 @@ import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.Role;
 import com.matevitsky.entity.User;
 import com.matevitsky.exception.ErrorException;
-import com.matevitsky.repository.interfaces.RoleRepository;
 import com.matevitsky.repository.interfaces.UserRepository;
 import org.apache.log4j.Logger;
 
@@ -24,12 +23,11 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (Name, Email, Password, Role) VALUES  ('%s', '%s', '%s', '%s')";
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE ID=%d";
     private static final String UPDATE_USERS_SQL = "UPDATE users set Name='%s',Email='%s',Password=%s,Role='%s' where ID=%d";
-    private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE ID=%d";
+    private static final String SELECT_USER_BY_ID = "SELECT  * FROM role LEFT JOIN users USING (ID) WHERE ID=%d";
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
-    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users WHERE Email='%s'";
+    private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users INNER JOIN role ON users.Role = role.ID where users.Email='%s'";
 
 
-    RoleRepository roleRepository = new RoleRepositoryImpl();
 
     private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
@@ -111,7 +109,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         User user;
         try {
             while (resultSet.next()) {
-                user = getUser(resultSet);
+                user = mapToUser(resultSet);
                 allUserList.add(user);
             }
         } catch (SQLException e) {
@@ -126,29 +124,31 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         User user = null;
         try {
             resultSet.next();
-            user = getUser(resultSet);
+            user = mapToUser(resultSet);
 
         } catch (SQLException e) {
-            LOGGER.warn("Failed to map User entity to Object");
+            LOGGER.warn("Failed to map User entity to Object " + e.getMessage());
         }
         return user;
     }
 
-    private User getUser(ResultSet resultSet) throws SQLException {
+    private User mapToUser(ResultSet resultSet) throws SQLException {
         User user;
         int id = resultSet.getInt("ID");
         String userName = resultSet.getString("Name");
         String userEmail = resultSet.getString("Email");
         String userPassword = resultSet.getString("Password");
-        String roleId = resultSet.getString("Role");
-        Role role = roleRepository.findRoleById(Integer.parseInt(roleId));
+        String roleName = resultSet.getString("RoleName");
+
+
+
 
         user = User.newBuilder()
                 .withId(id)
                 .withName(userName)
                 .withEmail(userEmail)
                 .withPassword(userPassword)
-                .withRole(role)
+                .withRole(new Role(0, roleName))
                 .build();
         return user;
     }
