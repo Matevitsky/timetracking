@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.mockito.Mock;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import static org.powermock.api.mockito.PowerMockito.mock;
 @RunWith(JUnit4.class)
 public class ChangeLocaleCommandTest {
 
+    @Mock
     private HttpServletRequest request;
     private HttpServletResponse response;
     private HttpSession session;

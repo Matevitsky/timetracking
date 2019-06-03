@@ -9,19 +9,18 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 @WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 
     private static final Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
-    private final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("/app")));
+    private final Set<String> ALLOWED_PATHS = Stream.of("/app").collect(Collectors.toCollection(HashSet::new));
 
-    //TODO: уменьшить коллекцию
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -31,7 +30,6 @@ public class AuthenticationFilter implements Filter {
 
         String uri = request.getRequestURI();
         LOGGER.debug(uri);
-
 
         if (uri.equals("/")) {
             response.sendRedirect(PageConstant.LOGIN_PAGE);
@@ -47,10 +45,6 @@ public class AuthenticationFilter implements Filter {
     }
 }
 
-
-//TODO:
-//encrypt password можно и валидировать здесь
-// посмотреть последовательность отработки фильтров через анотации
 
 
 

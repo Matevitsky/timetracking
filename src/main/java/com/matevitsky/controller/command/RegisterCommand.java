@@ -34,10 +34,11 @@ public class RegisterCommand implements Command {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm-password");
 
-        //TODO: провреять что все поля заполнены
 
-        if (!password.equals(confirmPassword)) {
-            return passwordsDifferent(request);
+        if (fieldsAreNotFilled(name, email, password, confirmPassword)) {
+            ErrorException exception = new ErrorException("Fields are not filled correctly");
+            return registrationFailed(request, exception);
+
         }
 
         String encryptedPass = MD5Util.encryptPassword(password);
@@ -57,6 +58,7 @@ public class RegisterCommand implements Command {
 
                     Integer userId = userByEmail.get().getId();
                     request.getSession().setAttribute("userId", userId);
+                    request.getSession().setAttribute("role", "User");
                     request.setAttribute("userId", userId);
                     return USER_PAGE;
                 }
@@ -66,11 +68,22 @@ public class RegisterCommand implements Command {
             }
         }
         return LOGIN_PAGE;
+
+
     }
 
-    private String passwordsDifferent(HttpServletRequest request) {
+    private boolean fieldsAreNotFilled(String name, String email, String password, String confirmPassword) {
+        if ((name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()
+                || !password.equals(confirmPassword))) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private String registrationFailed(HttpServletRequest request, ErrorException e) {
         LOGGER.debug("The passwords are not the same");
-        request.setAttribute("error", "The passwords are not the same");
+        request.setAttribute("error", e.getMessage());
         return LOGIN_PAGE;
     }
 

@@ -29,6 +29,8 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
             }
         } catch (SQLException e) {
             LOGGER.error("Failed to add entity to database " + e.getMessage());
+            //TODO: бросить ошибку если маил уже существует
+            //TODO: create activity validation
         }
         return resultOfCreation;
     }
