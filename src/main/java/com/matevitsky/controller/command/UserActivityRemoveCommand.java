@@ -14,7 +14,7 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 public class UserActivityRemoveCommand implements Command {
 
     private final ActivityService activityService;
-    private static Logger LOGGER = Logger.getLogger(UserActivityRemoveCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(UserActivityRemoveCommand.class);
 
     public UserActivityRemoveCommand(ActivityService activityService) {
         this.activityService = activityService;

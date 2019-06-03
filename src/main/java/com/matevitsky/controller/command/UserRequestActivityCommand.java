@@ -15,7 +15,7 @@ public class UserRequestActivityCommand implements Command {
 
     private final ActivityService activityService;
     private final ActivityRequestService activityRequestService;
-    private static Logger LOGGER = Logger.getLogger(UserRequestActivityCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(UserRequestActivityCommand.class);
 
 
     public UserRequestActivityCommand(ActivityService activityService, ActivityRequestService activityRequestService) {

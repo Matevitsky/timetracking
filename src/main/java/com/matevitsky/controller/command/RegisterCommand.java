@@ -18,7 +18,7 @@ public class RegisterCommand implements Command {
 
     private final UserService userService;
 
-    private static Logger LOGGER = Logger.getLogger(RegisterCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(RegisterCommand.class);
 
     public RegisterCommand(UserService userService) {
         this.userService = userService;

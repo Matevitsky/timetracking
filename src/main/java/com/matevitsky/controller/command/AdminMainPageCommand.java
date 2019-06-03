@@ -13,7 +13,7 @@ import static com.matevitsky.controller.constant.PageConstant.ADMIN_PAGE;
 public class AdminMainPageCommand implements Command {
 
     private final ActivityService activityService;
-    private final static Logger LOGGER = Logger.getLogger(AdminMainPageCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(AdminMainPageCommand.class);
 
 
     public AdminMainPageCommand(ActivityService activityService) {

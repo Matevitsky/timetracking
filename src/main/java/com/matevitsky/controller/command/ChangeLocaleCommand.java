@@ -15,7 +15,7 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 public class ChangeLocaleCommand implements Command {
 
     private final ActivityService activityService;
-    private final static Logger LOGGER = Logger.getLogger(ChangeLocaleCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(ChangeLocaleCommand.class);
 
     public ChangeLocaleCommand(ActivityService activityService) {
         this.activityService = activityService;

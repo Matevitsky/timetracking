@@ -20,7 +20,7 @@ public class LoginCommand implements Command {
 
     private final UserService userService;
     private final ActivityService activityService;
-    private Logger LOGGER = Logger.getLogger(LoginCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(LoginCommand.class);
 
     public LoginCommand(UserService userService, ActivityService activityService) {
         this.userService = userService;

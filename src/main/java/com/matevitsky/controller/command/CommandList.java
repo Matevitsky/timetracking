@@ -13,31 +13,31 @@ import com.matevitsky.service.impl.UserServiceImpl;
 public enum CommandList {
 
 
-    LOGIN(new LoginCommand(context.userService, context.activityService)),
+    LOGIN(new LoginCommand(Context.userService, Context.activityService)),
 
-    REGISTER(new RegisterCommand(context.userService)),
+    REGISTER(new RegisterCommand(Context.userService)),
 
-    USER_ACTIVITY_REMOVE_REQUEST(new UserActivityRemoveCommand(context.activityService)),
+    USER_ACTIVITY_REMOVE_REQUEST(new UserActivityRemoveCommand(Context.activityService)),
 
-    USER_REQUEST_ACTIVITY(new UserRequestActivityCommand(context.activityService, context.activityRequestService)),
+    USER_REQUEST_ACTIVITY(new UserRequestActivityCommand(Context.activityService, Context.activityRequestService)),
 
-    ADMIN_GET_FINISHED_ACTIVITIES(new AdminGetFinishedActivitiesCommand(context.activityService)),
+    ADMIN_GET_FINISHED_ACTIVITIES(new AdminGetFinishedActivitiesCommand(Context.activityService)),
 
-    ADMIN_MAIN_PAGE(new AdminMainPageCommand(context.activityService)),
+    ADMIN_MAIN_PAGE(new AdminMainPageCommand(Context.activityService)),
 
-    ADMIN_CREATE_NEW_ACTIVITY(new AdminCreateNewActivityCommand(context.activityService)),
+    ADMIN_CREATE_NEW_ACTIVITY(new AdminCreateNewActivityCommand(Context.activityService)),
 
-    ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand(context.userService, context.activityService, context.activityRequestService)),
+    ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand(Context.userService, Context.activityService, Context.activityRequestService)),
 
-    ADMIN_REMOVE_ACTIVITY(new AdminRemoveActivityCommand(context.activityService)),
+    ADMIN_REMOVE_ACTIVITY(new AdminRemoveActivityCommand(Context.activityService)),
 
-    ADMIN_ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand(context.userService, context.activityService, context.activityRequestService)),
+    ADMIN_ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand(Context.userService, Context.activityService, Context.activityRequestService)),
 
     ERROR(new ErrorCommand()),
 
     LOGOUT(new LogOutCommand()),
 
-    CHANGE_LOCALE(new ChangeLocaleCommand(context.activityService));
+    CHANGE_LOCALE(new ChangeLocaleCommand(Context.activityService));
 
 
     private Command command;
@@ -52,10 +52,13 @@ public enum CommandList {
 
     }
 
-    static class context {
-        public final static UserService userService = new UserServiceImpl(new UserRepositoryImpl());
-        public final static ActivityRequestService activityRequestService = new ActivityRequestServiceImpl(new ActivityRequestRepositoryImpl());
-        public final static ActivityService activityService = new ActivityServiceImpl(new ActivityRepositoryImpl());
+    static class Context {
+        public static final UserService userService = new UserServiceImpl(new UserRepositoryImpl());
+        public static final ActivityRequestService activityRequestService = new ActivityRequestServiceImpl(new ActivityRequestRepositoryImpl());
+        public static final ActivityService activityService = new ActivityServiceImpl(new ActivityRepositoryImpl());
+
+        private Context() {
+        }
 
     }
 

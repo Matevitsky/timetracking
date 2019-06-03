@@ -9,7 +9,7 @@ import static com.matevitsky.controller.constant.PageConstant.ERROR_PAGE;
 
 public class ErrorCommand implements Command {
 
-    private final static Logger LOGGER = Logger.getLogger(ErrorCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(ErrorCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

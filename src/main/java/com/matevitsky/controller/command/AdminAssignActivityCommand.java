@@ -19,10 +19,12 @@ import static com.matevitsky.controller.constant.PageConstant.ADMIN_ACTIVITY_REQ
 
 public class AdminAssignActivityCommand implements Command {
 
+    public static final String USER_ID = "userId";
+
     private final UserService userService;
     private final ActivityService activityService;
     private final ActivityRequestService activityRequestService;
-    private final static Logger LOGGER = Logger.getLogger(AdminAssignActivityCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(AdminAssignActivityCommand.class);
 
 
     public AdminAssignActivityCommand(UserService userService, ActivityService activityService, ActivityRequestService activityRequestService) {
@@ -41,9 +43,9 @@ public class AdminAssignActivityCommand implements Command {
             return buildAdminPageActivityRequestPage(request, activityRequestService, activityService, userService);
         }
 
-        Integer userId = Integer.parseInt(request.getParameter("userId"));
+        Integer userId = Integer.parseInt(request.getParameter(USER_ID));
 
-        String substring = activity.substring(activity.lastIndexOf("id=") + 3, activity.indexOf(","));
+        String substring = activity.substring(activity.lastIndexOf("id=") + 3, activity.indexOf(','));
         Integer activityId = Integer.parseInt(substring);
 
         Activity activityForAssign = activityService.getActivity(activityId).get();
@@ -81,7 +83,7 @@ public class AdminAssignActivityCommand implements Command {
         }
 
 
-        Integer userId = (Integer) request.getSession().getAttribute("userId");
+        Integer userId = (Integer) request.getSession().getAttribute(USER_ID);
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("userForActivityRequestList", userForActivityRequestList);
         request.setAttribute("unAssignedActivityList", unAssignedActivityList);

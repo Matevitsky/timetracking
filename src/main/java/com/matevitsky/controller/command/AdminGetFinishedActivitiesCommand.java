@@ -13,7 +13,7 @@ import static com.matevitsky.controller.constant.PageConstant.ADMIN_GET_FINISHED
 public class AdminGetFinishedActivitiesCommand implements Command {
 
     private final ActivityService activityService;
-    private final static Logger LOGGER = Logger.getLogger(AdminGetFinishedActivitiesCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(AdminGetFinishedActivitiesCommand.class);
 
     public AdminGetFinishedActivitiesCommand(ActivityService activityService) {
         this.activityService = activityService;
@@ -25,9 +25,6 @@ public class AdminGetFinishedActivitiesCommand implements Command {
 
         List<Activity> finishedActivityList = activityService.getAllActivityByStatus(Activity.Status.DONE.name());
 
-
-        //  Integer userId2 = (Integer) request.getSession().getAttribute("userId");
-        //   request.getSession().setAttribute("userId", userId2);
         request.setAttribute("activityList", finishedActivityList);
 
         return ADMIN_GET_FINISHED_ACTIVITIES;

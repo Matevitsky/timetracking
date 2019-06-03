@@ -18,7 +18,7 @@ import java.util.Set;
 @WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 
-    private final static Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
     private final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("/app")));
 
     //TODO: уменьшить коллекцию

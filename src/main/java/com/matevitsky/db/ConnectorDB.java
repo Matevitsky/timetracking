@@ -13,14 +13,14 @@ import java.util.Properties;
 
 public final class ConnectorDB {
 
-    public static final String DATABASE_PROPERTIES = "/Users/Sergey/Time-tracking/src/main/resources/database.properties";
-    public static final String DB_URL = "db.url";
-    public static final String DB_USER = "db.user";
-    public static final String DB_PASSWORD = "db.password";
-    public static final String DB_DRIVER = "db.driver";
-    public static final String DB_POOLSIZE = "db.poolsize";
-    private final static BasicDataSource ds = new BasicDataSource();
-    private final static Logger LOGGER = Logger.getLogger(ConnectorDB.class);
+    private static final String DATABASE_PROPERTIES = "/Users/Sergey/Time-tracking/src/main/resources/database.properties";
+    private static final String DB_URL = "db.url";
+    private static final String DB_USER = "db.user";
+    private static final String DB_PASSWORD = "db.password";
+    private static final String DB_DRIVER = "db.driver";
+    private static final String DB_POOLSIZE = "db.poolsize";
+    private static final BasicDataSource ds = new BasicDataSource();
+    private static final Logger LOGGER = Logger.getLogger(ConnectorDB.class);
 
     public static Connection getConnection() throws SQLException {
         FileInputStream fis = null;

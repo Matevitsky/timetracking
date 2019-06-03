@@ -13,7 +13,7 @@ import static com.matevitsky.controller.constant.PageConstant.ADMIN_PAGE;
 public class AdminCreateNewActivityCommand implements Command {
 
     private final ActivityService activityService;
-    private final static Logger LOGGER = Logger.getLogger(ActivityService.class);
+    private static final Logger LOGGER = Logger.getLogger(ActivityService.class);
 
     public AdminCreateNewActivityCommand(ActivityService activityService) {
         this.activityService = activityService;
@@ -23,8 +23,8 @@ public class AdminCreateNewActivityCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Method execute started");
 
-        String title = (String) request.getParameter("title");
-        String description = (String) request.getParameter("description");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
         Activity activity = Activity.newBuilder().withTitle(title)
                 .withDescription(description)
                 .withDuration(0).build();

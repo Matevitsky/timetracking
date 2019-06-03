@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebFilter(filterName = "RoleFilter")
 public class RoleFilter implements Filter {
 
-    private final static Logger LOGGER = Logger.getLogger(RoleFilter.class);
+    private static final Logger LOGGER = Logger.getLogger(RoleFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

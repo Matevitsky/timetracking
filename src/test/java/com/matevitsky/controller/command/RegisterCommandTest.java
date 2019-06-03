@@ -61,4 +61,20 @@ public class RegisterCommandTest {
 
 
     }
+
+    @Test
+    public void shouldReturnLoginPage() throws ErrorException {
+        when(request.getParameter("username")).thenReturn("admin");
+        when(request.getParameter("emailRegistration")).thenReturn("admin@gmail.com");
+        when(request.getParameter("password")).thenReturn("admin");
+        when(request.getParameter("confirm-password")).thenReturn("admin");
+
+        when(request.getSession()).thenReturn(session);
+        when(userService.insertUser(any())).thenReturn(false);
+        RegisterCommand registerCommand = new RegisterCommand(userService);
+
+        String actual = registerCommand.execute(request, response);
+        assertEquals(PageConstant.LOGIN_PAGE, actual);
+
+    }
 }

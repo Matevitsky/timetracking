@@ -28,8 +28,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users INNER JOIN role ON users.Role = role.ID where users.Email='%s'";
 
 
-
-    private static Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
     public boolean create(User user) {
@@ -44,7 +43,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
     @Override
     public Optional<User> getById(Integer id) {
-        // LOGGER.debug("Method getById started, for id " + id);
+        LOGGER.debug("Method getById started, for id " + id);
 
         User user = null;
         String query = String.format(SELECT_USER_BY_ID, id);
@@ -81,9 +80,9 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
             return userList.get();
         } else {
             LOGGER.warn("GetAll method return empty List");
+            return userList.orElse(new ArrayList<>());
         }
 
-        return null;
     }
 
     public Optional<User> findUserByEmail(String email) throws ErrorException {

@@ -24,9 +24,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM activities WHERE ID=%d";
     private static final String SELECT_ALL_ACTIVITY = "SELECT * FROM activities";
     private static final String SELECT_ACTIVITY_BY_USER_ID = "SELECT * FROM activities WHERE UserId=%d";
-    private static final String SELECT_ALL_UNASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE Status='NEW'";
-    private static final String SELECT_FINISHED_ACTIVITY = "SELECT * FROM activities WHERE Status='DONE'";
-    private static final String SELECT_ALL__ACTIVITIES_BY_STATUS = "SELECT * FROM activities WHERE Status='%s'";
+    private static final String SELECT_ALL_ACTIVITIES_BY_STATUS = "SELECT * FROM activities WHERE Status='%s'";
     private static final String UPDATE_ACTIVITY_STATUS = "UPDATE activities set Status='%s' WHERE ID=%d";
     private static final String SELECT_ASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE Status='ACTIVE' AND UserId=%d";
 
@@ -72,9 +70,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
         String query = String.format(SELECT_ACTIVITY_BY_ID, id);
 
-        Optional<Activity> activity = getById(id, query);
+        return getById(id, query);
 
-        return Optional.ofNullable(activity.get());
     }
 
     @Override
@@ -111,11 +108,11 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
         List<Activity> activityList = new ArrayList<>();
 
-        if (!Arrays.stream(Activity.Status.values()).anyMatch((t) -> t.name().equals(status))) {
+        if (Arrays.stream(Activity.Status.values()).noneMatch(t -> t.name().equals(status))) {
             LOGGER.debug("Status " + status + " not exist");
             return activityList;
         }
-        String query = String.format(SELECT_ALL__ACTIVITIES_BY_STATUS, status);
+        String query = String.format(SELECT_ALL_ACTIVITIES_BY_STATUS, status);
 
         try (Connection connection = ConnectorDB.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -158,7 +155,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
             assignedActivityList = mapToList(resultSet);
 
         } catch (SQLException e) {
-
+            LOGGER.warn(e.getMessage());
         }
         return assignedActivityList;
     }
