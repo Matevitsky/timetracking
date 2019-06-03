@@ -29,30 +29,38 @@ public class LoginCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.debug("Method execute started");
+
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Optional<User> user = null;
         if (!Validation.emailValidation(email) || password.isEmpty()) {
             request.setAttribute("error", "password is empty");
+            LOGGER.info("Login Validation Failed");
             return LOGIN_PAGE;
         }
         try {
             user = userService.findUserByEmail(email);
             String encryptedPassword = MD5Util.encryptPassword(password);
             if (user.isPresent() && !user.get().getPassword().equals(encryptedPassword)) {
+                LOGGER.info("Wrong password");
                 request.setAttribute("error", "wrong password");
                 return LOGIN_PAGE;
             }
 
         } catch (ErrorException e) {
+            LOGGER.info("User Not Exist");
             request.setAttribute("error", e.getMessage());
             return LOGIN_PAGE;
         }
+
+
         return user.get().getRole().getName().equals("Admin") ? adminPage(request, user.get()) : userPage(request, user.get());
     }
 
 
     private String adminPage(HttpServletRequest request, User user) {
+        LOGGER.debug("Method adminPage started");
 
         List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
         request.setAttribute("activityList", unAssignedActivityList);
@@ -63,6 +71,8 @@ public class LoginCommand implements Command {
     }
 
     private String userPage(HttpServletRequest request, User user) {
+        LOGGER.debug("Method userPage started");
+
         List<Activity> assignedActivityList = activityService.getAssignedActivityList(user.getId());
         request.getSession().setAttribute("userId", user.getId());
         request.setAttribute("activityList", assignedActivityList);

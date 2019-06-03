@@ -18,11 +18,9 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public Activity insertActivity(Activity activity) {
+    public boolean createActivity(Activity activity) {
 
-
-        //TODO: переделать
-        return activity;
+        return activityRepository.create(activity);
     }
 
     @Override
@@ -55,7 +53,6 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public List<Activity> getAllActivityByStatus(String status) {
-        //TODO: проверить существует ли такой статус до вызова репозитория
 
         return activityRepository.getGetAllActivityByStatus(status);
     }

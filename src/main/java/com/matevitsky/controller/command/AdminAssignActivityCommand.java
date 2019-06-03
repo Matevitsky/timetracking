@@ -7,6 +7,7 @@ import com.matevitsky.entity.dto.UserForActivityRequest;
 import com.matevitsky.service.ActivityRequestService;
 import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ public class AdminAssignActivityCommand implements Command {
     private final UserService userService;
     private final ActivityService activityService;
     private final ActivityRequestService activityRequestService;
+    private final static Logger LOGGER = Logger.getLogger(AdminAssignActivityCommand.class);
 
 
     public AdminAssignActivityCommand(UserService userService, ActivityService activityService, ActivityRequestService activityRequestService) {
@@ -32,8 +34,13 @@ public class AdminAssignActivityCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.debug("Method execute started");
 
         String activity = request.getParameter("selectedRecord");
+        if (activity == null) {
+            return buildAdminPageActivityRequestPage(request, activityRequestService, activityService, userService);
+        }
+
         Integer userId = Integer.parseInt(request.getParameter("userId"));
 
         String substring = activity.substring(activity.lastIndexOf("id=") + 3, activity.indexOf(","));
@@ -50,16 +57,22 @@ public class AdminAssignActivityCommand implements Command {
         activityService.updateActivity(assignedActivity);
         activityRequestService.deleteActivityRequest(activityId);
 
+        return buildAdminPageActivityRequestPage(request, activityRequestService, activityService, userService);
+
+    }
+
+    private String buildAdminPageActivityRequestPage(HttpServletRequest request, ActivityRequestService activityRequestService, ActivityService activityService, UserService userService) {
+        LOGGER.debug("Method buildAdminPageActivityRequestPage");
+
         List<UserForActivityRequest> userForActivityRequestList = new ArrayList<>();
 
         List<ActivityRequest> activityRequestList = activityRequestService.getAllActivityRequests();
-
         List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
 
 
         for (ActivityRequest activityRequest : activityRequestList) {
-            int userId1 = activityRequest.getUserId();
-            Optional<User> user = userService.getUser(userId1);
+            Integer userId = activityRequest.getUserId();
+            Optional<User> user = userService.getUser(userId);
             if (user.isPresent()) {
                 UserForActivityRequest userForActivityRequest =
                         new UserForActivityRequest(user.get().getId(), user.get().getName());
@@ -68,8 +81,8 @@ public class AdminAssignActivityCommand implements Command {
         }
 
 
-        Integer userId2 = (Integer) request.getSession().getAttribute("userId");
-        request.getSession().setAttribute("userId", userId2);
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
+        request.getSession().setAttribute("userId", userId);
         request.setAttribute("userForActivityRequestList", userForActivityRequestList);
         request.setAttribute("unAssignedActivityList", unAssignedActivityList);
 

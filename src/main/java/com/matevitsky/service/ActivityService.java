@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface ActivityService {
 
 
-    Activity insertActivity(Activity activity);
+    boolean createActivity(Activity activity);
 
     boolean deleteActivity(Integer activityId);
 

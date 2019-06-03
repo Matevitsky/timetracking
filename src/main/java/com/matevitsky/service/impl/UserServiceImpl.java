@@ -32,9 +32,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(User user) {
-        //TODO: проверить кто вызывает и что лучше вернуть user или boolean
 
-        return (User) userRepository.update(user);
+        return userRepository.update(user);
 
     }
 

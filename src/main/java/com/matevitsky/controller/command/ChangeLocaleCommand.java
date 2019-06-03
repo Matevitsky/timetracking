@@ -10,10 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Locale;
 
+import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
+
 public class ChangeLocaleCommand implements Command {
-    private final static Logger LOGGER = Logger.getLogger(ChangeLocaleCommand.class);
 
     private final ActivityService activityService;
+    private final static Logger LOGGER = Logger.getLogger(ChangeLocaleCommand.class);
 
     public ChangeLocaleCommand(ActivityService activityService) {
         this.activityService = activityService;
@@ -21,16 +23,22 @@ public class ChangeLocaleCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.debug("Method execute started");
 
         String locale = request.getParameter("locale");
         ResourceManager.INSTANCE.changeResource(Locale.forLanguageTag(locale));
         request.getSession().setAttribute("locale", locale);
         LOGGER.info("Locale: " + locale);
-        List<Activity> finishedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
 
-        request.setAttribute("activityList", finishedActivityList);
+        String role = (String) request.getSession().getAttribute("role");
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
 
-
-        return request.getParameter("uri");
+        if (role.equals("Admin")) {
+            return new AdminMainPageCommand(activityService).execute(request, response);
+        } else {
+            List<Activity> assignedActivityList = activityService.getAssignedActivityList(userId);
+            request.setAttribute("activityList", assignedActivityList);
+            return USER_PAGE;
+        }
     }
 }

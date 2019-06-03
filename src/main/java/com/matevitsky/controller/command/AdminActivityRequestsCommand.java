@@ -7,6 +7,7 @@ import com.matevitsky.entity.dto.UserForActivityRequest;
 import com.matevitsky.service.ActivityRequestService;
 import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,8 @@ import java.util.Optional;
 import static com.matevitsky.controller.constant.PageConstant.ADMIN_ACTIVITY_REQUESTS_PAGE;
 
 public class AdminActivityRequestsCommand implements Command {
+
+    private static final Logger LOGGER = Logger.getLogger(AdminActivityRequestsCommand.class);
 
     private final UserService userService;
     private final ActivityRequestService activityRequestService;
@@ -30,15 +33,15 @@ public class AdminActivityRequestsCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.debug("Method execute started");
 
         List<UserForActivityRequest> userForActivityRequestList = new ArrayList<>();
-
         List<ActivityRequest> activityRequestList = activityRequestService.getAllActivityRequests();
         List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
 
 
         for (ActivityRequest activityRequest : activityRequestList) {
-            int userId = activityRequest.getUserId();
+            Integer userId = activityRequest.getUserId();
             Optional<User> user = userService.getUser(userId);
             if (user.isPresent()) {
                 UserForActivityRequest userForActivityRequest =
@@ -46,7 +49,6 @@ public class AdminActivityRequestsCommand implements Command {
                 userForActivityRequestList.add(userForActivityRequest);
             }
         }
-
 
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         request.getSession().setAttribute("userId", userId);

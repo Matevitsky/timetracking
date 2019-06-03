@@ -140,9 +140,6 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         String userPassword = resultSet.getString("Password");
         String roleName = resultSet.getString("RoleName");
 
-
-
-
         user = User.newBuilder()
                 .withId(id)
                 .withName(userName)

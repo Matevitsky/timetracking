@@ -16,9 +16,9 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 
 public class RegisterCommand implements Command {
 
-    private static Logger LOGGER = Logger.getLogger(RegisterCommand.class);
-
     private final UserService userService;
+
+    private static Logger LOGGER = Logger.getLogger(RegisterCommand.class);
 
     public RegisterCommand(UserService userService) {
         this.userService = userService;
@@ -28,6 +28,7 @@ public class RegisterCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Registration Started");
+
         String name = request.getParameter("username");
         String email = request.getParameter("emailRegistration");
         String password = request.getParameter("password");

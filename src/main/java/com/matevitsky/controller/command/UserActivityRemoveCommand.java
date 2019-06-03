@@ -2,6 +2,7 @@ package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.service.ActivityService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import static com.matevitsky.controller.constant.PageConstant.USER_PAGE;
 public class UserActivityRemoveCommand implements Command {
 
     private final ActivityService activityService;
+    private static Logger LOGGER = Logger.getLogger(UserActivityRemoveCommand.class);
 
     public UserActivityRemoveCommand(ActivityService activityService) {
         this.activityService = activityService;
@@ -20,6 +22,8 @@ public class UserActivityRemoveCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        LOGGER.debug("Method execute started");
+
         String activityId = request.getParameter("id");
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         Integer duration = Integer.parseInt(request.getParameter("duration"));
