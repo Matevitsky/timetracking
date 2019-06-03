@@ -23,7 +23,7 @@
                            autofocus>
                     <input type="hidden" name="command" value="user_activity_remove_request">
                     <input type="hidden" name="id" value="${activity.id}"/>
-                    <input type="submit" value="Remove" name="remove">
+                    <input type="submit" value="<fmt:message bundle="${common}" key="delete.activity"/>" name="remove">
                 </form>
 
             </td>

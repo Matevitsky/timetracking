@@ -23,9 +23,9 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th class="th-sm">Title</th>
-        <th class="th-sm">Content</th>
-        <th class="th-sm">Duration</th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="title"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="description"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="time"/></th>
 
     </tr>
 
@@ -41,7 +41,8 @@
 
                     <input type="hidden" name="command" value="admin_remove_activity">
                     <input type="hidden" name="id" value="${activity.id}"/>
-                    <input type="submit" align="center" value="Remove" name="remove">
+                    <input type="submit" align="center" value="<fmt:message bundle="${common}" key="delete.activity"/>"
+                           name="remove">
 
                 </td>
             </form>
@@ -53,9 +54,9 @@
 
     <tfoot>
     <tr>
-        <th class="th-sm">Title</th>
-        <th class="th-sm">Content</th>
-        <th class="th-sm">Duration</th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="title"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="description"/></th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="time"/></th>
     </tr>
     </tfoot>
 </table>

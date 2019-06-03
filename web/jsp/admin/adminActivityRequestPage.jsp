@@ -21,12 +21,9 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
-        <th class="th-sm">User Name
+        <th class="th-sm"><fmt:message bundle="${common}" key="user.name"/></th>
 
-        </th>
-        <th>
-            Available Activity
-        </th>
+        <th><fmt:message bundle="${common}" key="activity.requests"/></th>
     </tr>
     </thead>
     <tbody>
@@ -40,7 +37,7 @@
 
                     <form action="/app" method="get">
 
-                        Please select an element:
+                        <fmt:message bundle="${common}" key="select.activity"/>
 
 
                         <select id="unAssignedActivityList" name="selectedRecord">
@@ -57,7 +54,7 @@
 
 
                         <form action="/app" method="get">
-                            <input type="submit" value="Assign task">
+                            <input type="submit" value="<fmt:message bundle="${common}" key="assign.task"/>">
                             <input type="hidden" name="command" value="admin_assign_activity_command">
 
                         </form>
@@ -76,9 +73,9 @@
 
     <tfoot>
     <tr>
-        <th class="th-sm">User Name</th>
+        <th class="th-sm"><fmt:message bundle="${common}" key="user.name"/></th>
 
-        <th>Activity Requests</th>
+        <th><fmt:message bundle="${common}" key="activity.requests"/></th>
     </tr>
     </tfoot>
 </table>
