@@ -2,6 +2,7 @@ package com.matevitsky.service.impl;
 
 
 import com.matevitsky.entity.ActivityRequest;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.repository.interfaces.ActivityRequestRepository;
 import com.matevitsky.service.ActivityRequestService;
 import org.apache.log4j.Logger;
@@ -18,7 +19,7 @@ public class ActivityRequestServiceImpl implements ActivityRequestService {
     }
 
     @Override
-    public boolean createActivityRequest(Integer userId) {
+    public boolean createActivityRequest(Integer userId) throws ErrorException {
         LOGGER.debug("Method createActivityRequest with userId " + userId + " started");
         ActivityRequest activityRequest = new ActivityRequest(0, userId);
         return activityRequestRepository.create(activityRequest);

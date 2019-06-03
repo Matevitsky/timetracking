@@ -1,6 +1,7 @@
 package com.matevitsky.repository.impl;
 
 import com.matevitsky.db.ConnectorDB;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.repository.interfaces.GenericRepository;
 import org.apache.log4j.Logger;
 
@@ -17,7 +18,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     private static Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
 
 
-    boolean createEntity(E entity, String query) {
+    boolean createEntity(E entity, String query) throws ErrorException {
         LOGGER.debug("createEntity" + entity.toString() + QUERY + query);
         boolean resultOfCreation = false;
         try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -29,6 +30,8 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
             }
         } catch (SQLException e) {
             LOGGER.error("Failed to add entity to database " + e.getMessage());
+
+            throw new ErrorException("");
             //TODO: бросить ошибку если маил уже существует
             //TODO: create activity validation
         }

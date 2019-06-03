@@ -3,6 +3,7 @@ package com.matevitsky.repository.impl;
 
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.Activity;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.repository.interfaces.ActivityRepository;
 import org.apache.log4j.Logger;
 
@@ -31,7 +32,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static Logger LOGGER = Logger.getLogger(ActivityRepositoryImpl.class);
 
     @Override
-    public boolean create(Activity activity) {
+    public boolean create(Activity activity) throws ErrorException {
         LOGGER.debug("Method create started, for Activity with Title " + activity.getTitle());
         String query = "";
         if (activity.getUserId() == null) {

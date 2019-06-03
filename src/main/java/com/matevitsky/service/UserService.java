@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface UserService {
 
-    boolean insertUser(User user);
+    boolean insertUser(User user) throws ErrorException;
 
     boolean deleteUser(Integer userId);
 

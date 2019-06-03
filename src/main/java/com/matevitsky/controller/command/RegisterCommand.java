@@ -48,24 +48,30 @@ public class RegisterCommand implements Command {
                 .withRole(new Role(1))
                 .withPassword(encryptedPass).build();
 
-        if (userService.insertUser(user)) {
+        try {
 
-            try {
 
-                Optional<User> userByEmail = userService.findUserByEmail(email);
+            if (userService.insertUser(user)) {
 
-                if (userByEmail.isPresent()) {
+                try {
 
-                    Integer userId = userByEmail.get().getId();
-                    request.getSession().setAttribute("userId", userId);
-                    request.getSession().setAttribute("role", "User");
-                    request.setAttribute("userId", userId);
-                    return USER_PAGE;
+                    Optional<User> userByEmail = userService.findUserByEmail(email);
+
+                    if (userByEmail.isPresent()) {
+
+                        Integer userId = userByEmail.get().getId();
+                        request.getSession().setAttribute("userId", userId);
+                        request.getSession().setAttribute("role", "User");
+                        request.setAttribute("userId", userId);
+                        return USER_PAGE;
+                    }
+                } catch (ErrorException e) {
+                    LOGGER.error("User Not found after registration");
+
                 }
-            } catch (ErrorException e) {
-                LOGGER.error("User Not found after registration");
-
             }
+        } catch (ErrorException e) {
+            registrationFailed(request, new ErrorException("This email is already registered"));
         }
         return LOGIN_PAGE;
 

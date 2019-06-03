@@ -2,6 +2,7 @@ package com.matevitsky.service.impl;
 
 
 import com.matevitsky.entity.Activity;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.repository.impl.ActivityRepositoryImpl;
 import com.matevitsky.repository.interfaces.ActivityRepository;
 import com.matevitsky.service.ActivityService;
@@ -18,7 +19,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public boolean createActivity(Activity activity) {
+    public boolean createActivity(Activity activity) throws ErrorException {
 
         return activityRepository.create(activity);
     }

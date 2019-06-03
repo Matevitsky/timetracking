@@ -1,6 +1,7 @@
 package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.service.ActivityService;
 import org.apache.log4j.Logger;
 
@@ -25,14 +26,30 @@ public class AdminCreateNewActivityCommand implements Command {
 
         String title = request.getParameter("title");
         String description = request.getParameter("description");
-        Activity activity = Activity.newBuilder().withTitle(title)
-                .withDescription(description)
-                .withDuration(0).build();
-        activityService.createActivity(activity);
 
-        List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
-        request.setAttribute("activityList", unAssignedActivityList);
+        if (inputDataIsValid(title, description)) {
 
-        return ADMIN_PAGE;
+            Activity activity = Activity.newBuilder().withTitle(title)
+                    .withDescription(description)
+                    .withDuration(0).build();
+            try {
+                activityService.createActivity(activity);
+            } catch (ErrorException e) {
+                request.setAttribute("error", new ErrorException("Failed create activity"));
+            }
+            List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
+            request.setAttribute("activityList", unAssignedActivityList);
+
+            return ADMIN_PAGE;
+        } else {
+            LOGGER.info("Input data not valid");
+            request.setAttribute("error", "Input data not valid");
+            return ADMIN_PAGE;
+        }
+    }
+
+    private boolean inputDataIsValid(String title, String description) {
+        String regex = "^[а-яА-ЯёЁa-zA-Z0-9]+$";
+        return title.matches(regex) && description.matches(regex);
     }
 }

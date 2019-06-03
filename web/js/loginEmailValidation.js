@@ -6,7 +6,7 @@ var loginEmail = $('#email');
 loginEmail.blur(function () {
     if (loginEmail.val() != '') {
         if (loginEmail.val().search(pattern) == 0) {
-            $('#loginValid').text('Valid');
+            $('#loginValid').text('valid');
             $('#login-submit').attr('disabled', false);
             loginEmail.removeClass('error').addClass('ok');
         } else {

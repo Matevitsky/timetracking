@@ -2,6 +2,7 @@ package com.matevitsky.repository.impl;
 
 import com.matevitsky.db.ConnectorDB;
 import com.matevitsky.entity.ActivityRequest;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.repository.interfaces.ActivityRequestRepository;
 import org.apache.log4j.Logger;
 
@@ -24,7 +25,7 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
 
 
     @Override
-    public boolean create(ActivityRequest activityRequest) {
+    public boolean create(ActivityRequest activityRequest) throws ErrorException {
         LOGGER.debug("Method create activityRequest with UserId " + activityRequest.getUserId());
         String query = String.format(INSERT_REQUEST_SQL, activityRequest.getUserId());
 

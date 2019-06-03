@@ -20,7 +20,7 @@
         <fieldset>
             <input name="description" textarea
                    placeholder=<fmt:message bundle="${common}" key="type.activity.description"/>" tabindex=" Description"
-                   required></inputtextarea>
+            required></inputtextarea>
 
         </fieldset>
 
@@ -30,6 +30,7 @@
             </button>
         </fieldset>
 
+        <font color="red"><c:out value="${error}"/></font>
     </form>
 </div>
 

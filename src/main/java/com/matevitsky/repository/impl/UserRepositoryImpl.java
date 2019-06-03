@@ -31,12 +31,13 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     private static final Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override
-    public boolean create(User user) {
+    public boolean create(User user) throws ErrorException {
         LOGGER.debug("Method create started, for user with Email " + user.getEmail());
         if (user == null) {
             return false;
         }
         String query = String.format(INSERT_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole().getId());
+
         return createEntity(user, query);
 
     }

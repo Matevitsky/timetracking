@@ -2,6 +2,7 @@ package com.matevitsky.service;
 
 
 import com.matevitsky.entity.Activity;
+import com.matevitsky.exception.ErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,7 +10,7 @@ import java.util.Optional;
 public interface ActivityService {
 
 
-    boolean createActivity(Activity activity);
+    boolean createActivity(Activity activity) throws ErrorException;
 
     boolean deleteActivity(Integer activityId);
 

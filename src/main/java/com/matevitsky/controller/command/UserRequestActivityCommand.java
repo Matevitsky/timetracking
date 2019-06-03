@@ -1,6 +1,7 @@
 package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
+import com.matevitsky.exception.ErrorException;
 import com.matevitsky.service.ActivityRequestService;
 import com.matevitsky.service.ActivityService;
 import org.apache.log4j.Logger;
@@ -28,8 +29,12 @@ public class UserRequestActivityCommand implements Command {
         LOGGER.debug("Method execute started");
 
         Integer userId = (Integer) request.getSession().getAttribute("userId");
-        //TODO:// проверять на ноль юзер айди
-        activityRequestService.createActivityRequest(userId);
+        try {
+            activityRequestService.createActivityRequest(userId);
+        } catch (ErrorException e) {
+            LOGGER.warn(e.getMessage());
+        }
+
 
         List<Activity> activityListByUserId = activityService.getAssignedActivityList(userId);
 
