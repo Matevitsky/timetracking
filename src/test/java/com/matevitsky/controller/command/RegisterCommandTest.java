@@ -49,7 +49,7 @@ public class RegisterCommandTest {
         when(request.getParameter("confirm-password")).thenReturn("user");
 
         when(request.getSession()).thenReturn(session);
-        when(userService.insertUser(any())).thenReturn(true);
+        when(userService.createUser(any())).thenReturn(true);
         when(userService.findUserByEmail("user@gmail.com")).thenReturn(Optional.ofNullable(user));
 
 
@@ -70,7 +70,7 @@ public class RegisterCommandTest {
         when(request.getParameter("confirm-password")).thenReturn("admin");
 
         when(request.getSession()).thenReturn(session);
-        when(userService.insertUser(any())).thenReturn(false);
+        when(userService.createUser(any())).thenReturn(false);
         RegisterCommand registerCommand = new RegisterCommand(userService);
 
         String actual = registerCommand.execute(request, response);

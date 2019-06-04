@@ -9,13 +9,13 @@ import java.util.Optional;
 
 public interface UserService {
 
-    boolean insertUser(User user) throws ErrorException;
+    boolean createUser(User user) throws ErrorException;
 
     boolean deleteUser(Integer userId);
 
     User updateUser(User user);
 
-    Optional<User> getUser(Integer id);
+    Optional<User> getUserById(Integer id);
 
     List<User> getAll();
 

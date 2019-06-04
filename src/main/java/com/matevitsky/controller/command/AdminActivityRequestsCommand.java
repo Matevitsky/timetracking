@@ -42,7 +42,7 @@ public class AdminActivityRequestsCommand implements Command {
 
         for (ActivityRequest activityRequest : activityRequestList) {
             Integer userId = activityRequest.getUserId();
-            Optional<User> user = userService.getUser(userId);
+            Optional<User> user = userService.getUserById(userId);
             if (user.isPresent()) {
                 UserForActivityRequest userForActivityRequest =
                         new UserForActivityRequest(user.get().getId(), user.get().getName());

@@ -81,25 +81,26 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
             return all.get();
         }
         LOGGER.debug("Method getAll returned empty list ");
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
     protected List<ActivityRequest> mapToList(ResultSet resultSet) throws SQLException {
         List<ActivityRequest> activityRequestsList = new ArrayList<>();
         while (resultSet.next()) {
-            Integer requestId = resultSet.getInt("ID");
-            Integer userId = resultSet.getInt("UserId");
-
-            ActivityRequest activityRequest = new ActivityRequest(requestId, userId);
+            ActivityRequest activityRequest = mapToObject(resultSet);
             activityRequestsList.add(activityRequest);
-
         }
         return activityRequestsList;
     }
 
     @Override
-    protected ActivityRequest mapToObject(ResultSet rs) {
-        return null;
+    protected ActivityRequest mapToObject(ResultSet resultSet) throws SQLException {
+
+        Integer requestId = resultSet.getInt("ID");
+        Integer userId = resultSet.getInt("UserId");
+        return new ActivityRequest(requestId, userId);
+
+
     }
 }

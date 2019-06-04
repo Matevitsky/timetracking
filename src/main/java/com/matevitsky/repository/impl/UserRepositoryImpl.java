@@ -109,7 +109,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         User user;
         try {
             while (resultSet.next()) {
-                user = mapToUser(resultSet);
+                user = mapToObject(resultSet);
                 allUserList.add(user);
             }
         } catch (SQLException e) {

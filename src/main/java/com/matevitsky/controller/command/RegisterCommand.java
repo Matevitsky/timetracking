@@ -51,7 +51,7 @@ public class RegisterCommand implements Command {
         try {
 
 
-            if (userService.insertUser(user)) {
+            if (userService.createUser(user)) {
 
                 try {
 

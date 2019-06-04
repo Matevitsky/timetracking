@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean insertUser(User user) throws ErrorException {
+    public boolean createUser(User user) throws ErrorException {
 
         return userRepository.create(user);
 
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUser(Integer id) {
+    public Optional<User> getUserById(Integer id) {
 
         return userRepository.getById(id);
 
