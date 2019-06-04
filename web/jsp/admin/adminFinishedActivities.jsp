@@ -39,6 +39,7 @@
                 <td>${activity.description}</td>
                 <td>${activity.duration}
 
+
                     <input type="hidden" name="command" value="admin_remove_activity">
                     <input type="hidden" name="id" value="${activity.id}"/>
                     <input type="submit" align="center" value="<fmt:message bundle="${common}" key="delete.activity"/>"

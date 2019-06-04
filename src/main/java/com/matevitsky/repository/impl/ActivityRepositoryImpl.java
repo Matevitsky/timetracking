@@ -19,7 +19,7 @@ import java.util.Optional;
 public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> implements ActivityRepository {
 
     private static final String INSERT_ACTIVITY_SQL = "INSERT INTO activities" + "  (Title, Description, Duration, UserId,Status) VALUES  ('%s', '%s', '%d', '%d','%s)";
-    private static final String INSERT_ACTIVITY_WITHOUT_USER_ID_SQL = "INSERT INTO activities" + "  (Title, Description, Duration, Status) VALUES  ('%s', '%s', '%d','%s')";
+    private static final String INSERT_ACTIVITY_WITHOUT_USER_ID_SQL = "INSERT INTO activities" + "  (Title, Description, Status) VALUES  ('%s', '%s','%s')";
     private static final String DELETE_ACTIVITY_SQL = "DELETE FROM activities WHERE ID=%d;";
     private static final String UPDATE_ACTIVITY_SQL = "UPDATE activities set Title='%s',Description='%s',Duration=%d, UserId=%d, Status='%s' WHERE ID=%d";
     private static final String SELECT_ACTIVITY_BY_ID = "SELECT * FROM activities WHERE ID=%d";
@@ -36,7 +36,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
         LOGGER.debug("Method create started, for Activity with Title " + activity.getTitle());
         String query = "";
         if (activity.getUserId() == null) {
-            query = String.format(INSERT_ACTIVITY_WITHOUT_USER_ID_SQL, activity.getTitle(), activity.getDescription(), activity.getDuration(), Activity.Status.NEW);
+            query = String.format(INSERT_ACTIVITY_WITHOUT_USER_ID_SQL, activity.getTitle(), activity.getDescription(), Activity.Status.NEW);
 
         } else {
 
@@ -85,7 +85,7 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
             return activityList.get();
         }
         LOGGER.debug("GetAll activities returned empty list");
-        return null;
+        return new ArrayList<>();
     }
 
     public List<Activity> getActivityListByUserId(Integer userId) {
@@ -174,13 +174,10 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
 
     @Override
     protected Activity mapToObject(ResultSet resultSet) throws SQLException {
-        Activity activity = null;
 
         resultSet.next();
-        activity = getActivity(resultSet);
 
-
-        return activity;
+        return getActivity(resultSet);
     }
 
     private Activity getActivity(ResultSet resultSet) throws SQLException {

@@ -14,13 +14,13 @@ import java.util.Optional;
 
 public abstract class AbstractGenericRepository<E> implements GenericRepository<E> {
 
-    public static final String QUERY = " Query = ";
+    private static final String QUERY = " Query = ";
     private static Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
 
 
     boolean createEntity(E entity, String query) throws ErrorException {
         LOGGER.debug("createEntity" + entity.toString() + QUERY + query);
-        boolean resultOfCreation = false;
+        boolean resultOfCreation;
         try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             if (preparedStatement.executeUpdate() == 0) {
                 LOGGER.warn("Creating entity failed, no rows affected.");
@@ -32,8 +32,7 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
             LOGGER.error("Failed to add entity to database " + e.getMessage());
 
             throw new ErrorException("");
-            //TODO: бросить ошибку если маил уже существует
-            //TODO: create activity validation
+
         }
         return resultOfCreation;
     }

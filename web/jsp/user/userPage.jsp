@@ -18,9 +18,11 @@
             <td>
 
                 <form action="/app" method="get">
-                    <input name="duration" input placeholder=
-                        <fmt:message bundle="${common}" key="time"/> type="text" tabindex="duration" required
-                           autofocus>
+                    <input type="time" id="duration" name="duration" input placeholder=
+                        <fmt:message bundle="${common}" key="time"/>
+                            min="59:00" max="23:00" required autofocus/>
+
+
                     <input type="hidden" name="command" value="user_activity_remove_request">
                     <input type="hidden" name="id" value="${activity.id}"/>
                     <input type="submit" value="<fmt:message bundle="${common}" key="delete.activity"/>" name="remove">
@@ -45,11 +47,11 @@
 <!-- SCRIPTS -->
 
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="/js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="js/mdb.min.js"></script>
+<script type="text/javascript" src="/js/mdb.min.js"></script>
 
 <script>
     $(".dropdown-menu li a").click(function () {
@@ -65,7 +67,7 @@
 
 
 <!-- MDBootstrap Datatables -->
-<script type="text/javascript" src="js/addons/datatables.min.js"></script>
+<script type="text/javascript" src="/js/addons/datatables.min.js"></script>
 
 
 </body>

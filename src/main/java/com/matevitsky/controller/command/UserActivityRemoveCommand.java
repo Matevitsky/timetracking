@@ -2,6 +2,7 @@ package com.matevitsky.controller.command;
 
 import com.matevitsky.entity.Activity;
 import com.matevitsky.service.ActivityService;
+import com.matevitsky.util.TimeParser;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,8 @@ public class UserActivityRemoveCommand implements Command {
 
         String activityId = request.getParameter("id");
         Integer userId = (Integer) request.getSession().getAttribute("userId");
-        Integer duration = Integer.parseInt(request.getParameter("duration"));
+        String time = request.getParameter("duration");
+
 
         Optional<Activity> activity = activityService.getActivity(Integer.parseInt(activityId));
 
@@ -35,7 +37,7 @@ public class UserActivityRemoveCommand implements Command {
                     .withId(activity.get().getId())
                     .withTitle(activity.get().getTitle())
                     .withDescription(activity.get().getDescription())
-                    .withDuration(duration)
+                    .withDuration(TimeParser.parseStringTimeToInteger(time))
                     .withStatus(Activity.Status.DONE)
                     .build();
             activityService.updateActivity(activityWithDuration);
