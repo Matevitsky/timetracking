@@ -104,7 +104,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     }
 
     @Override
-    protected List<User> mapToList(ResultSet resultSet) throws SQLException {
+    protected List<User> mapToList(ResultSet resultSet) {
         List<User> allUserList = new ArrayList<>();
         User user;
         try {
@@ -120,7 +120,7 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
 
 
     @Override
-    protected User mapToObject(ResultSet resultSet) throws SQLException {
+    protected User mapToObject(ResultSet resultSet) {
         User user = null;
         try {
             resultSet.next();

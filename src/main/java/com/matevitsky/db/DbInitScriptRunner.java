@@ -13,10 +13,7 @@ public class DbInitScriptRunner {
         Scanner s = new Scanner(in);
         s.useDelimiter("/\\*[\\s\\S]*?\\*/|--[^\\r\\n]*|;");
 
-        Statement st = null;
-
-        try {
-            st = conn.createStatement();
+        try (Statement st = conn.createStatement()) {
 
             while (s.hasNext()) {
                 String line = s.next().trim();
@@ -24,10 +21,6 @@ public class DbInitScriptRunner {
                 if (!line.isEmpty()) {
                     st.execute(line);
                 }
-            }
-        } finally {
-            if (st != null) {
-                st.close();
             }
         }
     }

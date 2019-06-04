@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/jsp/user/i18n.jsp" %>
 <!doctype html>
 <html>
@@ -12,34 +11,19 @@
     <title>Time Tracking User Page</title>
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Bootstrap core CSS -->
-    <%--
-        <link href="../../css/modules/mdb.min.css" rel="stylesheet">
-    --%>
-    <!-- Material Design Bootstrap -->
-    <%--  <link href="/css/modules/mdb.min.css" rel="stylesheet">--%>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Your custom styles (optional) -->
-    <link href="../../css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- MDBootstrap Datatables  -->
-    <link href="../../css/addons/datatables.min.css" rel="stylesheet">
-
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css' rel='stylesheet'
-          type='text/css'>
-
-
-    <%--
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"></script>
-    --%>
+    <link href="css/addons/datatables.min.css" rel="stylesheet">
 
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"

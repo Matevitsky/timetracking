@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB FREE: 4.8.1
+ * Version: MDB FREE: 4.8.2
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -16702,7 +16702,7 @@ Waves.init();
 var _this = void 0;
 
 (function ($) {
-    var inputSelector = "".concat(['text', 'password', 'loginEmail', 'url', 'tel', 'number', 'search', 'search-md'].map(function (selector) {
+    var inputSelector = "".concat(['text', 'password', 'email', 'url', 'tel', 'number', 'search', 'search-md'].map(function (selector) {
         return "input[type=".concat(selector, "]");
     }).join(', '), ", textarea");
     var textAreaSelector = '.materialize-textarea';

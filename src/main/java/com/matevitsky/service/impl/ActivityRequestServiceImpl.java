@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ActivityRequestServiceImpl implements ActivityRequestService {
 
-    private static Logger LOGGER = Logger.getLogger(ActivityRequestServiceImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(ActivityRequestServiceImpl.class);
     private final ActivityRequestRepository activityRequestRepository;
 
     public ActivityRequestServiceImpl(ActivityRequestRepository activityRequestRepository) {

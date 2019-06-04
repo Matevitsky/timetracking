@@ -21,7 +21,7 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
     private static final String DELETE_REQUEST_SQL = "DELETE FROM activityRequests WHERE Id=%d";
     private static final String SELECT_REQUEST_ID = "SELECT * FROM activityRequests WHERE UserId=%d";
 
-    private static Logger LOGGER = Logger.getLogger(ActivityRequestRepositoryImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(ActivityRequestRepositoryImpl.class);
 
 
     @Override
@@ -99,7 +99,7 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
     }
 
     @Override
-    protected ActivityRequest mapToObject(ResultSet rs) throws SQLException {
+    protected ActivityRequest mapToObject(ResultSet rs) {
         return null;
     }
 }

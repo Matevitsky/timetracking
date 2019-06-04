@@ -32,7 +32,7 @@ create table users
 create table activityRequests
 (
     ID     int auto_increment,
-    UserId int not null UNIQUE,
+    UserId int not null,
 
 
     PRIMARY KEY (ID),

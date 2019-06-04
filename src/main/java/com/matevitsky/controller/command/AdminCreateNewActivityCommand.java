@@ -14,7 +14,7 @@ import static com.matevitsky.controller.constant.PageConstant.ADMIN_PAGE;
 public class AdminCreateNewActivityCommand implements Command {
 
     private final ActivityService activityService;
-    private static final Logger LOGGER = Logger.getLogger(ActivityService.class);
+    private static final Logger LOGGER = Logger.getLogger(AdminCreateNewActivityCommand.class);
 
     public AdminCreateNewActivityCommand(ActivityService activityService) {
         this.activityService = activityService;
@@ -27,29 +27,22 @@ public class AdminCreateNewActivityCommand implements Command {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-        if (inputDataIsValid(title, description)) {
 
-            Activity activity = Activity.newBuilder().withTitle(title)
-                    .withDescription(description)
-                    .withDuration(0).build();
-            try {
-                activityService.createActivity(activity);
-            } catch (ErrorException e) {
-                request.setAttribute("error", new ErrorException("Failed create activity"));
-            }
-            List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
-            request.setAttribute("activityList", unAssignedActivityList);
-
-            return ADMIN_PAGE;
-        } else {
-            LOGGER.info("Input data not valid");
-            request.setAttribute("error", "Input data not valid");
-            return ADMIN_PAGE;
+        Activity activity = Activity.newBuilder().withTitle(title)
+                .withDescription(description)
+                .withDuration(0).build();
+        try {
+            activityService.createActivity(activity);
+        } catch (ErrorException e) {
+            request.setAttribute("error", new ErrorException("Failed create activity"));
         }
-    }
+        List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
+        request.setAttribute("activityList", unAssignedActivityList);
 
-    private boolean inputDataIsValid(String title, String description) {
-        String regex = "^[а-яА-ЯёЁa-zA-Z0-9]+$";
-        return title.matches(regex) && description.matches(regex);
+        return ADMIN_PAGE;
+
+
     }
 }
+
+

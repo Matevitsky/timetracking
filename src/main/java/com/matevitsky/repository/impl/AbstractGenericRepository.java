@@ -15,7 +15,7 @@ import java.util.Optional;
 public abstract class AbstractGenericRepository<E> implements GenericRepository<E> {
 
     private static final String QUERY = " Query = ";
-    private static Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
+    private static final Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
 
 
     boolean createEntity(E entity, String query) throws ErrorException {

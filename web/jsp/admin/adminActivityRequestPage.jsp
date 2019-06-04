@@ -1,24 +1,29 @@
 <%@include file="adminHeader.jsp" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html lang="en">
+
+<html>
 
 <head>
-    <meta charset="utf-8">
-
     <title>Activity Requests</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/modules/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
 
 
     <!-- MDBootstrap Datatables  -->
     <link href="../../css/addons/datatables.min.css" rel="stylesheet">
 
-
 </head>
 
 <body>
 
-<table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+<table id="adminRequestTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
         <th class="th-sm"><fmt:message bundle="${common}" key="user.name"/></th>
@@ -80,32 +85,23 @@
     </tfoot>
 </table>
 
-<script>
-    $(".dropdown-menu li a").click(function () {
-        var selText = $(this).text();
-        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-    });
-</script>
-
-<script>$(document).ready(function () {
-    $('#dtBasicExample').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});</script>
-
-
-<!-- SCRIPTS -->
-<!-- JQuery -->
-<%--<script type="text/javascript" src="../js/jquery-3.4.0.min.js"></script>--%>
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="../js/popper.min.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="../js/mdb.min.js"></script>
+<script type="text/javascript" src="js/mdb.min.js"></script>
 
 <!-- MDBootstrap Datatables  -->
-<script type="text/javascript" src="../js/addons/datatables.min.js"></script>
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
 
+<script>
+    $(document).ready(function () {
+        $('#adminRequestTable').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+    });
+</script>
 
 </body>
 

@@ -79,12 +79,8 @@ public class RegisterCommand implements Command {
     }
 
     private boolean fieldsAreNotFilled(String name, String email, String password, String confirmPassword) {
-        if ((name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()
-                || !password.equals(confirmPassword))) {
-            return true;
-        } else {
-            return false;
-        }
+        return (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()
+                || !password.equals(confirmPassword));
     }
 
     private String registrationFailed(HttpServletRequest request, ErrorException e) {

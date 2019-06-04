@@ -53,9 +53,9 @@ public enum CommandList {
     }
 
     static class Context {
-        public static final UserService userService = new UserServiceImpl(new UserRepositoryImpl());
-        public static final ActivityRequestService activityRequestService = new ActivityRequestServiceImpl(new ActivityRequestRepositoryImpl());
-        public static final ActivityService activityService = new ActivityServiceImpl(new ActivityRepositoryImpl());
+        private static final UserService userService = new UserServiceImpl(new UserRepositoryImpl());
+        private static final ActivityRequestService activityRequestService = new ActivityRequestServiceImpl(new ActivityRequestRepositoryImpl());
+        private static final ActivityService activityService = new ActivityServiceImpl(new ActivityRepositoryImpl());
 
         private Context() {
         }

@@ -19,7 +19,7 @@ import static com.matevitsky.controller.constant.PageConstant.ADMIN_ACTIVITY_REQ
 
 public class AdminAssignActivityCommand implements Command {
 
-    public static final String USER_ID = "userId";
+    private static final String USER_ID = "userId";
 
     private final UserService userService;
     private final ActivityService activityService;

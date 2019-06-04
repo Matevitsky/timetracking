@@ -1,4 +1,5 @@
 <%@include file="userHeader.jsp" %>
+
 <body>
 <table id="userTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
 
@@ -44,31 +45,23 @@
     </tfoot>
 </table>
 
-<!-- SCRIPTS -->
-
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 <!-- Bootstrap tooltips -->
-<script type="text/javascript" src="/js/popper.min.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
 <!-- Bootstrap core JavaScript -->
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <!-- MDB core JavaScript -->
-<script type="text/javascript" src="/js/mdb.min.js"></script>
+<script type="text/javascript" src="js/mdb.min.js"></script>
+
+<!-- MDBootstrap Datatables  -->
+<script type="text/javascript" src="js/addons/datatables.min.js"></script>
 
 <script>
-    $(".dropdown-menu li a").click(function () {
-        var selText = $(this).text();
-        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+    $(document).ready(function () {
+        $('#userTable').DataTable();
+        $('.dataTables_length').addClass('bs-select');
     });
 </script>
-
-<script>$(document).ready(function () {
-    $('#userTable').DataTable();
-    $('.dataTables_length').addClass('bs-select');
-});</script>
-
-
-<!-- MDBootstrap Datatables -->
-<script type="text/javascript" src="/js/addons/datatables.min.js"></script>
-
 
 </body>
 

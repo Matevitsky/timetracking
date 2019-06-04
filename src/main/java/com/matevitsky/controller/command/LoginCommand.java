@@ -33,7 +33,7 @@ public class LoginCommand implements Command {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Optional<User> user = null;
+        Optional<User> user;
         if (!Validation.emailValidation(email) || password.isEmpty()) {
             request.setAttribute("error", "password is empty");
             LOGGER.info("Login Validation Failed");

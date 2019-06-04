@@ -29,12 +29,12 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static final String UPDATE_ACTIVITY_STATUS = "UPDATE activities set Status='%s' WHERE ID=%d";
     private static final String SELECT_ASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE Status='ACTIVE' AND UserId=%d";
 
-    private static Logger LOGGER = Logger.getLogger(ActivityRepositoryImpl.class);
+    private static final Logger LOGGER = Logger.getLogger(ActivityRepositoryImpl.class);
 
     @Override
     public boolean create(Activity activity) throws ErrorException {
         LOGGER.debug("Method create started, for Activity with Title " + activity.getTitle());
-        String query = "";
+        String query;
         if (activity.getUserId() == null) {
             query = String.format(INSERT_ACTIVITY_WITHOUT_USER_ID_SQL, activity.getTitle(), activity.getDescription(), Activity.Status.NEW);
 
