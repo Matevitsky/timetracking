@@ -4,16 +4,14 @@ package com.matevitsky.db;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
+import java.util.ResourceBundle;
 
 public final class ConnectorDB {
 
-    private static final String DATABASE_PROPERTIES = "/Users/Sergey/Time-tracking/src/main/resources/database.properties";
+
+    private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("database");
     private static final String DB_URL = "db.url";
     private static final String DB_USER = "db.user";
     private static final String DB_PASSWORD = "db.password";
@@ -23,26 +21,13 @@ public final class ConnectorDB {
     private static final Logger LOGGER = Logger.getLogger(ConnectorDB.class);
 
     public static Connection getConnection() throws SQLException {
-        FileInputStream fis = null;
-        Properties p = new Properties();
-        try {
-            fis = new FileInputStream(DATABASE_PROPERTIES);
-        } catch (FileNotFoundException e) {
-            LOGGER.error("File with dataBase properties not found");
+        LOGGER.debug("Method get connection started");
 
-        }
-
-        try {
-            p.load(fis);
-        } catch (IOException e) {
-            LOGGER.error("Create Connection error " + e.getMessage());
-        }
-
-        String url = p.getProperty(DB_URL);
-        String user = p.getProperty(DB_USER);
-        String password = p.getProperty(DB_PASSWORD);
-        String driver = p.getProperty(DB_DRIVER);
-        int poolSize = Integer.parseInt(p.getProperty(DB_POOLSIZE));
+        String url = RESOURCE_BUNDLE.getString(DB_URL);
+        String user = RESOURCE_BUNDLE.getString(DB_USER);
+        String password = RESOURCE_BUNDLE.getString(DB_PASSWORD);
+        String driver = RESOURCE_BUNDLE.getString(DB_DRIVER);
+        int poolSize = Integer.parseInt(RESOURCE_BUNDLE.getString(DB_POOLSIZE));
         ds.setDriverClassName(driver);
         ds.setUrl(url);
         ds.setUsername(user);
@@ -51,9 +36,6 @@ public final class ConnectorDB {
         ds.setMaxIdle(10);
         ds.setMaxOpenPreparedStatements(poolSize);
 
-
         return ds.getConnection();
     }
-
-
 }

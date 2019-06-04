@@ -1,4 +1,6 @@
 <%@include file="userHeader.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 
 <body>
 <table id="userTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">

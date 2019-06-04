@@ -1,4 +1,5 @@
 <%@include file="adminHeader.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <link href="../../css/addons/datatables.min.css" rel="stylesheet">
     <title>Admin Main Page</title>

@@ -1,11 +1,5 @@
-DROP TABLE IF EXISTS removeActivityRequests;
 DROP TABLE IF EXISTS activities;
-
-
-
 DROP TABLE IF EXISTS activityRequests;
-
-
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS role;
 

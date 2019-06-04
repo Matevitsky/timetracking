@@ -21,6 +21,7 @@ public class UserServiceImplTest {
 
     @Mock
     UserRepository userRepository;
+
     @InjectMocks
     UserServiceImpl userService;
     private User user = User.newBuilder().build();
