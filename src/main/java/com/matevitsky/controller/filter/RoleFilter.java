@@ -22,7 +22,6 @@ public class RoleFilter implements Filter {
         String uri = req.getRequestURI();
         LOGGER.debug(uri);
 
-
         String role = (String) req.getSession().getAttribute("role");
 
         if (!command.equals("login") && !command.equals("register")) {
@@ -43,8 +42,6 @@ public class RoleFilter implements Filter {
         } else {
             chain.doFilter(request, response);
         }
-
-        //TODO: уменшить вложенность
     }
 }
 

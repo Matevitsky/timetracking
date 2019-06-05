@@ -17,7 +17,6 @@ public class TimeParserTest {
         assertEquals("02:45", actual1);
     }
 
-
     @Test
     public void testParseStringToInteger() {
         Integer expected = 123;

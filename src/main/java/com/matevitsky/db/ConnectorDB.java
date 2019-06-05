@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 
 public final class ConnectorDB {
 
-
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("database");
     private static final String DB_URL = "db.url";
     private static final String DB_USER = "db.user";

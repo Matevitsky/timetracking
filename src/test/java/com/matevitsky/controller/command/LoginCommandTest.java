@@ -7,7 +7,6 @@ import com.matevitsky.exception.ErrorException;
 import com.matevitsky.service.ActivityService;
 import com.matevitsky.service.UserService;
 import com.matevitsky.util.MD5Util;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -22,7 +21,6 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mock;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(MD5Util.class)
@@ -30,21 +28,16 @@ public class LoginCommandTest {
 
     @Mock
     private UserService userService;
+    @Mock
     private ActivityService activityService;
+    @Mock
     private HttpServletRequest request;
+    @Mock
     private HttpServletResponse response;
+    @Mock
     private HttpSession session;
 
-    @Before
-    public void init() {
-        request = mock(HttpServletRequest.class);
-        response = mock(HttpServletResponse.class);
-        session = mock(HttpSession.class);
-        userService = mock(UserService.class);
-        activityService = mock(ActivityService.class);
-        PowerMockito.mockStatic(MD5Util.class);
 
-    }
 
     @Test
     public void shouldReturnLoginPage() {
@@ -59,6 +52,7 @@ public class LoginCommandTest {
 
     @Test
     public void shouldReturnAdminPage() throws ErrorException {
+        PowerMockito.mockStatic(MD5Util.class);
         when(request.getParameter("email")).thenReturn("admin@gmail.com");
         when(request.getParameter("password")).thenReturn("admin");
         when(request.getSession()).thenReturn(session);
@@ -75,6 +69,7 @@ public class LoginCommandTest {
 
     @Test
     public void shouldReturnUserPage() throws ErrorException {
+        PowerMockito.mockStatic(MD5Util.class);
         when(request.getParameter("email")).thenReturn("user@gmail.com");
         when(request.getParameter("password")).thenReturn("user");
         when(request.getSession()).thenReturn(session);

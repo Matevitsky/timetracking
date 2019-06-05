@@ -4,11 +4,10 @@ import com.matevitsky.controller.constant.PageConstant;
 import com.matevitsky.entity.User;
 import com.matevitsky.exception.ErrorException;
 import com.matevitsky.service.UserService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,28 +16,23 @@ import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-@RunWith(JUnit4.class)
+@RunWith(MockitoJUnitRunner.class)
 public class RegisterCommandTest {
 
     @Mock
     private HttpServletRequest request;
+    @Mock
     private HttpServletResponse response;
+    @Mock
     private HttpSession session;
+    @Mock
     private UserService userService;
+    @Mock
     private User user;
 
-    @Before
-    public void init() {
-        request = mock(HttpServletRequest.class);
-        response = mock(HttpServletResponse.class);
-        session = mock(HttpSession.class);
-        userService = mock(UserService.class);
-        user = mock(User.class);
-    }
 
     @Test
     public void shouldReturnUserPage() throws ErrorException {

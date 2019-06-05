@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class UserRepositoryImplTest {
 
     @InjectMocks
-    UserRepositoryImpl userRepository = new UserRepositoryImpl();
+    private UserRepositoryImpl userRepository = new UserRepositoryImpl();
     @Mock
     private ResultSet resultset;
 

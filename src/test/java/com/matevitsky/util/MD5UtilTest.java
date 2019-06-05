@@ -15,7 +15,6 @@ public class MD5UtilTest {
 
     @Before
     public void setUp() {
-        MD5Util md5Util = new MD5Util();
         PowerMockito.mockStatic(MD5Util.class);
         PowerMockito.when(MD5Util.encryptPassword("1234")).thenReturn("81dc9bdb52d04dc20036dbd8313ed055");
     }

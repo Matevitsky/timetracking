@@ -37,7 +37,7 @@ public class ActivityRequestServiceImpl implements ActivityRequestService {
         LOGGER.debug("Method getAllActivityRequests started");
         List<ActivityRequest> activityRequestList = activityRequestRepository.getAll();
         if (activityRequestList.isEmpty()) {
-            LOGGER.warn("ActivityRequestList is empty");
+            LOGGER.info("ActivityRequestList is empty");
         }
         return activityRequestList;
     }
@@ -47,7 +47,7 @@ public class ActivityRequestServiceImpl implements ActivityRequestService {
         LOGGER.debug("Method getAllActivityRequestsByUserId started");
         List<ActivityRequest> activityRequestList = activityRequestRepository.getByUserId(userId);
         if (activityRequestList.isEmpty()) {
-            LOGGER.warn("ActivityRequestList is empty");
+            LOGGER.info("ActivityRequestList is empty");
         }
         return activityRequestList;
     }

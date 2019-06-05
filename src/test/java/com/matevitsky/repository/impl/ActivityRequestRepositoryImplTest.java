@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 public class ActivityRequestRepositoryImplTest {
 
     @InjectMocks
-    ActivityRequestRepositoryImpl activityRequestRepository = new ActivityRequestRepositoryImpl();
+    private ActivityRequestRepositoryImpl activityRequestRepository = new ActivityRequestRepositoryImpl();
     @Mock
     private ResultSet resultset;
 

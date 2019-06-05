@@ -17,10 +17,10 @@ import static org.mockito.Mockito.when;
 public class ActivityRepositoryImplTest {
 
     @Mock
-    ResultSet resultSet;
+    private ResultSet resultSet;
 
     @InjectMocks
-    ActivityRepositoryImpl activityRepository = new ActivityRepositoryImpl();
+    private ActivityRepositoryImpl activityRepository = new ActivityRepositoryImpl();
 
 
     @Test
