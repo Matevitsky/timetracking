@@ -15,7 +15,6 @@ public class AdminMainPageCommand implements Command {
     private final ActivityService activityService;
     private static final Logger LOGGER = Logger.getLogger(AdminMainPageCommand.class);
 
-
     public AdminMainPageCommand(ActivityService activityService) {
         this.activityService = activityService;
     }
@@ -29,6 +28,5 @@ public class AdminMainPageCommand implements Command {
         request.setAttribute("activityList", finishedActivityList);
 
         return ADMIN_PAGE;
-
     }
 }

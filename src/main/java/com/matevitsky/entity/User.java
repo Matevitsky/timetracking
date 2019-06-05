@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class User {
 
-
     private final Integer id;
 
     private final String name;

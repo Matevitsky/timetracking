@@ -12,6 +12,4 @@ public final class Validation {
         String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         return email.matches(regex);
     }
-
-
 }

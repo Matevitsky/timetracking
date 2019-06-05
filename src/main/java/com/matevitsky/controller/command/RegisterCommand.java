@@ -24,7 +24,6 @@ public class RegisterCommand implements Command {
         this.userService = userService;
     }
 
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Registration Started");
@@ -33,7 +32,6 @@ public class RegisterCommand implements Command {
         String email = request.getParameter("emailRegistration");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm-password");
-
 
         if (fieldsAreNotFilled(name, email, password, confirmPassword)) {
             ErrorException exception = new ErrorException("Fields are not filled correctly");
@@ -49,7 +47,6 @@ public class RegisterCommand implements Command {
                 .withPassword(encryptedPass).build();
 
         try {
-
 
             if (userService.createUser(user)) {
 
@@ -74,8 +71,6 @@ public class RegisterCommand implements Command {
             registrationFailed(request, new ErrorException("This email is already registered"));
         }
         return LOGIN_PAGE;
-
-
     }
 
     private boolean fieldsAreNotFilled(String name, String email, String password, String confirmPassword) {
@@ -88,5 +83,4 @@ public class RegisterCommand implements Command {
         request.setAttribute("error", e.getMessage());
         return LOGIN_PAGE;
     }
-
 }

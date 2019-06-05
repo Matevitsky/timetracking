@@ -12,7 +12,6 @@ import com.matevitsky.service.impl.UserServiceImpl;
 
 public enum CommandList {
 
-
     LOGIN(new LoginCommand(Context.userService, Context.activityService)),
 
     REGISTER(new RegisterCommand(Context.userService)),
@@ -29,7 +28,7 @@ public enum CommandList {
 
     ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand(Context.userService, Context.activityService, Context.activityRequestService)),
 
-    ADMIN_REMOVE_ACTIVITY(new AdminRemoveActivityCommand(Context.activityService)),
+    ADMIN_REMOVE_ACTIVITY(new AdminRemoveActivityCommand(Context.activityService, Context.userService)),
 
     ADMIN_ASSIGN_ACTIVITY_COMMAND(new AdminAssignActivityCommand(Context.userService, Context.activityService, Context.activityRequestService)),
 
@@ -38,7 +37,6 @@ public enum CommandList {
     LOGOUT(new LogOutCommand()),
 
     CHANGE_LOCALE(new ChangeLocaleCommand(Context.activityService));
-
 
     private Command command;
 
@@ -59,7 +57,5 @@ public enum CommandList {
 
         private Context() {
         }
-
     }
-
 }

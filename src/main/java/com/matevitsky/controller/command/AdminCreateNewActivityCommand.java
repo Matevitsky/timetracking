@@ -27,7 +27,6 @@ public class AdminCreateNewActivityCommand implements Command {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
 
-
         Activity activity = Activity.newBuilder().withTitle(title)
                 .withDescription(description)
                 .withDuration(0).build();
@@ -40,8 +39,6 @@ public class AdminCreateNewActivityCommand implements Command {
         request.setAttribute("activityList", unAssignedActivityList);
 
         return ADMIN_PAGE;
-
-
     }
 }
 

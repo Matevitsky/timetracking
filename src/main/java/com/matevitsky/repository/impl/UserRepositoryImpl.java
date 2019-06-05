@@ -16,9 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class UserRepositoryImpl extends AbstractGenericRepository<User> implements UserRepository {
-
 
     private static final String INSERT_USERS_SQL = "INSERT INTO users" + "  (Name, Email, Password, Role) VALUES  ('%s', '%s', '%s', '%s')";
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE ID=%d";
@@ -38,7 +36,6 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
         String query = String.format(INSERT_USERS_SQL, user.getName(), user.getEmail(), user.getPassword(), user.getRole().getId());
 
         return createEntity(user, query);
-
     }
 
     @Override
@@ -82,7 +79,6 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
             LOGGER.warn("GetAll method return empty List");
             return userList.orElse(new ArrayList<>());
         }
-
     }
 
     public Optional<User> findUserByEmail(String email) throws ErrorException {
@@ -99,7 +95,6 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
             throw new ErrorException("email " + email + "not exist, please signup first");
         }
         return Optional.ofNullable(user);
-
     }
 
     @Override

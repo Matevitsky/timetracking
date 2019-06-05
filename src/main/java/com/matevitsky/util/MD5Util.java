@@ -14,5 +14,4 @@ public class MD5Util {
 
         return DigestUtils.md5Hex(st);
     }
-
 }

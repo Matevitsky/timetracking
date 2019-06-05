@@ -22,15 +22,12 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
     private static final String SELECT_REQUEST_ID = "SELECT * FROM activityRequests WHERE UserId=%d";
     private static final Logger LOGGER = Logger.getLogger(ActivityRequestRepositoryImpl.class);
 
-
     @Override
     public boolean create(ActivityRequest activityRequest) throws ErrorException {
         LOGGER.debug("Method create activityRequest with UserId " + activityRequest.getUserId());
         String query = String.format(INSERT_REQUEST_SQL, activityRequest.getUserId());
 
         return createEntity(activityRequest, query);
-
-
     }
 
     @Override
@@ -38,8 +35,6 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
         LOGGER.debug("Method delete request with UserId " + id);
         String query = String.format(DELETE_REQUEST_SQL, id);
         return deleteEntity(query);
-
-
     }
 
     @Override
@@ -67,8 +62,8 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
             LOGGER.error("Failed to get entity from database " + e.getMessage());
         }
 
-        return activityRequestList;
 
+        return activityRequestList;
     }
 
     @Override
@@ -99,7 +94,5 @@ public class ActivityRequestRepositoryImpl extends AbstractGenericRepository<Act
         Integer requestId = resultSet.getInt("ID");
         Integer userId = resultSet.getInt("UserId");
         return new ActivityRequest(requestId, userId);
-
-
     }
 }

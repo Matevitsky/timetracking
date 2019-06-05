@@ -22,27 +22,23 @@ public class UserServiceImpl implements UserService {
     public boolean createUser(User user) throws ErrorException {
 
         return userRepository.create(user);
-
     }
 
     @Override
     public boolean deleteUser(Integer userId) {
         return userRepository.deleteById(userId);
-
     }
 
     @Override
     public User updateUser(User user) {
 
         return userRepository.update(user);
-
     }
 
     @Override
     public Optional<User> getUserById(Integer id) {
 
         return userRepository.getById(id);
-
     }
 
     @Override
@@ -54,8 +50,5 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findUserByEmail(String email) throws ErrorException {
 
         return userRepository.findUserByEmail(email);
-
     }
-
-
 }

@@ -68,12 +68,11 @@
 
             <form action="/app" method="get">
                 <input type="submit" value="<fmt:message bundle="${common}" key="request.activity"/>"
-                       class="btn btn-secondary btn-lg"/>
+                       data-target="#modal-1" class="btn btn-secondary btn-lg"/>
                 <input type="hidden" name="command" value="user_request_activity">
 
             </form>
-
-
+            <font color="green"><c:out value="${alert}"/></font>
         </ul>
     </div>
 
@@ -102,6 +101,4 @@
     </form>
 
 </nav>
-
-
 <body>

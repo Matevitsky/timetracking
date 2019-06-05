@@ -64,7 +64,6 @@
         $('.dataTables_length').addClass('bs-select');
     });
 </script>
-
 </body>
 
 </html>

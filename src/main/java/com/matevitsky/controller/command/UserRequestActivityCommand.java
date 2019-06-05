@@ -18,7 +18,6 @@ public class UserRequestActivityCommand implements Command {
     private final ActivityRequestService activityRequestService;
     private static final Logger LOGGER = Logger.getLogger(UserRequestActivityCommand.class);
 
-
     public UserRequestActivityCommand(ActivityService activityService, ActivityRequestService activityRequestService) {
         this.activityService = activityService;
         this.activityRequestService = activityRequestService;
@@ -31,6 +30,7 @@ public class UserRequestActivityCommand implements Command {
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         try {
             activityRequestService.createActivityRequest(userId);
+            request.setAttribute("alert", "activity successfully added");
         } catch (ErrorException e) {
             LOGGER.warn(e.getMessage());
         }
@@ -41,7 +41,6 @@ public class UserRequestActivityCommand implements Command {
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("activityList", activityListByUserId);
         request.setAttribute("userId", userId);
-
 
         return USER_PAGE;
     }

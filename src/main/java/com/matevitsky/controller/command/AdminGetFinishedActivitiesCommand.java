@@ -21,7 +21,6 @@ public class AdminGetFinishedActivitiesCommand implements Command {
     private final UserService userService;
     private static final Logger LOGGER = Logger.getLogger(AdminGetFinishedActivitiesCommand.class);
 
-
     public AdminGetFinishedActivitiesCommand(ActivityService activityService, UserService userService) {
         this.activityService = activityService;
         this.userService = userService;
@@ -50,8 +49,6 @@ public class AdminGetFinishedActivitiesCommand implements Command {
         }
 
         request.setAttribute("activityList", finishedActivityList);
-
         return ADMIN_GET_FINISHED_ACTIVITIES;
-
     }
 }

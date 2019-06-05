@@ -29,7 +29,6 @@ public class UserActivityRemoveCommand implements Command {
         Integer userId = (Integer) request.getSession().getAttribute("userId");
         String time = request.getParameter("duration");
 
-
         Optional<Activity> activity = activityService.getActivity(Integer.parseInt(activityId));
 
         if (activity.isPresent()) {
@@ -43,7 +42,6 @@ public class UserActivityRemoveCommand implements Command {
                     .build();
             activityService.updateActivity(activityWithDuration);
         }
-
 
         List<Activity> assignedActivityList = activityService.getAssignedActivityList(userId);
 

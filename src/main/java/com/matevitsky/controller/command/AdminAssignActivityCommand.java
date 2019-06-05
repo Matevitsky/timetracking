@@ -82,7 +82,6 @@ public class AdminAssignActivityCommand implements Command {
             }
         }
 
-
         Integer userId = (Integer) request.getSession().getAttribute(USER_ID);
         request.getSession().setAttribute("userId", userId);
         request.setAttribute("userForActivityRequestList", userForActivityRequestList);

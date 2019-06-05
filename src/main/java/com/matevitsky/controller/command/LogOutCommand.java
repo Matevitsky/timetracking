@@ -10,6 +10,7 @@ import static com.matevitsky.controller.constant.PageConstant.LOGIN_PAGE;
 
 public class LogOutCommand implements Command {
     private static final Logger LOGGER = Logger.getLogger(LogOutCommand.class);
+
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         LOGGER.debug("Method execute started");

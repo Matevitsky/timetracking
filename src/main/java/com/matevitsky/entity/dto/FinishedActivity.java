@@ -10,7 +10,6 @@ import java.util.Objects;
 public class FinishedActivity extends Activity {
     private final String userName;
 
-
     public FinishedActivity(String userName, Integer id, String title, String description,
                             Integer duration, Integer userId, Status status) {
         super(newBuilder()
@@ -22,7 +21,6 @@ public class FinishedActivity extends Activity {
                 .withStatus(status));
 
         this.userName = userName;
-
     }
 
     public String getUserName() {

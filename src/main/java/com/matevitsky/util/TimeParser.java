@@ -47,7 +47,6 @@ public class TimeParser {
 
             String[] split = time.split(":");
             return Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
-
         }
         return 0;
     }
