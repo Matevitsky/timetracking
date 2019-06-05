@@ -8,6 +8,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Connection pool realisation
+ */
 public final class ConnectorDB {
 
     private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle("database");
@@ -19,6 +22,12 @@ public final class ConnectorDB {
     private static final BasicDataSource ds = new BasicDataSource();
     private static final Logger LOGGER = Logger.getLogger(ConnectorDB.class);
 
+    /**
+     * Get connection from the pool
+     *
+     * @return Connection
+     * @throws SQLException if something went wrong
+     */
     public static Connection getConnection() throws SQLException {
         LOGGER.debug("Method get connection started");
 

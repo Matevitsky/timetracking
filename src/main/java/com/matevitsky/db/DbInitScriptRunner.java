@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+/**
+ * This class  for running Data base initialisation script
+ */
 public class DbInitScriptRunner {
 
     public static void executeScript(Connection conn, InputStream in)

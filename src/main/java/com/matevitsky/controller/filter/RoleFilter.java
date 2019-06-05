@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * A filter check the rights to access to specific page
+ */
 @WebFilter(filterName = "RoleFilter")
 public class RoleFilter implements Filter {
 

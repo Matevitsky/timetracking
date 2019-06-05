@@ -15,6 +15,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
+/**
+ * Filter checking if the request is processed by the main servlet.
+ * If not request is redirect to an error page
+ */
 @WebFilter(filterName = "AuthenticationFilter")
 public class AuthenticationFilter implements Filter {
 

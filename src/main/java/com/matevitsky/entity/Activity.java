@@ -7,6 +7,9 @@ public class Activity {
     private final Integer id;
     private final String title;
     private final String description;
+    /**
+     * Duration in minute
+     */
     private final Integer duration;
     private final Integer userId;
     private final Status status;
@@ -49,6 +52,9 @@ public class Activity {
     }
 
 
+    /**
+     * Activity status
+     */
     public enum Status {
         NEW,
         ACTIVE,

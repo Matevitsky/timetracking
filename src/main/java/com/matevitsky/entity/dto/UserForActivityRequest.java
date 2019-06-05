@@ -1,5 +1,8 @@
 package com.matevitsky.entity.dto;
 
+/**
+ * Class used for admin activity request page
+ */
 public class UserForActivityRequest {
 
     private final Integer id;

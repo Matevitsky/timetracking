@@ -27,7 +27,6 @@ public class UserRepositoryImpl extends AbstractGenericRepository<User> implemen
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String SELECT_USER_BY_EMAIL = "SELECT * FROM users INNER JOIN role ON users.Role = role.ID where users.Email='%s'";
 
-
     private static final Logger LOGGER = Logger.getLogger(UserRepositoryImpl.class);
 
     @Override

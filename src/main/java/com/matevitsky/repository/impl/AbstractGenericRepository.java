@@ -12,12 +12,25 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Abstract Generic repository with Crud realization
+ *
+ * @param <E> Entity
+ */
 public abstract class AbstractGenericRepository<E> implements GenericRepository<E> {
 
     private static final String QUERY = " Query = ";
     private static final Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
 
 
+    /**
+     * Create entity with query
+     *
+     * @param entity
+     * @param query
+     * @return boolean
+     * @throws ErrorException
+     */
     boolean createEntity(E entity, String query) throws ErrorException {
         LOGGER.debug("createEntity" + entity.toString() + QUERY + query);
         boolean resultOfCreation;
@@ -37,6 +50,14 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
         return resultOfCreation;
     }
 
+
+    /**
+     * get entity by id with Query
+     *
+     * @param id
+     * @param query
+     * @return Optional<E>
+     */
     protected Optional<E> getById(Integer id, String query) {
         LOGGER.debug("getById with id " + id + QUERY + query);
 
@@ -50,6 +71,12 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
         return Optional.empty();
     }
 
+    /**
+     * Delete Entity with query
+     *
+     * @param query
+     * @return
+     */
     protected boolean deleteEntity(String query) {
         boolean result = true;
         LOGGER.debug("delete " + QUERY + query);
@@ -67,6 +94,13 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     }
 
 
+    /**
+     * Update entity with query
+     *
+     * @param entity
+     * @param query
+     * @return
+     */
     protected E updateEntity(E entity, String query) {
         LOGGER.debug("update with id " + entity.toString() + QUERY + query);
         try (Connection connection = ConnectorDB.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -83,6 +117,12 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     }
 
 
+    /**
+     *
+     * Get all entity with query
+     * @param query
+     * @return
+     */
     public Optional<List<E>> getAll(String query) {
         LOGGER.debug("getAllEntity " + QUERY + query);
         List<E> listOfObjects = null;
