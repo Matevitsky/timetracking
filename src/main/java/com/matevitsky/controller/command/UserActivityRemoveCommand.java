@@ -38,6 +38,7 @@ public class UserActivityRemoveCommand implements Command {
                     .withTitle(activity.get().getTitle())
                     .withDescription(activity.get().getDescription())
                     .withDuration(TimeParser.parseStringTimeToInteger(time))
+                    .withUserId(userId)
                     .withStatus(Activity.Status.DONE)
                     .build();
             activityService.updateActivity(activityWithDuration);

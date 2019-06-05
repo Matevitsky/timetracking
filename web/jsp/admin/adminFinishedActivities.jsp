@@ -23,9 +23,11 @@
 <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
     <thead>
     <tr>
+        <th class="th-sm"><fmt:message bundle="${common}" key="user.name"/></th>
         <th class="th-sm"><fmt:message bundle="${common}" key="title"/></th>
         <th class="th-sm"><fmt:message bundle="${common}" key="description"/></th>
         <th class="th-sm"><fmt:message bundle="${common}" key="time"/></th>
+
 
     </tr>
 
@@ -35,6 +37,7 @@
 
         <tr>
             <form action="/app" method="get">
+                <td>${activity.userName}</td>
                 <td>${activity.title}</td>
                 <td>${activity.description}</td>
                 <td>${activity.duration}
@@ -55,6 +58,7 @@
 
     <tfoot>
     <tr>
+        <th class="th-sm"><fmt:message bundle="${common}" key="user.name"/></th>
         <th class="th-sm"><fmt:message bundle="${common}" key="title"/></th>
         <th class="th-sm"><fmt:message bundle="${common}" key="description"/></th>
         <th class="th-sm"><fmt:message bundle="${common}" key="time"/></th>

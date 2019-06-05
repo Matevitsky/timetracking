@@ -21,7 +21,7 @@ public enum CommandList {
 
     USER_REQUEST_ACTIVITY(new UserRequestActivityCommand(Context.activityService, Context.activityRequestService)),
 
-    ADMIN_GET_FINISHED_ACTIVITIES(new AdminGetFinishedActivitiesCommand(Context.activityService)),
+    ADMIN_GET_FINISHED_ACTIVITIES(new AdminGetFinishedActivitiesCommand(Context.activityService, Context.userService)),
 
     ADMIN_MAIN_PAGE(new AdminMainPageCommand(Context.activityService)),
 
