@@ -12,7 +12,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -44,7 +43,7 @@ public class RegisterCommandTest {
 
         when(request.getSession()).thenReturn(session);
         when(userService.createUser(any())).thenReturn(true);
-        when(userService.findUserByEmail("user@gmail.com")).thenReturn(Optional.ofNullable(user));
+        when(userService.findUserByEmail("user@gmail.com")).thenReturn(user);
 
 
         RegisterCommand registerCommand = new RegisterCommand(userService);

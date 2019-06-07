@@ -10,13 +10,16 @@ Java Web Project Time-tracking
 
 ### Install and run instructions
 
-1. Install MysqlServer
-2. Create Data Base with name - **Time**
-3. Verify Tomcat Installed
-4. Verify Maven Install
-5. Download the project
-6. In class, DataBase Initialization run the main method to create all necessary tables in DB
-7. Run tomcat server with command /Tomcat/bin/catalina.sh run
-8. Deploy project with command mvn tomcat7:run-war
+1. Install and run MysqlServer
+2. Verify Tomcat Installed
+3. Verify Maven Install
+4. Download the project
+5. In class, DataBase Initialization run the main method to create all necessary tables in DB
+6. Run tomcat server with command /Tomcat/bin/catalina.sh run
+7. Deploy project with command mvn tomcat7:run-war
+
+**User name**: `user@gmail.com` **password**: `user` 
+
+**User name:**  `admin@gmail.com` **password**: `admin`
 
 

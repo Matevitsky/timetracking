@@ -47,8 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserByEmail(String email) throws ErrorException {
+    public User findUserByEmail(String email) throws ErrorException {
+        Optional<User> userByEmail = userRepository.findUserByEmail(email);
 
-        return userRepository.findUserByEmail(email);
+        if (userByEmail.isPresent()) {
+            return userByEmail.get();
+        } else {
+            throw new ErrorException("This email not exist please sign up");
+        }
     }
 }

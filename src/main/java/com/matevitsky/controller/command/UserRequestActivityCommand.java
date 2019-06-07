@@ -35,7 +35,6 @@ public class UserRequestActivityCommand implements Command {
             LOGGER.warn(e.getMessage());
         }
 
-
         List<Activity> activityListByUserId = activityService.getAssignedActivityList(userId);
 
         request.getSession().setAttribute("userId", userId);

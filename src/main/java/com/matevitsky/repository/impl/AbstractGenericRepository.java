@@ -22,7 +22,6 @@ public abstract class AbstractGenericRepository<E> implements GenericRepository<
     private static final String QUERY = " Query = ";
     private static final Logger LOGGER = Logger.getLogger(AbstractGenericRepository.class);
 
-
     /**
      * Create entity with query
      *

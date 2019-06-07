@@ -17,7 +17,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
@@ -57,7 +56,7 @@ public class LoginCommandTest {
         when(request.getParameter("password")).thenReturn("admin");
         when(request.getSession()).thenReturn(session);
         User user = User.newBuilder().withEmail("admin@gmail.com").withPassword("admin").withRole(new Role(1, "Admin")).build();
-        when(userService.findUserByEmail("admin@gmail.com")).thenReturn(Optional.ofNullable(user));
+        when(userService.findUserByEmail("admin@gmail.com")).thenReturn(user);
         PowerMockito.when(MD5Util.encryptPassword("admin")).thenReturn("admin");
 
         LoginCommand loginCommand = new LoginCommand(userService, activityService);
@@ -74,7 +73,7 @@ public class LoginCommandTest {
         when(request.getParameter("password")).thenReturn("user");
         when(request.getSession()).thenReturn(session);
         User user = User.newBuilder().withEmail("user@gmail.com").withPassword("user").withRole(new Role(2, "user")).build();
-        when(userService.findUserByEmail("user@gmail.com")).thenReturn(Optional.ofNullable(user));
+        when(userService.findUserByEmail("user@gmail.com")).thenReturn(user);
         PowerMockito.when(MD5Util.encryptPassword("user")).thenReturn("user");
 
         LoginCommand loginCommand = new LoginCommand(userService, activityService);

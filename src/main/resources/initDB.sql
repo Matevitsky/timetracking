@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS Time
+    DEFAULT CHARACTER SET utf8;
+USE Time;
 DROP TABLE IF EXISTS activities;
 DROP TABLE IF EXISTS activityRequests;
 DROP TABLE IF EXISTS users;
@@ -67,9 +70,9 @@ VALUES ('user', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', '1');
 
 
 INSERT INTO activities(Title, Description, Duration, UserId, Status)
-VALUES ('Tittle2', 'Content2', '100', NULL, 'NEW');
+VALUES ('Tittle2', 'Content2', '', NULL, 'NEW');
 
 INSERT INTO activities(Title, Description, Duration, UserId, Status)
-VALUES ('Tittle3', 'Content3', '100', NULL, 'NEW');
+VALUES ('Tittle3', 'Content3', '', NULL, 'NEW');
 
 

@@ -23,23 +23,26 @@ public class UserServiceImplTest {
     private UserRepository userRepository;
 
     @InjectMocks
-    UserServiceImpl userService;
-    private User user = User.newBuilder().build();
+    private UserServiceImpl userService;
+
 
     @Test
     public void createUser() throws ErrorException {
+        User user = User.newBuilder().build();
         when(userService.createUser(user)).thenReturn(true);
         assertTrue(userService.createUser(user));
     }
 
     @Test
     public void deleteUser() {
+        User user = User.newBuilder().build();
         when(userService.deleteUser(user.getId())).thenReturn(true);
         assertTrue(userService.deleteUser(user.getId()));
     }
 
     @Test
     public void updateUser() {
+        User user = User.newBuilder().build();
         when(userService.updateUser(user)).thenReturn(user);
         assertEquals(user, userService.updateUser(user));
     }
@@ -56,8 +59,9 @@ public class UserServiceImplTest {
     @Test
     public void findUserByEmail() throws ErrorException {
         User user = User.newBuilder().withEmail("user@gmail.com").build();
-        when(userService.findUserByEmail("user@gmail.com")).thenReturn(Optional.ofNullable(user));
+        when(userRepository.findUserByEmail("user@gmail.com")).thenReturn(Optional.ofNullable(user));
         User expected = User.newBuilder().withEmail("user@gmail.com").build();
-        assertEquals(expected, userService.findUserByEmail("user@gmail.com").get());
+        User actual = userService.findUserByEmail("user@gmail.com");
+        assertEquals(expected, actual);
     }
 }

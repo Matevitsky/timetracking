@@ -14,5 +14,4 @@ public interface ActivityRequestRepository extends GenericRepository<ActivityReq
      */
     List<ActivityRequest> getByUserId(Integer id);
 
-
 }

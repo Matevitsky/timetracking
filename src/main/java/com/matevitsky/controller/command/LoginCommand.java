@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Optional;
 
 import static com.matevitsky.controller.constant.PageConstant.*;
 
@@ -33,7 +32,7 @@ public class LoginCommand implements Command {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        Optional<User> user;
+        User user;
         if (!Validation.emailValidation(email) || password.isEmpty()) {
             request.setAttribute("error", "password is empty");
             LOGGER.info("Login Validation Failed");
@@ -42,7 +41,7 @@ public class LoginCommand implements Command {
         try {
             user = userService.findUserByEmail(email);
             String encryptedPassword = MD5Util.encryptPassword(password);
-            if (user.isPresent() && !user.get().getPassword().equals(encryptedPassword)) {
+            if (!user.getPassword().equals(encryptedPassword)) {
                 LOGGER.info("Wrong password");
                 request.setAttribute("error", "wrong password");
                 return LOGIN_PAGE;
@@ -55,7 +54,7 @@ public class LoginCommand implements Command {
         }
 
 
-        return user.get().getRole().getName().equals("Admin") ? adminPage(request, user.get()) : userPage(request, user.get());
+        return user.getRole().getName().equals("Admin") ? adminPage(request, user) : userPage(request, user);
     }
 
 

@@ -9,9 +9,9 @@ import java.util.Scanner;
 /**
  * This class  for running Data base initialisation script
  */
-public class DbInitScriptRunner {
+public final class DbInitScriptRunner {
 
-    public static void executeScript(Connection conn, InputStream in)
+    public final static void executeScript(Connection conn, InputStream in)
             throws SQLException {
         Scanner s = new Scanner(in);
         s.useDelimiter("/\\*[\\s\\S]*?\\*/|--[^\\r\\n]*|;");
