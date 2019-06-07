@@ -7,9 +7,6 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-
-import static com.matevitsky.controller.constant.PageConstant.ADMIN_PAGE;
 
 public class AdminCreateNewActivityCommand implements Command {
 
@@ -35,10 +32,7 @@ public class AdminCreateNewActivityCommand implements Command {
         } catch (ErrorException e) {
             request.setAttribute("error", new ErrorException("Failed create activity"));
         }
-        List<Activity> unAssignedActivityList = activityService.getAllActivityByStatus(Activity.Status.NEW.name());
-        request.setAttribute("activityList", unAssignedActivityList);
-
-        return ADMIN_PAGE;
+        return new AdminMainPageCommand(activityService).execute(request, response);
     }
 }
 

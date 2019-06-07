@@ -3,10 +3,10 @@ Java Web Project Time-tracking
 
 
 #### **Система Time-Tracking.**
-   - Администратор закрепляет за пользователем Активность.
-   - У пользователя может быть одна или несколько Активностей.
-   - Пользователь отмечает кол-во затраченного времени на каждую активность.
-   - Пользователь может отправить запрос на добавление/удаление Активности.
+   - The administrator assigns the activity to the user.
+   - A user can have one or several activities.
+   - The user notes the amount of time spent on each activity.
+   - The user can send a request to add/delete an аctivity.
 
 ### Install and run instructions
 
