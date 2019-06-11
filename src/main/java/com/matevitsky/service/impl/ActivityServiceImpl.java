@@ -55,7 +55,6 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public List<Activity> getAllActivityByStatus(String status) {
 
-
         return activityRepository.getGetAllActivityByStatus(status);
     }
 

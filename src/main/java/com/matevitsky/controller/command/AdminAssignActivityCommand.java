@@ -58,6 +58,7 @@ public class AdminAssignActivityCommand implements Command {
                 .withStatus(Activity.Status.ACTIVE).build();
         activityService.updateActivity(assignedActivity);
         activityRequestService.deleteActivityRequest(activityId);
+        
 
         return buildAdminPageActivityRequestPage(request, activityRequestService, activityService, userService);
 

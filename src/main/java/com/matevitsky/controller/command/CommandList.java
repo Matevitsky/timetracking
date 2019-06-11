@@ -1,5 +1,6 @@
 package com.matevitsky.controller.command;
 
+import com.matevitsky.annotation.init;
 import com.matevitsky.repository.impl.ActivityRepositoryImpl;
 import com.matevitsky.repository.impl.ActivityRequestRepositoryImpl;
 import com.matevitsky.repository.impl.UserRepositoryImpl;
@@ -49,6 +50,9 @@ public enum CommandList {
         return this.command;
 
     }
+
+    @init
+    private static UserService userSer;
 
     static class Context {
         private static final UserService userService = new UserServiceImpl(new UserRepositoryImpl());

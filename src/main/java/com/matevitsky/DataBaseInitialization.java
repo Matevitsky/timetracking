@@ -16,7 +16,6 @@ import java.sql.SQLException;
 public final class DataBaseInitialization {
     private DataBaseInitialization() {
     }
-
     public static final void main(String[] args) throws IOException, SQLException {
         File initialFile = new File("../Time-tracking/src/main/resources/initDB.sql");
         InputStream targetStream = new FileInputStream(initialFile);
