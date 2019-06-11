@@ -1,6 +1,6 @@
 package com.matevitsky.controller.command;
 
-import com.matevitsky.annotation.init;
+
 import com.matevitsky.repository.impl.ActivityRepositoryImpl;
 import com.matevitsky.repository.impl.ActivityRequestRepositoryImpl;
 import com.matevitsky.repository.impl.UserRepositoryImpl;
@@ -27,7 +27,7 @@ public enum CommandList {
 
     ADMIN_CREATE_NEW_ACTIVITY(new AdminCreateNewActivityCommand(Context.activityService)),
 
-    ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsCommand(Context.userService, Context.activityService, Context.activityRequestService)),
+    ADMIN_ACTIVITY_REQUESTS(new AdminActivityRequestsPageCommand(Context.userService, Context.activityService, Context.activityRequestService)),
 
     ADMIN_REMOVE_ACTIVITY(new AdminRemoveActivityCommand(Context.activityService, Context.userService)),
 
@@ -50,9 +50,6 @@ public enum CommandList {
         return this.command;
 
     }
-
-    @init
-    private static UserService userSer;
 
     static class Context {
         private static final UserService userService = new UserServiceImpl(new UserRepositoryImpl());

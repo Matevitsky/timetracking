@@ -17,15 +17,15 @@ import java.util.Optional;
 
 import static com.matevitsky.controller.constant.PageConstant.ADMIN_ACTIVITY_REQUESTS_PAGE;
 
-public class AdminActivityRequestsCommand implements Command {
+public class AdminActivityRequestsPageCommand implements Command {
 
-    private static final Logger LOGGER = Logger.getLogger(AdminActivityRequestsCommand.class);
+    private static final Logger LOGGER = Logger.getLogger(AdminActivityRequestsPageCommand.class);
 
     private final UserService userService;
     private final ActivityRequestService activityRequestService;
     private final ActivityService activityService;
 
-    public AdminActivityRequestsCommand(UserService userService, ActivityService activityService, ActivityRequestService activityRequestService) {
+    public AdminActivityRequestsPageCommand(UserService userService, ActivityService activityService, ActivityRequestService activityRequestService) {
         this.userService = userService;
         this.activityService = activityService;
         this.activityRequestService = activityRequestService;

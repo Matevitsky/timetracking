@@ -7,6 +7,7 @@ import com.matevitsky.repository.impl.ActivityRepositoryImpl;
 import com.matevitsky.repository.interfaces.ActivityRepository;
 import com.matevitsky.service.ActivityService;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,5 +70,13 @@ public class ActivityServiceImpl implements ActivityService {
         return activityRepository.getAssignedActivityList(userId);
     }
 
+    @Override
+    public boolean assignActivity(Activity activityForAssign) {
+        try {
+            return activityRepository.assignActivity(activityForAssign);
+        } catch (SQLException e) {
+            return false;
+        }
+    }
 
 }

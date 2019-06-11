@@ -29,6 +29,8 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
     private static final String UPDATE_ACTIVITY_STATUS = "UPDATE activities set Status='%s' WHERE ID=%d";
     private static final String SELECT_ASSIGNED_ACTIVITY = "SELECT * FROM activities WHERE Status='ACTIVE' AND UserId=%d";
 
+    private static final String DELETE_REQUEST_SQL = "DELETE FROM activityRequests WHERE Id=%d";
+
     private static final Logger LOGGER = Logger.getLogger(ActivityRepositoryImpl.class);
 
     @Override
@@ -159,6 +161,50 @@ public class ActivityRepositoryImpl extends AbstractGenericRepository<Activity> 
             LOGGER.warn(e.getMessage());
         }
         return assignedActivityList;
+    }
+
+    @Override
+    public boolean assignActivity(Activity activityForAssign) throws SQLException {
+        LOGGER.debug("Method assignActivity started");
+        Connection connection = null;
+        PreparedStatement assignActivityStatement = null;
+        PreparedStatement removeRequestStatement = null;
+
+        String assignQuery = String.format(UPDATE_ACTIVITY_SQL
+                , activityForAssign.getTitle()
+                , activityForAssign.getDescription()
+                , activityForAssign.getDuration()
+                , activityForAssign.getUserId()
+                , activityForAssign.getStatus()
+                , activityForAssign.getId());
+
+        String removerRequestQuery = String.format(DELETE_REQUEST_SQL, activityForAssign.getId());
+        try {
+            connection = ConnectorDB.getConnection();
+            connection.setAutoCommit(false);
+            assignActivityStatement = connection.prepareStatement(assignQuery);
+            removeRequestStatement = connection.prepareStatement(removerRequestQuery);
+            assignActivityStatement.execute();
+            removeRequestStatement.execute();
+            connection.commit();
+            return true;
+        } catch (SQLException e) {
+            LOGGER.error("Transaction failed " + e.getMessage());
+            connection.rollback();
+        } finally {
+            if (assignActivityStatement != null) {
+                assignActivityStatement.close();
+            }
+            if (removeRequestStatement != null) {
+                removeRequestStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+
+        }
+        return false;
+
     }
 
 

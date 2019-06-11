@@ -28,4 +28,5 @@ public interface ActivityService {
 
     List<Activity> getAssignedActivityList(Integer userId);
 
+    boolean assignActivity(Activity activityForAssign);
 }
