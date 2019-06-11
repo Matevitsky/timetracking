@@ -2,7 +2,7 @@ Java Web Project Time-tracking
 -------------------------------
 
 
-#### **Система Time-Tracking.**
+#### **Time-Tracking System.**
    - The administrator assigns the activity to the user.
    - A user can have one or several activities.
    - The user notes the amount of time spent on each activity.
